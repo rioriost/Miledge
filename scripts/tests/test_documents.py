@@ -14,6 +14,7 @@ import gates
 
 READMES = [ROOT / "README.md", ROOT / "README.ja.md"]
 GUIDES = [ROOT / "docs/release.en.md", ROOT / "docs/release.ja.md"]
+DOCUMENTS = READMES + GUIDES + [ROOT / "PRIVACY.md"]
 LOCALIZATIONS = {
     "en", "ja", "zh-Hans", "zh-Hant", "ko", "fr",
     "de", "es", "pt-BR", "it", "ar", "hi",
@@ -40,11 +41,11 @@ class DocumentTests(unittest.TestCase):
         for path in READMES:
             self.assertIn("`st.rio.miledge`", path.read_text())
 
-    def test_current_version_is_documented_in_both_languages(self):
+    def test_current_version_is_documented(self):
         project = (ROOT / "project.yml").read_text()
         version = re.search(r'MARKETING_VERSION: "([^"]+)"', project).group(1)
         build = re.search(r'CURRENT_PROJECT_VERSION: "([^"]+)"', project).group(1)
-        for path in READMES + GUIDES:
+        for path in DOCUMENTS:
             with self.subTest(path=path.name):
                 self.assertIn(f"**{version}**", path.read_text())
                 self.assertIn(f"**{build}**", path.read_text())
@@ -79,7 +80,7 @@ class DocumentTests(unittest.TestCase):
                     self.assertIn(requirement, text)
 
     def test_local_markdown_links_resolve(self):
-        for path in READMES + GUIDES:
+        for path in DOCUMENTS:
             for link in re.findall(r"\[[^\]]+\]\(([^)]+)\)", path.read_text()):
                 parsed = urlsplit(link)
                 if parsed.scheme or not parsed.path:

@@ -1,6 +1,6 @@
 # Miledge
 
-[English](README.md)
+[English](README.md) · [プライバシーポリシー（英語）](PRIVACY.md)
 
 **Apple「パスワード」に収まらない秘密を、自分の台帳へ。** MiledgeはMy Ledgerを表す造語です。Apple Silicon Mac・iPhone・iPad向けのSwiftUIアプリで、資格情報、アフィリエイト、健康情報を含まない保険、本人確認・税務書類、契約、鍵、メモなど30種類と独自項目を扱います。健康情報は対象外で、HealthKitも使いません。
 

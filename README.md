@@ -1,6 +1,6 @@
 # Miledge
 
-[日本語](README.ja.md)
+[日本語](README.ja.md) · [Privacy policy](PRIVACY.md)
 
 **My Ledger, for private information that does not fit in Apple Passwords.** Miledge is a native SwiftUI app for Apple Silicon Mac, iPhone and iPad. It supports 30 item types plus custom items, including credentials, affiliate accounts, non-health insurance, identity and tax documents, contracts, keys and private notes. Health information is excluded; there is no HealthKit integration.
 
