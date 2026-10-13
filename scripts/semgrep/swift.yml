@@ -1,0 +1,94 @@
+rules:
+  - id: miledge.swift.parse-inventory
+    languages: [swift]
+    severity: INFO
+    message: Parser inventory only, not a security finding.
+    pattern: import $MODULE
+  - id: miledge.swift.no-production-logging
+    languages: [swift]
+    severity: ERROR
+    message: Production logging can disclose vault content; remove the logging path.
+    pattern-either:
+      - pattern: print(...)
+      - pattern: debugPrint(...)
+      - pattern: dump(...)
+      - pattern: NSLog(...)
+      - pattern: os_log(...)
+      - pattern: $LOGGER.log(...)
+      - pattern: $LOGGER.debug(...)
+  - id: miledge.swift.no-userdefaults-storage
+    languages: [swift]
+    severity: ERROR
+    message: UserDefaults is not approved storage for vault data.
+    mode: taint
+    pattern-sources:
+      - pattern: UserDefaults.standard
+      - pattern: 'UserDefaults(suiteName: ...)'
+    pattern-sinks:
+      - patterns:
+          - pattern: '$STORE.set(..., forKey: ...)'
+          - focus-metavariable: $STORE
+  - id: miledge.swift.keychain-when-unlocked
+    languages: [swift]
+    severity: ERROR
+    message: Vault Keychain items must not be accessible while the device is locked.
+    pattern-either:
+      - pattern: kSecAttrAccessibleAlways
+      - pattern: kSecAttrAccessibleAlwaysThisDeviceOnly
+      - pattern: kSecAttrAccessibleAfterFirstUnlock
+      - pattern: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+  - id: miledge.swift.no-legacy-crypto
+    languages: [swift]
+    severity: ERROR
+    message: Use the reviewed authenticated CryptoKit envelope, not legacy encryption APIs.
+    pattern-either:
+      - pattern: CCCrypt(...)
+      - pattern: CCCryptorCreate(...)
+      - pattern: Insecure.MD5.hash(...)
+      - pattern: Insecure.SHA1.hash(...)
+  - id: miledge.swift.no-explicit-gcm-nonce
+    languages: [swift]
+    severity: ERROR
+    message: Let CryptoKit generate a fresh GCM nonce; explicit nonces require a separate reviewed design.
+    pattern: 'AES.GCM.seal(..., nonce: ..., ...)'
+  - id: miledge.swift.authenticated-envelope
+    languages: [swift]
+    severity: ERROR
+    message: Authenticate the envelope metadata when encrypting attachment bytes.
+    pattern: 'AES.GCM.seal($DATA, using: $KEY)'
+  - id: miledge.swift.no-direct-file-write
+    languages: [swift]
+    severity: ERROR
+    message: Direct Foundation file writes bypass the reviewed ciphertext-only blob store.
+    pattern-either:
+      - pattern: '$DATA.write(to: ..., ...)'
+      - pattern: '$DATA.write(toFile: ..., ...)'
+  - id: miledge.swift.no-custom-network-client
+    languages: [swift]
+    severity: ERROR
+    message: Custom networking is outside the approved local/Apple-managed storage architecture.
+    pattern-either:
+      - pattern: URLSession(...)
+      - pattern: URLSession.shared
+      - pattern: NWConnection(...)
+  - id: miledge.swift.no-server-trust-bypass
+    languages: [swift]
+    severity: ERROR
+    message: Do not accept server trust manually or bypass system certificate validation.
+    pattern: 'URLCredential(trust: ...)'
+  - id: miledge.swift.no-unrestricted-ios-clipboard
+    languages: [swift]
+    severity: ERROR
+    message: Clipboard export needs a reviewed local-only, expiring, explicit-copy implementation.
+    pattern-either:
+      - pattern: UIPasteboard.general.string = ...
+      - pattern: UIPasteboard.general.strings = ...
+      - pattern: UIPasteboard.general.data = ...
+      - pattern: UIPasteboard.general.items = ...
+      - pattern: '$BOARD.setItems($ITEMS)'
+      - pattern: '$BOARD.setValue($VALUE, forPasteboardType: $TYPE)'
+      - pattern: '$BOARD.setData($DATA, forPasteboardType: $TYPE)'
+      - patterns:
+          - pattern: '$BOARD.setItems($ITEMS, options: $OPTIONS)'
+          - pattern-not: '$BOARD.setItems($ITEMS, options: [.localOnly: true, .expirationDate: $EXPIRY])'
+          - pattern-not: '$BOARD.setItems([], options: [.localOnly: true])'

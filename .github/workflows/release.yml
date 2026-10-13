@@ -1,0 +1,156 @@
+name: Upload App Store build
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Marketing version X.Y.Z; dispatch at the matching vX.Y.Z tag"
+        required: true
+        type: string
+      build_number:
+        description: "New positive integer build number; do not reuse an uploaded number"
+        required: true
+        type: string
+      platform:
+        description: "Both platforms are required for the first public release"
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - ios
+          - macos
+
+permissions:
+  contents: read
+
+concurrency:
+  group: miledge-app-store-upload
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  RELEASE_VERSION: ${{ inputs.version }}
+  RELEASE_BUILD_NUMBER: ${{ inputs.build_number }}
+  RELEASE_RUNNER: ${{ vars.RELEASE_RUNNER }}
+  XCODE_DEVELOPER_DIR: ${{ vars.XCODE_DEVELOPER_DIR }}
+  XCODE_VERSION: ${{ vars.XCODE_VERSION }}
+  XCODE_BUILD_VERSION: ${{ vars.XCODE_BUILD_VERSION }}
+  XCODE_PROJECT: ${{ vars.XCODE_PROJECT }}
+  APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+  KEYCHAIN_ACCESS_GROUP: ${{ vars.KEYCHAIN_ACCESS_GROUP }}
+  ICLOUD_CONTAINER_ID: ${{ vars.ICLOUD_CONTAINER_ID }}
+  IOS_SCHEME: ${{ vars.IOS_SCHEME }}
+  MACOS_SCHEME: ${{ vars.MACOS_SCHEME }}
+  IOS_BUNDLE_ID: st.rio.miledge
+  MACOS_BUNDLE_ID: st.rio.miledge
+  IOS_TEST_DESTINATION: ${{ vars.IOS_TEST_DESTINATION }}
+  IPAD_TEST_DESTINATION: ${{ vars.IPAD_TEST_DESTINATION }}
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    outputs:
+      runner: ${{ steps.config.outputs.runner }}
+      platforms: ${{ steps.config.outputs.platforms }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Test release tooling
+        run: python3 -m unittest discover -s scripts/tests -v
+      - name: Check tag and project configuration
+        id: config
+        env:
+          SELECTED_PLATFORM: ${{ inputs.platform }}
+        run: python3 scripts/release.py preflight --platform "$SELECTED_PLATFORM"
+
+  test:
+    needs: preflight
+    runs-on: ${{ needs.preflight.outputs.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ios, macos]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Require synthetic UI interactions, then 90% production executable-line coverage
+        env:
+          PLATFORM: ${{ matrix.platform }}
+        run: python3 scripts/release.py test --platform "$PLATFORM"
+      - name: Retain successful native coverage and interaction gate evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate-coverage-${{ matrix.platform }}
+          path: |
+            .build/gates/coverage-${{ matrix.platform }}*.json
+            .build/gates/xccov-${{ matrix.platform }}*.json
+            .build/gates/interaction-${{ matrix.platform }}*.json
+            .build/gates/interaction-summary-${{ matrix.platform }}*.json
+            .build/gates/interaction-tests-${{ matrix.platform }}*.json
+            .build/gates/interaction-availability-${{ matrix.platform }}*.json
+          if-no-files-found: error
+          retention-days: 14
+
+  package-coverage:
+    needs: preflight
+    runs-on: ${{ needs.preflight.outputs.runner }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Measure all package sources and require 90% executable-line coverage
+        env:
+          DEVELOPER_DIR: ${{ vars.XCODE_DEVELOPER_DIR }}
+        run: python3 scripts/coverage.py swift --measure --report .build/gates/package-llvm.json
+
+  security:
+    needs: preflight
+    uses: ./.github/workflows/security.yml
+    with:
+      runner: ${{ needs.preflight.outputs.runner }}
+
+  upload:
+    needs: [preflight, test, package-coverage, security]
+    runs-on: ${{ needs.preflight.outputs.runner }}
+    environment: app-store
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        platform: ${{ fromJSON(needs.preflight.outputs.platforms) }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Retrieve gate evidence from this run only
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: gate-*
+          merge-multiple: true
+          path: .build/gates
+      - name: Archive, verify, and upload
+        env:
+          PLATFORM: ${{ matrix.platform }}
+          SECURITY_REVIEWER_ID: ${{ vars.SECURITY_REVIEWER_ID }}
+          SECURITY_REVIEW_PUBLIC_KEY: ${{ vars.SECURITY_REVIEW_PUBLIC_KEY }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          SIGNING_CERTIFICATES_P12: ${{ secrets.SIGNING_CERTIFICATES_P12 }}
+          SIGNING_CERTIFICATES_PASSWORD: ${{ secrets.SIGNING_CERTIFICATES_PASSWORD }}
+        run: python3 scripts/release.py upload --platform "$PLATFORM"
+      - name: Retain symbols, not signing keys or private app data
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: symbols-${{ matrix.platform }}-${{ inputs.version }}-${{ inputs.build_number }}
+          path: .build/release/${{ matrix.platform }}/dSYMs
+          retention-days: 14
+          if-no-files-found: warn

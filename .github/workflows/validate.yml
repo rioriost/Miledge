@@ -1,0 +1,55 @@
+name: Validate release tooling
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "scripts/**"
+      - "docs/**"
+      - "README*.md"
+      - "Package.swift"
+      - "Sources/**"
+      - "Tests/**"
+      - "App/**"
+      - "AppTests/**"
+      - "project.yml"
+  push:
+    paths:
+      - ".github/workflows/**"
+      - "scripts/**"
+      - "docs/**"
+      - "README*.md"
+      - "Package.swift"
+      - "Sources/**"
+      - "Tests/**"
+      - "App/**"
+      - "AppTests/**"
+      - "project.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-tools:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Test release tooling
+        run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -v
+
+  package-coverage:
+    runs-on: ${{ vars.RELEASE_RUNNER }}
+    env:
+      DEVELOPER_DIR: ${{ vars.XCODE_DEVELOPER_DIR }}
+      XCODE_DEVELOPER_DIR: ${{ vars.XCODE_DEVELOPER_DIR }}
+      XCODE_VERSION: ${{ vars.XCODE_VERSION }}
+      XCODE_BUILD_VERSION: ${{ vars.XCODE_BUILD_VERSION }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Measure and gate every package source file
+        run: PYTHONDONTWRITEBYTECODE=1 python3 scripts/coverage.py swift --measure --report .build/gates/package-llvm.json

@@ -1,0 +1,3 @@
+/* Presentation strings only; never use these keys to modify stored user content. */
+"CFBundleDisplayName" = "Miledge";
+"NSFaceIDUsageDescription" = "秘密情報を保存した台帳を開きます。";

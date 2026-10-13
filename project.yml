@@ -1,0 +1,302 @@
+name: Miledge
+options:
+  minimumXcodeGenVersion: 2.46.0
+  developmentLanguage: en
+  deploymentTarget:
+    iOS: "27.0"
+    macOS: "27.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    ARCHS: arm64
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "2"
+    GENERATE_INFOPLIST_FILE: YES
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 23889H77KX
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+    PRODUCT_MODULE_NAME: MiledgeApp
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
+    Release:
+      ENABLE_TESTABILITY: NO
+targetTemplates:
+  Domain:
+    type: framework
+    sources: [Sources/MiledgeDomain]
+    settings:
+      base:
+        PRODUCT_NAME: MiledgeDomain
+        PRODUCT_MODULE_NAME: MiledgeDomain
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.domain
+  Storage:
+    type: framework
+    sources: [Sources/MiledgeStorage]
+    settings:
+      base:
+        PRODUCT_NAME: MiledgeStorage
+        PRODUCT_MODULE_NAME: MiledgeStorage
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.storage
+  Application:
+    type: framework
+    sources: [Sources/MiledgeApplication]
+    settings:
+      base:
+        PRODUCT_NAME: MiledgeApplication
+        PRODUCT_MODULE_NAME: MiledgeApplication
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.application
+  InteractionHost:
+    type: application
+    sources:
+      - path: App
+        excludes: [MiledgeApp.swift, Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-macOS.entitlements, Resources/AppIcon.icon]
+      - path: InteractionHost
+        excludes: [Info.plist, Mac-Info.plist]
+    settings:
+      base:
+        PRODUCT_MODULE_NAME: MiledgeInteraction
+        INFOPLIST_KEY_CFBundleDisplayName: Miledge UI Tests
+        SKIP_INSTALL: YES
+  InteractionTests:
+    type: bundle.ui-testing
+    sources: [InteractionTests]
+    settings:
+      base:
+        PRODUCT_MODULE_NAME: MiledgeInteractionTests
+        SKIP_INSTALL: YES
+targets:
+  MiledgeInteraction-iOS:
+    templates: [InteractionHost]
+    platform: iOS
+    info:
+      path: InteractionHost/Info.plist
+      properties:
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UTExportedTypeDeclarations: &backupType
+          - UTTypeIdentifier: com.miledge.encrypted-backup
+            UTTypeDescription: Miledge encrypted backup
+            UTTypeConformsTo: [public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [miledge-backup]
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    dependencies:
+      - target: MiledgeApplication-iOS
+      - target: MiledgeDomain-iOS
+      - target: MiledgeStorage-iOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.interaction.ios
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+  MiledgeInteraction-macOS:
+    templates: [InteractionHost]
+    platform: macOS
+    info:
+      path: InteractionHost/Mac-Info.plist
+      properties:
+        UTExportedTypeDeclarations: *backupType
+    dependencies:
+      - target: MiledgeApplication-macOS
+      - target: MiledgeDomain-macOS
+      - target: MiledgeStorage-macOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.interaction.mac
+  MiledgeInteraction-iOSTests:
+    templates: [InteractionTests]
+    platform: iOS
+    dependencies:
+      - target: MiledgeInteraction-iOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.interaction.tests.ios
+  MiledgeInteraction-macOSTests:
+    templates: [InteractionTests]
+    platform: macOS
+    dependencies:
+      - target: MiledgeInteraction-macOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.interaction.tests.mac
+  MiledgeDomain-iOS:
+    templates: [Domain]
+    platform: iOS
+  MiledgeStorage-iOS:
+    templates: [Storage]
+    platform: iOS
+  MiledgeApplication-iOS:
+    templates: [Application]
+    platform: iOS
+    dependencies:
+      - target: MiledgeDomain-iOS
+      - target: MiledgeStorage-iOS
+  MiledgeDomain-macOS:
+    templates: [Domain]
+    platform: macOS
+  MiledgeStorage-macOS:
+    templates: [Storage]
+    platform: macOS
+  MiledgeApplication-macOS:
+    templates: [Application]
+    platform: macOS
+    dependencies:
+      - target: MiledgeDomain-macOS
+      - target: MiledgeStorage-macOS
+  Miledge-iOS:
+    type: application
+    platform: iOS
+    productName: Miledge
+    sources:
+      - path: App
+        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-macOS.entitlements]
+    info:
+      path: App/Miledge-iOS-Info.plist
+      properties:
+        ITSAppUsesNonExemptEncryption: false
+        UTExportedTypeDeclarations: *backupType
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    dependencies:
+      - target: MiledgeApplication-iOS
+      - target: MiledgeDomain-iOS
+      - target: MiledgeStorage-iOS
+    settings:
+      base:
+        PRODUCT_NAME: Miledge
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge
+        INFOPLIST_KEY_CFBundleDisplayName: Miledge
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        INFOPLIST_KEY_NSFaceIDUsageDescription: "Unlock your private ledger."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_CFBundleDevelopmentRegion: en
+  Miledge-macOS:
+    type: application
+    platform: macOS
+    productName: Miledge
+    sources:
+      - path: App
+        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-macOS.entitlements]
+    info:
+      path: App/Miledge-macOS-Info.plist
+      properties:
+        ITSAppUsesNonExemptEncryption: false
+        UTExportedTypeDeclarations: *backupType
+    dependencies:
+      - target: MiledgeApplication-macOS
+      - target: MiledgeDomain-macOS
+      - target: MiledgeStorage-macOS
+    settings:
+      base:
+        PRODUCT_NAME: Miledge
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge
+        INFOPLIST_KEY_CFBundleDisplayName: Miledge
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ONLY_ACTIVE_ARCH: NO
+        ENABLE_APP_SANDBOX: YES
+        INFOPLIST_KEY_CFBundleDevelopmentRegion: en
+    entitlements:
+      path: App/Miledge-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.files.user-selected.read-write: true
+  Miledge-iOSTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [AppTests, Tests]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.tests.ios
+        PRODUCT_MODULE_NAME: MiledgeAppTests
+    dependencies:
+      - target: Miledge-iOS
+      - target: MiledgeApplication-iOS
+      - target: MiledgeDomain-iOS
+      - target: MiledgeStorage-iOS
+  Miledge-macOSTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [AppTests, Tests]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.miledge.tests.mac
+        PRODUCT_MODULE_NAME: MiledgeAppTests
+    dependencies:
+      - target: Miledge-macOS
+      - target: MiledgeApplication-macOS
+      - target: MiledgeDomain-macOS
+      - target: MiledgeStorage-macOS
+schemes:
+  MiledgeInteraction-iOS:
+    build:
+      targets:
+        MiledgeInteraction-iOS: [test]
+    test:
+      gatherCoverageData: false
+      targets: [MiledgeInteraction-iOSTests]
+  MiledgeInteraction-macOS:
+    build:
+      targets:
+        MiledgeInteraction-macOS: [test]
+    test:
+      gatherCoverageData: false
+      targets: [MiledgeInteraction-macOSTests]
+  Miledge-iOS:
+    build:
+      targets:
+        Miledge-iOS: all
+    test:
+      gatherCoverageData: true
+      coverageTargets:
+        - Miledge-iOS
+        - MiledgeDomain-iOS
+        - MiledgeStorage-iOS
+        - MiledgeApplication-iOS
+      targets: [Miledge-iOSTests]
+    run:
+      config: Debug
+    archive:
+      config: Release
+  Miledge-macOS:
+    build:
+      targets:
+        Miledge-macOS: all
+    test:
+      gatherCoverageData: true
+      coverageTargets:
+        - Miledge-macOS
+        - MiledgeDomain-macOS
+        - MiledgeStorage-macOS
+        - MiledgeApplication-macOS
+      targets: [Miledge-macOSTests]
+    run:
+      config: Debug
+    archive:
+      config: Release

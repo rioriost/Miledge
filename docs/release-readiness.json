@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "reviewedSourceDigest": "",
+  "checks": {
+    "portableEncryptedBackup": {
+      "status": "blocked",
+      "evidence": "Encrypted backup and restore are implemented with synthetic regressions. Signed-device and cross-team portability, complete native file-dialog acceptance, maximum-history behavior and independent backup security approval remain unverified."
+    },
+    "translations": {
+      "status": "blocked",
+      "evidence": "Draft resources exist for all 12 localizations. Native-speaker review and complete localized/RTL visual and task acceptance remain incomplete."
+    },
+    "hardwareValidation": {
+      "status": "blocked",
+      "evidence": "Version 0.1.0 build 2 has been distributed to internal TestFlight for Mac and iOS/iPadOS. Device installation and acceptance, signed authentication/Keychain persistence and official cross-device sharing remain unverified. Distribution is not hardware acceptance."
+    },
+    "accessibility": {
+      "status": "blocked",
+      "evidence": "Synthetic native renders and focused interaction regressions exist. Complete current-source native interaction, keyboard/focus, physical VoiceOver/Voice Control, appearance, contrast, clipping and localization acceptance are still required."
+    },
+    "conflictRecovery": {
+      "status": "blocked",
+      "evidence": "Immutable revisions and explicit whole-version conflict resolution are implemented. Signed cross-device conflicts, cloud attachment delivery and complete recovery behavior remain unverified or incomplete."
+    }
+  }
+}

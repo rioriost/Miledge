@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked",
+  "reviewedSourceDigest": "",
+  "reviewer": {"identity": ""},
+  "implementationAuthors": [],
+  "independenceEvidence": "",
+  "reviewDate": "",
+  "scopes": {
+    "ios-masvs-storage-crypto": {"status": "blocked", "evidence": ""},
+    "ios-masvs-auth-network": {"status": "blocked", "evidence": ""},
+    "ios-masvs-platform-code-resilience-privacy": {"status": "blocked", "evidence": ""},
+    "macos-keychain-access-groups": {"status": "blocked", "evidence": ""},
+    "macos-sandbox-entitlements": {"status": "blocked", "evidence": ""},
+    "macos-authentication-lock": {"status": "blocked", "evidence": ""},
+    "macos-encrypted-files-paths": {"status": "blocked", "evidence": ""},
+    "clipboard-logs": {"status": "blocked", "evidence": ""},
+    "sync-conflict-backup-recovery": {"status": "blocked", "evidence": ""},
+    "signed-device-distribution": {"status": "blocked", "evidence": ""},
+    "swift-parser-cross-function-cross-file-gaps": {"status": "blocked", "evidence": ""}
+  },
+  "findings": [],
+  "residualRiskAcceptance": "",
+  "report": {"path": "", "sha256": ""}
+}
