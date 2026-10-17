@@ -1,4 +1,5 @@
 import SwiftUI
+import MiledgeApplication
 
 #if os(macOS)
 import AppKit
@@ -80,9 +81,9 @@ struct FieldRowLayout: DynamicProperty {
 
     func layout(auxiliary: Bool = false, alignment: VerticalAlignment = .top) -> AnyLayout {
         #if os(iOS)
-        let stacked = sizeClass == .compact && (auxiliary
-            ? dynamicSize.isAccessibilitySize && textSize.scale > 1
-            : dynamicSize.isAccessibilitySize || textSize.scale > 1)
+        let stacked = auxiliary
+            ? dynamicSize >= .accessibility4 || (dynamicSize.isAccessibilitySize && textSize.scale > 1)
+            : dynamicSize.isAccessibilitySize || (sizeClass == .compact && textSize.scale > 1)
         if stacked { return AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) }
         #endif
         return AnyLayout(HStackLayout(alignment: alignment, spacing: 8))
@@ -91,6 +92,7 @@ struct FieldRowLayout: DynamicProperty {
 
 private struct LedgerFont: ViewModifier {
     @Environment(\.displayTextSize) private var size
+    @Environment(\.legibilityWeight) private var legibility
     @ScaledMetric private var points: CGFloat
     let weight: Font.Weight
 
@@ -121,7 +123,8 @@ private struct LedgerFont: ViewModifier {
         #else
         let minimum: CGFloat = 11
         #endif
-        content.font(.system(size: max(minimum, points * size.scale), weight: weight))
+        content.font(.system(size: max(minimum, points * size.scale),
+                             weight: legibility == .bold && weight == .regular ? .semibold : weight))
     }
 }
 
@@ -187,11 +190,13 @@ extension View {
 }
 
 struct DisplaySettingsView: View {
+    var session: VaultSession? = nil
     @AppStorage("displayTextSize") private var size = DisplayTextSize.standard
     @AppStorage("concealValuesByDefault") private var concealByDefault = true
 
     var body: some View {
         Form {
+            Section("Display") {
             Picker("Font size", selection: $size) {
                 ForEach(DisplayTextSize.allCases) { size in
                     Text("\(size.rawValue) pt").tag(size)
@@ -203,11 +208,38 @@ struct DisplaySettingsView: View {
                 .accessibilityIdentifier("display-font-preview")
             Toggle("Conceal by default", isOn: $concealByDefault)
                 .accessibilityIdentifier("display-conceal-values")
+            }
+            Section("iCloud Keychain") {
+                Text("Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing.")
+                    .fixedSize(horizontal: false, vertical: true)
+                if let session {
+                    if let date = session.lastReadAt {
+                        LabeledContent("Last checked on this device") {
+                            Text(date, style: .time)
+                        }
+                    }
+                    if session.pendingRevisionCount > 0 {
+                        Label("Waiting for iCloud Keychain history.", systemImage: "icloud.and.arrow.down")
+                    }
+                    if session.refreshFailed {
+                        Label("Could not refresh. Try again.", systemImage: "exclamationmark.triangle")
+                    }
+                    Button("Refresh", systemImage: "arrow.clockwise") { try? session.refresh() }
+                        .disabled(session.state != .unlocked)
+                        .accessibilityIdentifier("refresh-keychain")
+                }
+            }
+            Section {
+                Link("Privacy Policy", destination: URL(string: "https://github.com/rioriost/Miledge/blob/main/PRIVACY.md")!)
+                    .accessibilityIdentifier("privacy-policy-link")
+                Link("Support", destination: URL(string: "https://github.com/rioriost/Miledge/issues")!)
+                    .accessibilityIdentifier("support-link")
+            }
         }
         .formStyle(.grouped)
-        .navigationTitle("Display")
+        .navigationTitle("Settings")
         #if os(macOS)
-        .frame(width: 400 * size.scale, height: 240 * size.scale)
+        .frame(width: 460 * size.scale, height: 420 * size.scale)
         #else
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {

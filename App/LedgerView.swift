@@ -9,6 +9,7 @@ struct LedgerView: View {
     var clipboard: SecureClipboard?
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.horizontalSizeClass) private var sizeClass
+    @Environment(\.dynamicTypeSize) private var textSize
     @Environment(\.locale) private var locale
     @State private var browser: LedgerBrowser
     @State private var columnVisibility = NavigationSplitViewVisibility.all
@@ -38,6 +39,14 @@ struct LedgerView: View {
         browser.visibleItems(from: session.heads)
     }
 
+    private var usesCompactLayout: Bool {
+        #if os(iOS)
+        sizeClass == .compact || textSize.isAccessibilitySize
+        #else
+        false
+        #endif
+    }
+
     var body: some View {
         Group {
             if session.state == .unlocked {
@@ -48,7 +57,10 @@ struct LedgerView: View {
                     }
                     .navigationSplitViewColumnWidth(min: 240, ideal: 280, max: 340)
                     .toolbar {
-                        if sizeClass == .compact {
+                        if usesCompactLayout {
+                            #if os(iOS)
+                            ToolbarItem { settingsButton }
+                            #endif
                             ToolbarItem {
                                 Button("Add", systemImage: "plus") { choosingTemplate = true }.accessibilityIdentifier("ledger-add")
                             }
@@ -63,6 +75,9 @@ struct LedgerView: View {
                         .navigationSplitViewColumnWidth(min: 320, ideal: 500)
                 }
                 .navigationSplitViewStyle(.balanced)
+                #if os(iOS)
+                .environment(\.horizontalSizeClass, usesCompactLayout ? .compact : sizeClass)
+                #endif
                 #if os(macOS)
                 .searchable(text: $browser.query)
                 #endif
@@ -109,16 +124,8 @@ struct LedgerView: View {
             BackupView(flow: flow)
         }
         .sheet(isPresented: $showingDisplaySettings) {
-            NavigationStack { DisplaySettingsView() }
+            NavigationStack { DisplaySettingsView(session: session) }
         }
-        #if os(iOS)
-        .toolbar {
-            ToolbarItem {
-                Button("Display", systemImage: "textformat.size") { showingDisplaySettings = true }
-                    .accessibilityIdentifier("display-settings")
-            }
-        }
-        #endif
         .alert("Unable to complete the action", isPresented: Binding(
             get: { issue != nil },
             set: { if !$0 { issue = nil } }
@@ -142,6 +149,14 @@ struct LedgerView: View {
                 lock(clearClipboard: false)
             }
         }
+        .task(id: session.state) {
+            guard session.state == .unlocked else { return }
+            while !Task.isCancelled {
+                do { try await Task.sleep(for: .seconds(5)) } catch { return }
+                guard session.state == .unlocked, !Task.isCancelled else { return }
+                try? session.refresh()
+            }
+        }
         .onChange(of: session.accessGeneration) { _, _ in
             attachments?.clearTemporaryFiles()
             backupFlow?.cancel()
@@ -162,13 +177,17 @@ struct LedgerView: View {
     }
 
     private var ledgerList: some View {
-        List(selection: $browser.selectedRecordId) {
-            ForEach(items) { item in
-                NavigationLink(value: item.id) {
-                    LedgerItemRow(item: item)
+        Group {
+            #if os(macOS)
+            MacLedgerList(items: items, selection: $browser.selectedRecordId)
+            #else
+            List(selection: $browser.selectedRecordId) {
+                ForEach(items) { item in
+                    NavigationLink(value: item.id) { LedgerItemRow(item: item) }
+                        .accessibilityIdentifier("ledger-item-\(item.id.uuidString)")
                 }
-                .accessibilityIdentifier("ledger-item-\(item.id.uuidString)")
             }
+            #endif
         }
         .listStyle(.plain)
         .navigationTitle(browser.category.title)
@@ -177,6 +196,7 @@ struct LedgerView: View {
         .searchable(text: $browser.query)
         #endif
         .accessibilityIdentifier("ledger-items")
+        .refreshable { try? session.refresh() }
         .overlay {
             if items.isEmpty {
                 if !browser.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -192,25 +212,26 @@ struct LedgerView: View {
             }
         }
         .toolbar {
+            #if os(iOS)
+            ToolbarItem { settingsButton }
+            ToolbarItem {
+                Menu("More", systemImage: "ellipsis") {
+                    backupMenu
+                    sortMenu
+                }
+            }
+            #else
             ToolbarItem { backupMenu }
             ToolbarItem {
-                Menu {
-                    Picker("Sort", selection: $browser.descending) {
-                        Text("Title, A–Z").tag(false)
-                        Text("Title, Z–A").tag(true)
-                    }
-                } label: {
-                    Label("Sort", systemImage: "arrow.up.arrow.down")
-                }
-                .accessibilityLabel("Sort")
-                .help("Sort")
+                Button("Refresh", systemImage: "arrow.clockwise") { try? session.refresh() }
+                    .accessibilityIdentifier("refresh-keychain")
             }
+            ToolbarItem { sortMenu }
+            #endif
             ToolbarItem {
                 Button("Add", systemImage: "plus") { choosingTemplate = true }.accessibilityIdentifier("ledger-add")
             }
-            ToolbarItem {
-                lockButton
-            }
+            ToolbarItem { lockButton }
         }
     }
 
@@ -243,8 +264,19 @@ struct LedgerView: View {
                         }
                         return clipboard.copy(value)
                     }
-                }, resolveConflict: { conflict = revision }, attachments: attachments
+                }, resolveConflict: { conflict = revision },
+                synchronize: session.defaultStorageScope == .synchronizable ? {
+                    do {
+                        let copy = try session.copyForSynchronization(revision)
+                        browser.show(recordId: copy.recordId, heads: session.heads)
+                    } catch {
+                        issue = String(localized: "The item could not be copied. The original is unchanged.")
+                    }
+                } : nil, attachments: attachments
             ).navigationTitle(Text(verbatim: revision.title))
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.inline)
+            #endif
         } else if let item = items.first(where: { $0.id == browser.selectedRecordId }) {
             ContentUnavailableView {
                 Label("Conflicting changes", systemImage: "exclamationmark.triangle")
@@ -256,6 +288,7 @@ struct LedgerView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(Color(red: 0, green: 0.35, blue: 0.75))
             }
         } else {
             ContentUnavailableView("No item selected", systemImage: "square.stack.3d.up")
@@ -268,13 +301,11 @@ struct LedgerView: View {
             Text("Miledge").ledgerFont(.title)
             Button("Unlock") { Task { await unlock() } }
                 .buttonStyle(.borderedProminent)
+                // Keep white button text readable when the system accent brightens in Dark Mode.
+                .tint(Color(red: 0, green: 0.35, blue: 0.75))
                 .keyboardShortcut(.defaultAction)
                 .disabled(session.state == .unlocking)
             if session.state == .unlocking { ProgressView() }
-            #if os(iOS)
-            Button("Display", systemImage: "textformat.size") { showingDisplaySettings = true }
-                .accessibilityIdentifier("display-settings")
-            #endif
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -287,6 +318,24 @@ struct LedgerView: View {
             Label("Backup", systemImage: "externaldrive")
         }
         .disabled(attachments == nil)
+    }
+
+    private var settingsButton: some View {
+        Button("Settings", systemImage: "gearshape") { showingDisplaySettings = true }
+            .accessibilityIdentifier("app-settings")
+    }
+
+    private var sortMenu: some View {
+        Menu {
+            Picker("Sort", selection: $browser.descending) {
+                Text("Title, A–Z").tag(false)
+                Text("Title, Z–A").tag(true)
+            }
+        } label: {
+            Label("Sort", systemImage: "arrow.up.arrow.down")
+        }
+        .accessibilityLabel("Sort")
+        .help("Sort")
     }
 
     private var lockButton: some View {

@@ -103,7 +103,8 @@ final class TypedInteractionTests: XCTestCase {
             }
             activate(selectAll)
         }
-        element.typeText(text.isEmpty ? XCUIKeyboardKey.delete.rawValue : text)
+        if text.isEmpty { element.typeText(XCUIKeyboardKey.delete.rawValue) }
+        else { for character in text { element.typeText(String(character)) } }
         #endif
     }
 
@@ -354,12 +355,12 @@ final class TypedInteractionTests: XCTestCase {
         try auditAccessibility(of: app, state: "concealed fields")
         XCTAssertFalse(app.debugDescription.contains("Synthetic first secret"))
         XCTAssertFalse(app.debugDescription.contains("Synthetic second secret"))
-        XCTAssertEqual(visibilityButton("Reveal").label, "Reveal First")
-        activate(visibilityButton("Reveal"))
-        XCTAssertTrue(app.staticTexts["Synthetic first secret"].exists)
+        let first = app.buttons.matching(NSPredicate(format: "label == %@", "First")).firstMatch
+        activate(first)
+        XCTAssertTrue((first.value as? String)?.contains("Synthetic first secret") == true)
         XCTAssertFalse(app.debugDescription.contains("Synthetic second secret"))
         try auditAccessibility(of: app, state: "revealed field")
-        activate(visibilityButton("Hide"))
+        activate(first)
         XCTAssertFalse(app.debugDescription.contains("Synthetic first secret"))
     }
 
@@ -552,12 +553,96 @@ final class TypedInteractionTests: XCTestCase {
         return app.staticTexts["test-clipboard"].value as? String
     }
 
+    private func copyDetailField(at index: Int) {
+        let field = app.buttons.matching(identifier: "copy-value").element(boundBy: index)
+        activate(field)
+        #if os(iOS)
+        let action = app.menuItems.matching(NSPredicate(format: "label BEGINSWITH %@", "Copy ")).firstMatch
+        XCTAssertTrue(action.waitForExistence(timeout: 5))
+        activate(action)
+        #endif
+    }
+
+    #if os(iOS)
+    func testDismissingCopyMenuConcealsWithoutCopying() {
+        launch("clipboard")
+        activate(ledgerRow("Synthetic copy source"))
+        let field = app.buttons.matching(identifier: "copy-value").firstMatch
+        activate(field)
+        XCTAssertTrue(app.menuItems["Copy Synthetic key"].waitForExistence(timeout: 5))
+        app.navigationBars.staticTexts.firstMatch.tap()
+        XCTAssertTrue(app.menuItems["Copy Synthetic key"].waitForNonExistence(timeout: 5))
+        XCTAssertEqual(field.value as? String, "Concealed value")
+        XCTAssertEqual(inspectClipboard(), "Empty")
+    }
+    #endif
+
+    func testDetailTapRevealsThenNativeCopyMenuConceals() {
+        launch("clipboard")
+        activate(ledgerRow("Synthetic copy source"))
+        XCTAssertFalse(app.debugDescription.contains("Exact Case"))
+        XCTAssertEqual(app.buttons.matching(identifier: "field-visibility").count, 0)
+        let field = app.buttons.matching(identifier: "copy-value").firstMatch
+        #if os(macOS)
+        field.hover()
+        XCTAssertTrue(app.debugDescription.contains("Exact Case"))
+        activate(field)
+        #else
+        activate(field)
+        XCTAssertTrue(app.menuItems["Copy Synthetic key"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.debugDescription.contains("Exact Case"))
+        XCTAssertFalse(app.debugDescription.contains("postalCode"))
+        let image = XCTAttachment(screenshot: app.screenshot())
+        image.name = "Native floating copy menu"
+        image.lifetime = .keepAlways
+        add(image)
+        activate(app.menuItems["Copy Synthetic key"])
+        #endif
+        XCTAssertEqual(field.value as? String, "Copied")
+        XCTAssertFalse(app.debugDescription.contains("Exact Case"))
+        XCTAssertEqual(inspectClipboard(), "  Exact Case\n0001\nالعربية e\u{301} \n")
+    }
+
+    #if os(iOS)
+    func testJapaneseNativeControlsInDarkAppearance() {
+        app.launchEnvironment["MILEDGE_UI_LOCALE"] = "ja"
+        app.launchEnvironment["MILEDGE_UI_APPEARANCE"] = "dark"
+        launch("clipboard")
+        activate(ledgerRow("Synthetic copy source"))
+        let field = app.buttons.matching(identifier: "copy-value").firstMatch
+        activate(field)
+        XCTAssertTrue(app.menuItems.firstMatch.waitForExistence(timeout: 5))
+        captureNative("Japanese floating copy menu")
+        activate(app.menuItems.firstMatch)
+        XCTAssertFalse(app.debugDescription.contains("Exact Case"))
+        activate(field)
+        XCTAssertTrue(app.menuItems.firstMatch.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.debugDescription.contains("Exact Case"))
+        activate(app.menuItems.firstMatch)
+        launch("selection-dates")
+        activate(app.buttons["field-calendar-issueDate"])
+        makeReachable(app.buttons["calendar-done"], in: app)
+        captureNative("Japanese inline calendar")
+        activate(app.buttons["DatePicker.Show"])
+        XCTAssertEqual(app.pickerWheels.count, 2)
+        captureNative("Japanese month year selection")
+    }
+
+    private func captureNative(_ name: String) {
+        let image = XCTAttachment(screenshot: app.screenshot())
+        image.name = name
+        image.lifetime = .keepAlways
+        add(image)
+    }
+    #endif
+
     func testExplicitCopyKeepsSecretConcealedAndPreservesExactMultilineUnicode() {
         launch("clipboard")
         activate(ledgerRow("Synthetic copy source"))
         XCTAssertFalse(app.debugDescription.contains("Exact Case"))
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 0))
-        XCTAssertTrue(app.staticTexts["Copied"].waitForExistence(timeout: 5))
+        copyDetailField(at: 0)
+        XCTAssertTrue(app.buttons.matching(identifier: "copy-value").element(boundBy: 0).waitForExistence(timeout: 5))
+        XCTAssertEqual(app.buttons.matching(identifier: "copy-value").element(boundBy: 0).value as? String, "Copied")
         XCTAssertFalse(app.debugDescription.contains("Exact Case"))
         XCTAssertEqual(inspectClipboard(), "  Exact Case\n0001\nالعربية e\u{301} \n")
         clipboardAction("Expire test clipboard")
@@ -567,7 +652,7 @@ final class TypedInteractionTests: XCTestCase {
     func testStructuredCopyUsesJSONWithoutDroppingUnknownValuesOrLeadingZeros() {
         launch("clipboard")
         activate(ledgerRow("Synthetic copy source"))
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 1))
+        copyDetailField(at: 1)
         XCTAssertEqual(inspectClipboard(), "{\"future\":9007199254740993,\"postalCode\":\"000001\"}")
         XCTAssertFalse(app.staticTexts["000001"].exists)
     }
@@ -575,13 +660,13 @@ final class TypedInteractionTests: XCTestCase {
     func testManualLockClearsOwnedCopyButKeepsAnotherAppsReplacement() {
         launch("clipboard")
         activate(ledgerRow("Synthetic copy source"))
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 0))
+        copyDetailField(at: 0)
         showLedgerList()
         activate(app.buttons["Lock"])
         XCTAssertEqual(inspectClipboard(), "Empty")
         unlockLedger()
         activate(ledgerRow("Synthetic copy source"))
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 0))
+        copyDetailField(at: 0)
         clipboardAction("Replace test clipboard")
         showLedgerList()
         activate(app.buttons["Lock"])
@@ -592,17 +677,17 @@ final class TypedInteractionTests: XCTestCase {
         launch("clipboard")
         activate(ledgerRow("Synthetic copy source"))
         clipboardAction("Fail next copy")
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 0))
+        copyDetailField(at: 0)
         XCTAssertTrue(app.alerts["Clipboard unavailable"].waitForExistence(timeout: 5))
         activate(app.alerts.buttons["OK"])
-        XCTAssertFalse(app.staticTexts["Copied"].exists)
+        XCTAssertFalse(app.buttons.matching(NSPredicate(format: "value == %@", "Copied")).firstMatch.exists)
         XCTAssertEqual(inspectClipboard(), "Empty")
     }
 
     func testSwitchingAppsLocksTheLedgerButKeepsTheCopyUntilExpiry() {
         launch("clipboard")
         activate(ledgerRow("Synthetic copy source"))
-        activate(app.buttons.matching(identifier: "copy-value").element(boundBy: 0))
+        copyDetailField(at: 0)
         #if os(macOS)
         XCUIApplication(bundleIdentifier: "com.apple.finder").activate()
         #else
@@ -1093,7 +1178,9 @@ final class TypedInteractionTests: XCTestCase {
         #if os(macOS)
         app.typeKey(",", modifierFlags: .command)
         #else
-        activate(app.buttons["display-settings"])
+        XCTAssertFalse(app.buttons["app-settings"].exists)
+        activate(app.buttons["Unlock"])
+        activate(app.buttons["app-settings"])
         #endif
         activate(app.popUpButtons["display-font-size"].exists
             ? app.popUpButtons["display-font-size"] : app.buttons["display-font-size"])
@@ -1106,7 +1193,7 @@ final class TypedInteractionTests: XCTestCase {
         activate(app.buttons["26 pt"])
         let expected = "26"
         activate(app.buttons["Done"])
-        activate(app.buttons["display-settings"])
+        activate(app.buttons["app-settings"])
         #endif
         let picker = app.descendants(matching: .any).matching(identifier: "display-font-size").firstMatch
         XCTAssertTrue((picker.value as? String ?? "").contains(expected) || picker.label.contains(expected))
@@ -1146,13 +1233,13 @@ final class TypedInteractionTests: XCTestCase {
 
     func testIdenticalFieldIDsDoNotShareRevealState() throws {
         launch("reveal")
-        XCTAssertFalse(app.staticTexts["Synthetic first secret"].exists)
-        XCTAssertFalse(app.staticTexts["Synthetic second secret"].exists)
-        XCTAssertEqual(visibilityButton("Reveal").label, "Reveal First")
-        activate(visibilityButton("Reveal"))
-        XCTAssertTrue(app.staticTexts["Synthetic first secret"].exists)
-        XCTAssertFalse(app.staticTexts["Synthetic second secret"].exists)
-        activate(visibilityButton("Hide"))
-        XCTAssertFalse(app.staticTexts["Synthetic first secret"].exists)
+        XCTAssertFalse(app.debugDescription.contains("Synthetic first secret"))
+        XCTAssertFalse(app.debugDescription.contains("Synthetic second secret"))
+        let first = app.buttons.matching(NSPredicate(format: "label == %@", "First")).firstMatch
+        activate(first)
+        XCTAssertTrue((first.value as? String)?.contains("Synthetic first secret") == true)
+        XCTAssertFalse(app.debugDescription.contains("Synthetic second secret"))
+        activate(first)
+        XCTAssertFalse(app.debugDescription.contains("Synthetic first secret"))
     }
 }

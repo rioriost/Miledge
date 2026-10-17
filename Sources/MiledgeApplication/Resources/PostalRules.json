@@ -1,0 +1,1519 @@
+{
+  "regions": {
+    "AC": {
+      "examples": "ASCN 1ZZ",
+      "pattern": "ASCN 1ZZ",
+      "sourceSHA256": "cfc7038e1fb6e8405599278bcba2a79d8a5b7c0342972d2e741e7e8c05149bd7",
+      "usesPostalCode": true
+    },
+    "AD": {
+      "examples": "AD100,AD501,AD700",
+      "pattern": "AD[1-7]0\\d",
+      "sourceSHA256": "d3ac2fcaf595656ff4fa2b917f0e5654c46763a71d122d201a0f6deba2650d39",
+      "usesPostalCode": true
+    },
+    "AE": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "9b912cf5af8241c36c057d77441d23fd7d7656957326acec3b8feb86fd3fd9bb",
+      "usesPostalCode": false
+    },
+    "AF": {
+      "examples": "1001,2601,3801",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "47d087f4c236dcdf5a62a1cd8cf609683e51dd726b15e70e140f5a4a37194991",
+      "usesPostalCode": true
+    },
+    "AG": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "884c6d7acce567ea46db82c8ea4bfeeba3d8cfb117dbca9bd9c0ab295dfe5397",
+      "usesPostalCode": false
+    },
+    "AI": {
+      "examples": "2640",
+      "pattern": "(?:AI-)?2640",
+      "sourceSHA256": "ad03e66475126fcf9d5d9ba6bfc00ad8a7d1ac2542f7ac330299b954d7a72d2b",
+      "usesPostalCode": true
+    },
+    "AL": {
+      "examples": "1001,1017,3501",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "015d682e284b9e89dc165915019cc115b67a07135ef07b366206aa5a972bbfba",
+      "usesPostalCode": true
+    },
+    "AM": {
+      "examples": "375010,0002,0010",
+      "pattern": "(?:37)?\\d{4}",
+      "sourceSHA256": "7d12217234aede761b8e3e04763f86b5b213f646971daaf90f345a425cfc2279",
+      "usesPostalCode": true
+    },
+    "AO": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "ce39beeaa1ea949e2002ee37fe6a19727b5596cfb8b895ce711ba2c3f1326259",
+      "usesPostalCode": false
+    },
+    "AQ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "9c665d00309d5e14f0d2c2366c939edcb87aed2d5950287a9796193d9f8f5f8f",
+      "usesPostalCode": false
+    },
+    "AR": {
+      "examples": "C1070AAM,C1000WAM,B1000TBU,X5187XAB",
+      "pattern": "[A-HJ-NP-Z]\\d{4}[A-Z]{3}",
+      "sourceSHA256": "4e0aef04b27097c0291a21e60c2be5b5a5bfef07a3d8bbee60e5d79f4abf85c4",
+      "usesPostalCode": true
+    },
+    "AS": {
+      "examples": "96799",
+      "pattern": "(96799)(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "883d725e346cecd2590e9e332eb9808d0ae60710dd186103c416b7bbad2d0320",
+      "usesPostalCode": true
+    },
+    "AT": {
+      "examples": "1010,3741",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "61f69e7a7975fcc190e5ff043cd5829a06cd75748e88cc79871880bb8e09d621",
+      "usesPostalCode": true
+    },
+    "AU": {
+      "examples": "2060,3171,6430,4000,4006,3001",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "7b224db7ce8e596e634e73f70c6630840cd45dc60ef872601f291bf903966cc6",
+      "usesPostalCode": true
+    },
+    "AW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "c8238beaf21117a124697edea2be04d6e65c9cfe3ec1c1b386e1ce60e260a6e4",
+      "usesPostalCode": false
+    },
+    "AX": {
+      "examples": "22150,22550,22240,22710,22270,22730,22430",
+      "pattern": "22\\d{3}",
+      "sourceSHA256": "07b7134c502525333738fb94bce41b4dd822101166b41d10190e47c1195cfcd7",
+      "usesPostalCode": true
+    },
+    "AZ": {
+      "examples": "1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "52ac5d78469049c3d3bcac03505be33256452e7c36f10000793e04760d7dde16",
+      "usesPostalCode": true
+    },
+    "BA": {
+      "examples": "71000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "ae01f4a167da18c79b2628385195ae7c018df837e170d71970c2cc9cc1c22aab",
+      "usesPostalCode": true
+    },
+    "BB": {
+      "examples": "BB23026,BB22025",
+      "pattern": "BB\\d{5}",
+      "sourceSHA256": "97033c0abf4180b06cdf0ccecf43e13bea06af2ed96434678af81b46e6465018",
+      "usesPostalCode": true
+    },
+    "BD": {
+      "examples": "1340,1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "c1a8a263f448237d0d3d003690346b62375962aa47b06024e5bed51f5671afcd",
+      "usesPostalCode": true
+    },
+    "BE": {
+      "examples": "4000,1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "ba116acce1f29961a82f99d14be59ab29fde8a52615fba407ebc7b42b1c5dc6e",
+      "usesPostalCode": true
+    },
+    "BF": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e08bcb3d4f1c69721ca77632ae65258427200dd93f9e086e283c6599b372ce22",
+      "usesPostalCode": false
+    },
+    "BG": {
+      "examples": "1000,1700",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "1577926d3f8b11bd7fee1fa74406579dd25504a4ba9e5171de8892d0d41280d1",
+      "usesPostalCode": true
+    },
+    "BH": {
+      "examples": "317",
+      "pattern": "(?:^|\\b)(?:1[0-2]|[1-9])\\d{2}(?:$|\\b)",
+      "sourceSHA256": "6487e1433b9f48ce037c10a8fb8a511dd7d90b3ec0da0952e1cb43ea5af7b8c5",
+      "usesPostalCode": true
+    },
+    "BI": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "819ded53436b4adb1e194816b5ebc0e44a231cca8d1b012af5018711e1e03613",
+      "usesPostalCode": false
+    },
+    "BJ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e54fc95396b0298e32763f5f980ca6124a034fc3af6c84b31ee54397852c66fe",
+      "usesPostalCode": false
+    },
+    "BL": {
+      "examples": "97100",
+      "pattern": "9[78][01]\\d{2}",
+      "sourceSHA256": "5f5b7e075e1fc2cdb30b1ce90fc7102d02cbda31afcac3955a80bb60b0fb97aa",
+      "usesPostalCode": true
+    },
+    "BM": {
+      "examples": "FL 07,HM GX,HM 12",
+      "pattern": "[A-Z]{2} ?[A-Z0-9]{2}",
+      "sourceSHA256": "68d1ab971a1f6590a668c9ae7377fdf11baf2b4b70b6cea5fce18630059dba0c",
+      "usesPostalCode": true
+    },
+    "BN": {
+      "examples": "BT2328,KA1131,BA1511",
+      "pattern": "[A-Z]{2} ?\\d{4}",
+      "sourceSHA256": "1494a79696c0749a5fc8ecfc306a6f0f575c72b368b763814a222e43f9bc70c5",
+      "usesPostalCode": true
+    },
+    "BO": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "2643437865c4ffd27a298eebe05570db90c11f1047c6bd840cc1ec2c6064be38",
+      "usesPostalCode": false
+    },
+    "BQ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "740ad00df593a11813f531427965c0104d05d3d79d3977ec7f5e33f5d5e705db",
+      "usesPostalCode": false
+    },
+    "BR": {
+      "examples": "40301-110,70002-900",
+      "pattern": "\\d{5}-?\\d{3}",
+      "sourceSHA256": "e11b8855dd165035089f382933ea1025cfde4646a76a0d70f6453799a4aac72d",
+      "usesPostalCode": true
+    },
+    "BS": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "898225f57656d8531137823b71157ecc92dee800ba458f6e7d6e2e675e1097d6",
+      "usesPostalCode": false
+    },
+    "BT": {
+      "examples": "11001,31101,35003",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "2346a58530eb9e3985176ac141439511135bfcbfb19f345908a36e6eaa2210c2",
+      "usesPostalCode": true
+    },
+    "BV": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "579528f250f3e0096808bc81979c7254ff16198dd1a612d4ae5565909ccc6b4a",
+      "usesPostalCode": false
+    },
+    "BW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7ccdc22e5d36d750783e725e53b94a475a49d769986c65686527c03b1c8967e7",
+      "usesPostalCode": false
+    },
+    "BY": {
+      "examples": "223016,225860,220050",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "3b988318b21a4093688c42ec10d38e8ae74a492ddeb34a889f67d87522cfef66",
+      "usesPostalCode": true
+    },
+    "BZ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "fd2a0a42da55ab70fd917622c6ff6414ff70c850cf6486a24a4be0f5ddc7f798",
+      "usesPostalCode": false
+    },
+    "CA": {
+      "examples": "H3Z 2Y7,V8X 3X4,T0L 1K0,T0H 1A0,K1A 0B1",
+      "pattern": "[ABCEGHJKLMNPRSTVXY]\\d[ABCEGHJ-NPRSTV-Z] ?\\d[ABCEGHJ-NPRSTV-Z]\\d",
+      "sourceSHA256": "94d81e4713a666fb585b8e1bb855741d29850c7499f3f51fc8b3ca3c787898fc",
+      "usesPostalCode": true
+    },
+    "CC": {
+      "examples": "6799",
+      "pattern": "6799",
+      "sourceSHA256": "9e8663c096a093440c7cfd10e846f76200e9ea94027debb385d90aff9b48adb3",
+      "usesPostalCode": true
+    },
+    "CD": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "9ee5136dedd2c0c272823b7f192df7b83688a186c5d4117954ea82775c194ea2",
+      "usesPostalCode": false
+    },
+    "CF": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "ad079c1cf246c4f1e12c492707998fbaa7517e94b3515c431bdf7416a929d48e",
+      "usesPostalCode": false
+    },
+    "CG": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7655da9955a309903c55e95b94c553a04ad4f93f5928d8de77504d9c56a65f37",
+      "usesPostalCode": false
+    },
+    "CH": {
+      "examples": "2544,1211,1556,3030",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "85063bc7053bc27ee6cf93dbab80a9d1285c31473ccf07ea8903093c167fcda9",
+      "usesPostalCode": true
+    },
+    "CI": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "5ed34232d645179dc14a97602acabf04e603bdb4a703be5c28236f3615314ac2",
+      "usesPostalCode": false
+    },
+    "CK": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "da16e5dab9e1bf684ae4c073716ea8d831c0b7fd755a28d13d19ca325bb53aaf",
+      "usesPostalCode": false
+    },
+    "CL": {
+      "examples": "8340457,8720019,1230000,8329100",
+      "pattern": "\\d{7}",
+      "sourceSHA256": "a594f1cfb834158a127707bd633d62ed10a83a925c076842fecf869741c78909",
+      "usesPostalCode": true
+    },
+    "CM": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "6a5bafc60d9e362690cfcd1f9a7c26c77b0f6fc0a870c64e2027615ca3453cc6",
+      "usesPostalCode": false
+    },
+    "CN": {
+      "examples": "266033,317204,100096,100808",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "3706f7ee038ee0f94346320c0f8a25da532fe13a65d149f0b12c9136d1a1c8d7",
+      "usesPostalCode": true
+    },
+    "CO": {
+      "examples": "111221,130001,760011",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "b38187ad9db11fd54447f641780aa252ca0cdfa38f473cd45dd48c64a5099977",
+      "usesPostalCode": true
+    },
+    "CR": {
+      "examples": "1000,2010,1001",
+      "pattern": "\\d{4,5}|\\d{3}-\\d{4}",
+      "sourceSHA256": "e18251ecafc6e9403ad8bed3f230973de8cdb376abee1c4dc403121a65e5e35e",
+      "usesPostalCode": true
+    },
+    "CU": {
+      "examples": "10700",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b4aab9f00cbdbe73a640cb63c76564ef5c346222f0737d853a7f30dbbdc9f72d",
+      "usesPostalCode": true
+    },
+    "CV": {
+      "examples": "7600",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "5270aaf7327f818f8e9c01a1bbf8bdd0bfc098b3e5126cffad9dc8f9a8323338",
+      "usesPostalCode": true
+    },
+    "CW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "cbc37d497256d72c02a060b2db87d63df24d15a0bb709a19e0831e75fdb6255a",
+      "usesPostalCode": false
+    },
+    "CX": {
+      "examples": "6798",
+      "pattern": "6798",
+      "sourceSHA256": "94c81cd38942f46de5365a162ae730b1132b2a18e5bc0a72682b6a771723d65b",
+      "usesPostalCode": true
+    },
+    "CY": {
+      "examples": "2008,3304,1900",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "99531ebcfd38535c7bd375f4bb9adb45e280db11ebc84273b8c0386cb6a6ed14",
+      "usesPostalCode": true
+    },
+    "CZ": {
+      "examples": "100 00,251 66,530 87,110 00,225 99",
+      "pattern": "\\d{3} ?\\d{2}",
+      "sourceSHA256": "4235e563c8bc8c19f5eb62377980500fd8d504d376f63120c8a4904879e8f1a4",
+      "usesPostalCode": true
+    },
+    "DE": {
+      "examples": "26133,53225",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "2b35e53a1ca7bfa83a01e8d3d29c35d6b665986a13cc7176645eb6938d47a4c1",
+      "usesPostalCode": true
+    },
+    "DJ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "cd62b4f73620c13087c875d9bdf9a612a250b538c11dcd8f113a794df6df6907",
+      "usesPostalCode": false
+    },
+    "DK": {
+      "examples": "8660,1566",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "7bc4b2da3fc81784b9c370ea298208798c74d8b91e79ed03a1be309a62ff605b",
+      "usesPostalCode": true
+    },
+    "DM": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "d11afb9220dd1c04f9539472ec7b8368cc3434e423687b69af13d4540d57e4b4",
+      "usesPostalCode": false
+    },
+    "DO": {
+      "examples": "11903,10101",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "0478b94fbab7de84d7477189449c1ba7a2b43c0e489ffc5ee1dc275287827fb1",
+      "usesPostalCode": true
+    },
+    "DZ": {
+      "examples": "40304,16027",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "4d4634fc310819271a2befc025c4c9dc172ec0be7b23fec7793d2ae71abde499",
+      "usesPostalCode": true
+    },
+    "EC": {
+      "examples": "090105,092301",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "99ed0bd3ae8f09f4ff6ba96a5ee4998dcb7b58cb5128a11c6f8392acbd8b0226",
+      "usesPostalCode": true
+    },
+    "EE": {
+      "examples": "69501,11212",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "614cfa9446baf76d0a33540980b2d8c9c0490aa8fabcd1f5c7a0732ecdf0df56",
+      "usesPostalCode": true
+    },
+    "EG": {
+      "examples": "4460232,5734356",
+      "pattern": "\\d{7}|\\d{5}",
+      "sourceSHA256": "ad22b6751ccb5962b07b1835a86a4bd33267e261f547d5647401b13102d198b3",
+      "usesPostalCode": true
+    },
+    "EH": {
+      "examples": "70000,72000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "1360a42157718a0e77bacb297bc15322e223afdce6edd23d85f33c5dab9b23ba",
+      "usesPostalCode": true
+    },
+    "ER": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "79121c7ad096f7ad0cc061d4daa9699d014c3301fe14fb8ac6b67571d36832f0",
+      "usesPostalCode": false
+    },
+    "ES": {
+      "examples": "28039,28300,28070",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "0c414e6f057b1308d175e7fff276c853814718453d95c162a5814b1f3f7c4f87",
+      "usesPostalCode": true
+    },
+    "ET": {
+      "examples": "1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "246c14c376fd1ff5c1b06fd9746593c864d5a776818bb9e0171614df4a16fd86",
+      "usesPostalCode": true
+    },
+    "FI": {
+      "examples": "00550,00011",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "2203664bd188d836ca083b285a9ee0267f83f33b2426c58965a6195f5af2e5be",
+      "usesPostalCode": true
+    },
+    "FJ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "10da80126f0ace0092431d51b0917897c1bd5683d841d30c3a1e4439f589f768",
+      "usesPostalCode": false
+    },
+    "FK": {
+      "examples": "FIQQ 1ZZ",
+      "pattern": "FIQQ 1ZZ",
+      "sourceSHA256": "a24d9f3e8620bb9ae44e418daa3c60dc2c7983738514ed82132200675fd093bb",
+      "usesPostalCode": true
+    },
+    "FM": {
+      "examples": "96941,96944",
+      "pattern": "(9694[1-4])(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "1794d9c4ee77328da871b0eacd65680e3d9256a7745ade4e87771e3f9fda24de",
+      "usesPostalCode": true
+    },
+    "FO": {
+      "examples": "100",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "8937d1da26326c6a619d572eaf2655fafbb71c437845364689829cebb9bfc44b",
+      "usesPostalCode": true
+    },
+    "FR": {
+      "examples": "33380,34092,33506",
+      "pattern": "\\d{2} ?\\d{3}",
+      "sourceSHA256": "35b7a5dc51fb37826327fa66a8d612e5bd64cfe9fd1f478cd792de4ba0911ca2",
+      "usesPostalCode": true
+    },
+    "GA": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "2f9905c4bd38c81dd311ac29ed035910867742603f924e73042b87de54936541",
+      "usesPostalCode": false
+    },
+    "GB": {
+      "examples": "EC1Y 8SY,GIR 0AA,M2 5BQ,M34 4AB,CR0 2YR,DN16 9AA,W1A 4ZZ,EC1A 1HQ,OX14 4PG,BS18 8HF,NR25 7HG,RH6 0NP,BH23 6AA,B6 5BA,SO23 9AP,PO1 3AX,BFPO 61",
+      "pattern": "GIR ?0AA|(?:(?:AB|AL|B|BA|BB|BD|BF|BH|BL|BN|BR|BS|BT|BX|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(?:\\d[\\dA-Z]? ?\\d[ABD-HJLN-UW-Z]{2}))|BFPO ?\\d{1,4}",
+      "sourceSHA256": "657a40fa1486a73e66a9b792cc266ceffeb76d794c10e2996e12472ba5c4d2a9",
+      "usesPostalCode": true
+    },
+    "GD": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "d1c47a6749e5b5c1ca9cb568641a3c7c5334561a422c83989b3bff11d2513d8e",
+      "usesPostalCode": false
+    },
+    "GE": {
+      "examples": "0101",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "930d1e1abad93ab37e7c0338f6bf9559d50152525a989f5a3e823903881cb879",
+      "usesPostalCode": true
+    },
+    "GF": {
+      "examples": "97300",
+      "pattern": "9[78]3\\d{2}",
+      "sourceSHA256": "be62d212281ec2d99d4594b1afcae98dc854c4f3ead0f199e56f87409a15288c",
+      "usesPostalCode": true
+    },
+    "GG": {
+      "examples": "GY1 1AA,GY2 2BT",
+      "pattern": "GY\\d[\\dA-Z]? ?\\d[ABD-HJLN-UW-Z]{2}",
+      "sourceSHA256": "2e8496a7ba1e483315f5ec8d348b621bb238249f36b69587e12d2642dceee42e",
+      "usesPostalCode": true
+    },
+    "GH": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7a96d5302b3891af2d28ba1b157abdd73fd5c268aa743f242a3d9e56feaf99c7",
+      "usesPostalCode": false
+    },
+    "GI": {
+      "examples": "GX11 1AA",
+      "pattern": "GX11 1AA",
+      "sourceSHA256": "aad2db9cc82e95bfa7fb3bd864ce8de724714afe5c6f840ba3911ac03e83f14e",
+      "usesPostalCode": true
+    },
+    "GL": {
+      "examples": "3900,3950,3911",
+      "pattern": "39\\d{2}",
+      "sourceSHA256": "fad8477229edbc641fd11057426fb0c307a95034570d8407f3b63d3b7470ef76",
+      "usesPostalCode": true
+    },
+    "GM": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "fa713b7bd8096fc9a8a66fb30f6dfc227136bbddb90b4d8af3bd488597ddb4c9",
+      "usesPostalCode": false
+    },
+    "GN": {
+      "examples": "001,200,100",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "21f9507c01f6d356b5aefc5366a70579862b2dde55aed9d5fb4fe09e6ee66f9e",
+      "usesPostalCode": true
+    },
+    "GP": {
+      "examples": "97100",
+      "pattern": "9[78][01]\\d{2}",
+      "sourceSHA256": "bf10ff31c0c74b1a0ffbdd5f6ea9df92d4c18c0ef92c4045f1b86de37e56580f",
+      "usesPostalCode": true
+    },
+    "GQ": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "85cb71a5a9bb26b377a503e408c60c857c3182e92aa2dbebb61d5542d76744d8",
+      "usesPostalCode": false
+    },
+    "GR": {
+      "examples": "151 24,151 10,101 88",
+      "pattern": "\\d{3} ?\\d{2}",
+      "sourceSHA256": "56bdf47c3458bd507efd5ae780b04c07ea921b8b8690a37cfea0a0ff892c5dd0",
+      "usesPostalCode": true
+    },
+    "GS": {
+      "examples": "SIQQ 1ZZ",
+      "pattern": "SIQQ 1ZZ",
+      "sourceSHA256": "8a65eb6a8f9be29b891de797ff2c28b8a95a803de13e29c7d197b25df3a6264e",
+      "usesPostalCode": true
+    },
+    "GT": {
+      "examples": "09001,01501",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "268fdff6a9577d2845b05af33267cf2560241f3685ae082c2d8c20f11ac434b9",
+      "usesPostalCode": true
+    },
+    "GU": {
+      "examples": "96910,96931",
+      "pattern": "(969(?:[12]\\d|3[12]))(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "29163025914c7ca6eadb187976bfa91424fe194e61c0872264fc3b2544601a3b",
+      "usesPostalCode": true
+    },
+    "GW": {
+      "examples": "1000,1011",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "f0f7b8894773ddf87cb79b54fc093325194dc18c7cde1a6821207723a4166432",
+      "usesPostalCode": true
+    },
+    "GY": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "f3f1a79103b5713d029553bed6f476724050ab3c5dbd21a9e518737fda388960",
+      "usesPostalCode": false
+    },
+    "HK": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e90b566cf83660521e4004e3b76efd86fca6ce8848e007df8389bef5039fa4d1",
+      "usesPostalCode": false
+    },
+    "HM": {
+      "examples": "7050",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "744a8e0dde75371e231048fef3c6722ba99f40c8d2be4b37b1f3888c05d06426",
+      "usesPostalCode": true
+    },
+    "HN": {
+      "examples": "31301",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b536bad48f76b1decd3dfa48d6ad174181bd84df5f9136ae0b5446561812fc76",
+      "usesPostalCode": true
+    },
+    "HR": {
+      "examples": "10000,21001,10002",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "1b3e4b0061eaf65d31f8490b77deaa8fffb3edf9371799380ea036cc109eaee7",
+      "usesPostalCode": true
+    },
+    "HT": {
+      "examples": "6120,5310,6110,8510",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "f92715a1ddb8ac1e83e18cb66cef521c33b8df2c32a0b933d6f05096beaf74a9",
+      "usesPostalCode": true
+    },
+    "HU": {
+      "examples": "1037,2380,1540",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "8719cc807cc2dce5b223b3e544ec4b76a5fd58c5f21756bf86b318e1c5f7cbbb",
+      "usesPostalCode": true
+    },
+    "ID": {
+      "examples": "40115",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "ea5e5b4944fac0f92a8cd2212fe46a3df51478f0881c04a9aaff3a88b9f80d45",
+      "usesPostalCode": true
+    },
+    "IE": {
+      "examples": "A65 F4E2",
+      "pattern": "[\\dA-Z]{3} ?[\\dA-Z]{4}",
+      "sourceSHA256": "8804d8fa15f90e35947a055a94e1633fe01abf6c663d11d00b47fd4d04c97c32",
+      "usesPostalCode": true
+    },
+    "IL": {
+      "examples": "9614303",
+      "pattern": "\\d{5}(?:\\d{2})?",
+      "sourceSHA256": "2931712ae04c04537ea38816cf7c53d91330b7b90ec449078e6c2c7366b08c65",
+      "usesPostalCode": true
+    },
+    "IM": {
+      "examples": "IM2 1AA,IM99 1PS",
+      "pattern": "IM\\d[\\dA-Z]? ?\\d[ABD-HJLN-UW-Z]{2}",
+      "sourceSHA256": "6dd03059fa69c2588b02cf214dd1d13fd61558142eb45e6dc3dac5d4a4b75847",
+      "usesPostalCode": true
+    },
+    "IN": {
+      "examples": "110034,110001",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "cc3d3bdd6e690c32d954845261310758aa334f457d9ef4e6f3e46b13e7fd97b1",
+      "usesPostalCode": true
+    },
+    "IO": {
+      "examples": "BBND 1ZZ",
+      "pattern": "BBND 1ZZ",
+      "sourceSHA256": "65766ae1e84a6e0f8765dd20c59bee3f6995c620537746f1a7662feffcdc5011",
+      "usesPostalCode": true
+    },
+    "IQ": {
+      "examples": "31001",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "83603e9cddce320642943b84a88d31b6d7617e76116173e1aacca13cd3c3e1c3",
+      "usesPostalCode": true
+    },
+    "IR": {
+      "examples": "11936-12345",
+      "pattern": "\\d{5}-?\\d{5}",
+      "sourceSHA256": "980b86106bfa1eb7e9cf90d9b1aaffdeac92af60792cfb3de6f172f30541ff53",
+      "usesPostalCode": true
+    },
+    "IS": {
+      "examples": "320,121,220,110",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "3c179876203c6878eb519fddafb2c5e0b72f81c5dbd46bb6d0525119657f242b",
+      "usesPostalCode": true
+    },
+    "IT": {
+      "examples": "00144,47037,39049",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "64850046bbe6b421ed7936a9842f527f08d70d1bdebeb126e6943633b369b514",
+      "usesPostalCode": true
+    },
+    "JE": {
+      "examples": "JE1 1AA,JE2 2BT",
+      "pattern": "JE\\d[\\dA-Z]? ?\\d[ABD-HJLN-UW-Z]{2}",
+      "sourceSHA256": "48343de37a47a398a8acdaffe7f7793d1d3dc6713919182174f21fed35ef5b26",
+      "usesPostalCode": true
+    },
+    "JM": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "2db994ed95f6a33cb265c655b58431d7c9c04a7c05524a44e7ffba9234e1896e",
+      "usesPostalCode": false
+    },
+    "JO": {
+      "examples": "11937,11190",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b63ae52179cc236667a5b0b8f2d6c56f8a9c8d5305d7cd55b4bbf04b20ac3fb2",
+      "usesPostalCode": true
+    },
+    "JP": {
+      "examples": "154-0023,350-1106,951-8073,112-0001,208-0032,231-0012",
+      "pattern": "\\d{3}-?\\d{4}",
+      "sourceSHA256": "cd22a1a783feb5c9084c00ff8bd85681f22f6a382fc7321e275a57cdb442ade9",
+      "usesPostalCode": true
+    },
+    "KE": {
+      "examples": "20100,00100",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "6db2f9ee43b005a26c3d723b0fe3587f0a4e08393a429312bc0db0fd0f6b451c",
+      "usesPostalCode": true
+    },
+    "KG": {
+      "examples": "720001",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "0a1cf0880518e31963e69e0898cc8b867b2dfc88f9c7a794d462867cb7f96356",
+      "usesPostalCode": true
+    },
+    "KH": {
+      "examples": "120101,120108",
+      "pattern": "\\d{5,6}",
+      "sourceSHA256": "0593c258358a651321247b09cd54cda49989134b57883124bcb102d1f8f8e427",
+      "usesPostalCode": true
+    },
+    "KI": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "9eac405acea08f6489167c4122b60030313db3f885416b1149d3596fdbc5e02e",
+      "usesPostalCode": false
+    },
+    "KM": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "6dc50d586b3eaa3cef7686fb2a819af13c7b54fda2400c2bfe997e895e6768ed",
+      "usesPostalCode": false
+    },
+    "KN": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7395ec9901a1395892be2aac8ba8325c6a969796bd7ff89340222ab0f94bb101",
+      "usesPostalCode": false
+    },
+    "KP": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e06078caa468813a117858f2641e4ce362dbb90bc1ba25086eb78a3b05fd9186",
+      "usesPostalCode": true
+    },
+    "KR": {
+      "examples": "03051",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "fd143d4d04af3a5d35da6bee580a796fc3bdc6cf4cd1935ac0a8db67899878ed",
+      "usesPostalCode": true
+    },
+    "KW": {
+      "examples": "54541,54551,54404,13009",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "ac30ea6036248f589ecfd242f191822ffeb182f622f527cb63bf4f23ec4c9c44",
+      "usesPostalCode": true
+    },
+    "KY": {
+      "examples": "KY1-1100,KY1-1702,KY2-2101",
+      "pattern": "KY\\d-\\d{4}",
+      "sourceSHA256": "19fd5258604aee75c7185eae0186576f61f8e9f533c6d477d0ad2092719ef5a1",
+      "usesPostalCode": true
+    },
+    "KZ": {
+      "examples": "040900,050012",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "f931a8e35792345fddf346a5f7a9f64f10f659e4cbc39834248f95179f7a7199",
+      "usesPostalCode": true
+    },
+    "LA": {
+      "examples": "01160,01000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "5c390bc5fdbfbe6d69667a8cba29823a52fbac013219880ba11e677ad2287da6",
+      "usesPostalCode": true
+    },
+    "LB": {
+      "examples": "2038 3054,1107 2810,1000",
+      "pattern": "(?:\\d{4})(?: ?(?:\\d{4}))?",
+      "sourceSHA256": "b6415437508b870294fc7e6bc90615bba133158b34e75cdc1ae25ca626d1eb88",
+      "usesPostalCode": true
+    },
+    "LC": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "c493019e1dbdb42ea0b8f542409b8167215c60b2f203f9bd1fa3cd5c7890672a",
+      "usesPostalCode": false
+    },
+    "LI": {
+      "examples": "9496,9491,9490,9485",
+      "pattern": "948[5-9]|949[0-8]",
+      "sourceSHA256": "ba4339ce43e0042d7ab2bdd5c9deae3a54c88df547aaf3d315b0c4b4d951b8e9",
+      "usesPostalCode": true
+    },
+    "LK": {
+      "examples": "20000,00100",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b0bcc082fbdeb5b630735292f62d6e5f20b82300cc6d8cc142f6066da4e501a3",
+      "usesPostalCode": true
+    },
+    "LR": {
+      "examples": "1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "3c69a61f0df5313dd2e58f402e0b229dc97314798e67d87f1daf4c7d4ccba293",
+      "usesPostalCode": true
+    },
+    "LS": {
+      "examples": "100",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "13f7708398349d93abcb79c2237d5ca753bbc9c127ba858be4b7ad1d8e556578",
+      "usesPostalCode": true
+    },
+    "LT": {
+      "examples": "04340,03500",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b0bdcd66433eb744eaa9e4d6a37bae7f2eab359750f2bfb982df6bfc6e578746",
+      "usesPostalCode": true
+    },
+    "LU": {
+      "examples": "4750,2998",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "14f381af53629373460afc1eab7793ef035ab4920d7f45138a955b2dfb450e5e",
+      "usesPostalCode": true
+    },
+    "LV": {
+      "examples": "LV-1073,LV-1000",
+      "pattern": "LV-\\d{4}",
+      "sourceSHA256": "03e34332f7b715b6cfb9916426a05b35f74d419bed8794e9536e1f33c410096e",
+      "usesPostalCode": true
+    },
+    "LY": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "0e3986f5b1c153ccc9b4e15e12add9313e52330bd65f3b5df955ac91fda035e7",
+      "usesPostalCode": false
+    },
+    "MA": {
+      "examples": "53000,10000,20050,16052",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "4ab3c9c00cfaab36c75ee36b29a2ad86b61b99c15afec2514e6dcf02a2cfa93f",
+      "usesPostalCode": true
+    },
+    "MC": {
+      "examples": "98000,98020,98011,98001",
+      "pattern": "980\\d{2}",
+      "sourceSHA256": "cb17a06f2bf072555b3869ff2b2fb48a932620335f9079de9477b1136ad6d801",
+      "usesPostalCode": true
+    },
+    "MD": {
+      "examples": "2012,2019",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "7442a6ed75f4d8a432d1047baf911b11de28a8882f420ab235f0abcf53f1783a",
+      "usesPostalCode": true
+    },
+    "ME": {
+      "examples": "81257,81258,81217,84314,85366",
+      "pattern": "8\\d{4}",
+      "sourceSHA256": "91116f4da730c32ad3fe720c64fc32498547a2d9f85f306621c2fa2d641c1b95",
+      "usesPostalCode": true
+    },
+    "MF": {
+      "examples": "97100",
+      "pattern": "9[78][01]\\d{2}",
+      "sourceSHA256": "4f2d384da1cd33b6b7dbd57a23e0f12ec396817aafaf1a7bd21cb095e8095766",
+      "usesPostalCode": true
+    },
+    "MG": {
+      "examples": "501,101",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "acb67b0b9f76b4e2a79e06427a813cf815eb711a3c5372a754c52c61f73d4255",
+      "usesPostalCode": true
+    },
+    "MH": {
+      "examples": "96960,96970",
+      "pattern": "(969[67]\\d)(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "2b6fc507972235d68c2722ff6302537133ca31799e60009558c0ce7da12441c7",
+      "usesPostalCode": true
+    },
+    "MK": {
+      "examples": "1314,1321,1443,1062",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "ac1da736735bfae10149e663ef5ba08664fdd41734923a216dabcbd5e5127bec",
+      "usesPostalCode": true
+    },
+    "ML": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "70a928774a2f6ec536f8310f3ba6b36b3854ce420f71c9f7fd0b14acfd4a39cd",
+      "usesPostalCode": false
+    },
+    "MM": {
+      "examples": "11181",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "79c56db95ec40bc24b6f6381d7c5615252481b0ddaf4769276fad08390ea2b2d",
+      "usesPostalCode": true
+    },
+    "MN": {
+      "examples": "65030,65270",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "f036fffcd91039b5f66a41e1bf72a6b6dbb02748232211bf724fd841d8c5fc8d",
+      "usesPostalCode": true
+    },
+    "MO": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "addfbc5e668b5f1ae15867efc6fa19eebb818a9dc3c3925c814033d2de2917cc",
+      "usesPostalCode": false
+    },
+    "MP": {
+      "examples": "96950,96951,96952",
+      "pattern": "(9695[012])(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "a9d1267767ea7bec74be96b601e6389f29f5f564dc6661f85c6651cd3a550176",
+      "usesPostalCode": true
+    },
+    "MQ": {
+      "examples": "97220",
+      "pattern": "9[78]2\\d{2}",
+      "sourceSHA256": "24126f09714bc49cc06acf0e4dceca672f1c615d60593e3800c0cc120779e560",
+      "usesPostalCode": true
+    },
+    "MR": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "f5bbc05ee2e1c131f33f663848e658fc03683f4b4085455c3739a5dc99238bf6",
+      "usesPostalCode": false
+    },
+    "MS": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7467d1335575409ab03384c39581dc3ed90406fa653ecac838ca3877a9776a62",
+      "usesPostalCode": false
+    },
+    "MT": {
+      "examples": "NXR 01,ZTN 05,GPO 01,BZN 1130,SPB 6031,VCT 1753",
+      "pattern": "[A-Z]{3} ?\\d{2,4}",
+      "sourceSHA256": "e3e73decaa6b1047e4f38c74102e38aa4b22b37317c8ee73a7f5accb429d3de5",
+      "usesPostalCode": true
+    },
+    "MU": {
+      "examples": "42602",
+      "pattern": "\\d{3}(?:\\d{2}|[A-Z]{2}\\d{3})",
+      "sourceSHA256": "9d7b8fb24986147e6f90da1590e62cb7d6051d307c10cfa28140ebda74bcff9a",
+      "usesPostalCode": true
+    },
+    "MV": {
+      "examples": "20026",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "e422667fee19476b5d213d83c8871278dc7ada96f594d8ed6332bf0e15b14d98",
+      "usesPostalCode": true
+    },
+    "MW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "f79da1c2a224379d9928d293e1feff94a47638a4ae6d1899ed45a36d126fcfd1",
+      "usesPostalCode": false
+    },
+    "MX": {
+      "examples": "02860,77520,06082",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "455e1dfa58f389c28fb8fb50ad9fd64cdd55a9ddd0fcbd9e31e8015b06c72006",
+      "usesPostalCode": true
+    },
+    "MY": {
+      "examples": "43000,50754,88990,50670",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "980684b1a16f229584bc2f628faaff4650caed96f5cbb415a0379cc28bc2b71b",
+      "usesPostalCode": true
+    },
+    "MZ": {
+      "examples": "1102,1119,3212",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "9978a74d2f946f6e290803d81aa5c07e191aae5ced3db741e70b532cab2eedf7",
+      "usesPostalCode": true
+    },
+    "NA": {
+      "examples": "10001,10017",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "921337ff91ec4143c543fcf8d3b6fd30f8c03390d40fef3539e2e4703f7ab5e1",
+      "usesPostalCode": true
+    },
+    "NC": {
+      "examples": "98814,98800,98810",
+      "pattern": "988\\d{2}",
+      "sourceSHA256": "5a407006fcca62b271baff8f0432d4efc7af3535cceea11d268e3066d95d02bb",
+      "usesPostalCode": true
+    },
+    "NE": {
+      "examples": "8001",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "a6e65669f86d5e58138a23b50f7749eb446526291dd79eea423ecf87c8be4700",
+      "usesPostalCode": true
+    },
+    "NF": {
+      "examples": "2899",
+      "pattern": "2899",
+      "sourceSHA256": "0995459abde2907a74c3d08c568ac4cadea9d71fea6a9ac9368c2756787a6f72",
+      "usesPostalCode": true
+    },
+    "NG": {
+      "examples": "930283,300001,931104",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "5737beebd8de888222df57d5de21bdce40c6589fa9139e37bad5b8ceca392609",
+      "usesPostalCode": true
+    },
+    "NI": {
+      "examples": "52000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "a5071cd19c10b4d408078c48756b14998d10e3e65de83d424575337584d5c8ed",
+      "usesPostalCode": true
+    },
+    "NL": {
+      "examples": "1234 AB,2490 AA",
+      "pattern": "[1-9]\\d{3} ?(?:[A-RT-Z][A-Z]|S[BCE-RT-Z])",
+      "sourceSHA256": "f043b132d81fc41a4d65a40d055fb32631a0d6f36a1a6d7b317187018487dd39",
+      "usesPostalCode": true
+    },
+    "NO": {
+      "examples": "0025,0107,6631",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "33122a2076ced05f5077cfc609a1b0fe806b45c5f553798f3d430fabd0ca2bc5",
+      "usesPostalCode": true
+    },
+    "NP": {
+      "examples": "44601",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "1b9b859f88ec5b4a65c8a286d37f8e48e8c7727cd3c265658c6ae1d07864fd37",
+      "usesPostalCode": true
+    },
+    "NR": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "1e895db2cc535c4b640e3994787d596654d00afc2b2dbb7475d31dfe08b05e34",
+      "usesPostalCode": false
+    },
+    "NU": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "d26a2bd9df95d8c562e4ab27b463b4176e6263218519b177c1ac2e87b9526a49",
+      "usesPostalCode": false
+    },
+    "NZ": {
+      "examples": "6001,6015,6332,8252,1030",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "9dba8dc96b7f96318930ee020795adab986c69233e36ae1af6cb10d8e8c4845d",
+      "usesPostalCode": true
+    },
+    "OM": {
+      "examples": "133,112,111",
+      "pattern": "(?:PC )?\\d{3}",
+      "sourceSHA256": "026dead5cf454939385fd0282960ac9259191d15f153c9f3087be07d94148143",
+      "usesPostalCode": true
+    },
+    "PA": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "481cfe77ba71b834f4d3187aae2fe3ad727038f06e6065f55a6b448286b47998",
+      "usesPostalCode": false
+    },
+    "PE": {
+      "examples": "LIMA 23,LIMA 42,CALLAO 2,02001",
+      "pattern": "(?:LIMA \\d{1,2}|CALLAO 0?\\d)|[0-2]\\d{4}",
+      "sourceSHA256": "c0a0d1f3bf9c805072c330956ac79a2755927c48d7ac98fa2d2633a974372b50",
+      "usesPostalCode": true
+    },
+    "PF": {
+      "examples": "98709",
+      "pattern": "987\\d{2}",
+      "sourceSHA256": "c808d34ed6b5be7176da468f610869cd1e43a0c20285241b3b9b84faee7ef946",
+      "usesPostalCode": true
+    },
+    "PG": {
+      "examples": "111",
+      "pattern": "\\d{3}",
+      "sourceSHA256": "6455c5c5db033130da22687c4c3a5e6d8fdb8be38dd90911bd745494e6d3f94e",
+      "usesPostalCode": true
+    },
+    "PH": {
+      "examples": "1008,1050,1135,1207,2000,1000",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "40a473d41a3d97b27133f2bd4f4fa3ca02e809f7ab2aeeecbaf909cf17562824",
+      "usesPostalCode": true
+    },
+    "PK": {
+      "examples": "44000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "9e7159b9a79c9b70e8c2f2d5b4e590427521834e59a39ded6be85a26cd3e4d6f",
+      "usesPostalCode": true
+    },
+    "PL": {
+      "examples": "00-950,05-470,48-300,32-015,00-940",
+      "pattern": "\\d{2}-\\d{3}",
+      "sourceSHA256": "759e1344ebce58b401e2daa20a70b0fa3c90049d3db63725dc80814a68866cd9",
+      "usesPostalCode": true
+    },
+    "PM": {
+      "examples": "97500",
+      "pattern": "9[78]5\\d{2}",
+      "sourceSHA256": "738a98a83db6fb0e64bdbe2e39cb976bef826b855ee5ed822da0516634467906",
+      "usesPostalCode": true
+    },
+    "PN": {
+      "examples": "PCRN 1ZZ",
+      "pattern": "PCRN 1ZZ",
+      "sourceSHA256": "2075e047d1953a9a6c10698498a152302f97ba9e61806d00f98fe1918ee3fcdc",
+      "usesPostalCode": true
+    },
+    "PR": {
+      "examples": "00930",
+      "pattern": "(00[679]\\d{2})(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "c5f43a583e83712d0257df7617a6f193e9762ad2ef4d7154f6bb3e863f54db33",
+      "usesPostalCode": true
+    },
+    "PS": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "859e80813854b10aaf35bbd2f4dd64b4d7f91c53a6ed16757c9531d8a4652ddb",
+      "usesPostalCode": false
+    },
+    "PT": {
+      "examples": "2725-079,1250-096,1201-950,2860-571,1208-148",
+      "pattern": "\\d{4}-\\d{3}",
+      "sourceSHA256": "b79b7b83b60f0d7ad4fbf4cfde4ccd69ded75a0ad4a73fad4d10a1d5788373a8",
+      "usesPostalCode": true
+    },
+    "PW": {
+      "examples": "96940",
+      "pattern": "(969(?:39|40))(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "e939d24a4ecda082f452ddbc337b834336c5716736cb553c2c3ef16ca070103f",
+      "usesPostalCode": true
+    },
+    "PY": {
+      "examples": "001001,051103,110407",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "6957b401dcafeaf13f1396e9e80b06cfbd71b4ec646884ee82700545effee7f5",
+      "usesPostalCode": true
+    },
+    "QA": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "82345a45cc7792d9a04438ad762fdfcf6ba2ee90369d77d95a197066d3166a26",
+      "usesPostalCode": false
+    },
+    "RE": {
+      "examples": "97400",
+      "pattern": "9[78]4\\d{2}",
+      "sourceSHA256": "b7f55d846193d144da16be6ef6ad60cdb75ef6e86b3dbfb65da48590eb395574",
+      "usesPostalCode": true
+    },
+    "RO": {
+      "examples": "060274,061357,200716",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "34c5961eaf24415f2f20134b500bca24568765869bdcf5563ea144690838e86e",
+      "usesPostalCode": true
+    },
+    "RS": {
+      "examples": "106314",
+      "pattern": "\\d{5,6}",
+      "sourceSHA256": "8aacd3e3ef0406628e85d6a49a3853e8b98fb5539690dc6150fea9efa50ebdc0",
+      "usesPostalCode": true
+    },
+    "RU": {
+      "examples": "247112,103375,188300",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "0ea9fedc799ffbdefc7ccbae0bb2617c6a73f6dbcc9d18146ce64f66c3d865e0",
+      "usesPostalCode": true
+    },
+    "RW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "bc0787296ffa24b1c8f5490279001f1505e21cdcd21e3abdb91c652567ad584e",
+      "usesPostalCode": false
+    },
+    "SA": {
+      "examples": "11564,11187,11142",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "6c74b64e5436d04ee2fbca65c636d92421e0dfe6c19b6c8bd11199ed637fdd06",
+      "usesPostalCode": true
+    },
+    "SB": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "291cc6d20f01caeb0db86b7157cd7d42a87a0d93e2f997b079fdc515feda0395",
+      "usesPostalCode": false
+    },
+    "SC": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "b3eddfdd1783c37c949cc4d2b087e82102b36cf26bbfc3098d0bc4278a1cf0ec",
+      "usesPostalCode": false
+    },
+    "SD": {
+      "examples": "11042,11113",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "b94a0497ed9543a7c7520a659c7006860623a935cb2b752b201e2a4d4eb2d878",
+      "usesPostalCode": true
+    },
+    "SE": {
+      "examples": "11455,12345,10500",
+      "pattern": "\\d{3} ?\\d{2}",
+      "sourceSHA256": "303ee75f36fba3cf6fda4e52a125cac00d7eba260a37d25ecd94374ee9be1c2b",
+      "usesPostalCode": true
+    },
+    "SG": {
+      "examples": "546080,308125,408600",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "ee6763f7187366d766806b67e11b859df74daf43c301dd18290f056b1fe7ae7d",
+      "usesPostalCode": true
+    },
+    "SH": {
+      "examples": "STHL 1ZZ",
+      "pattern": "(?:ASCN|STHL) 1ZZ",
+      "sourceSHA256": "4ef4af46bc53f6dfbc992d83439b98fa8e7e8fdbb67f3472b0cabda83f88d2a3",
+      "usesPostalCode": true
+    },
+    "SI": {
+      "examples": "4000,1001,2500",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "5ca73f5606f7f5613c13ca9017e7514d41bf58988c92db8d476e5a19b2930f14",
+      "usesPostalCode": true
+    },
+    "SJ": {
+      "examples": "9170",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "d8ac978d58c573c89a0ec06b87891fc974c7a63c0d622946a555a4d9769dc787",
+      "usesPostalCode": true
+    },
+    "SK": {
+      "examples": "010 01,023 14,972 48,921 01,975 99",
+      "pattern": "\\d{3} ?\\d{2}",
+      "sourceSHA256": "28fbab1b3f4ccbd15d67b73a8d9fb0fd8211468797aa43d7a08c8c1c3bde683e",
+      "usesPostalCode": true
+    },
+    "SL": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "b3cbf8283c28ee10de2c2ab2f1502aaac209a3b3e81649649be0be892912727f",
+      "usesPostalCode": false
+    },
+    "SM": {
+      "examples": "47890,47891,47895,47899",
+      "pattern": "4789\\d",
+      "sourceSHA256": "7aa207679a6b53d956f1a0f5ac2fcb4cbce8814c5191821d66117daa7b8173ac",
+      "usesPostalCode": true
+    },
+    "SN": {
+      "examples": "12500,46024,16556,10000",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "4703d0728bb82dcf7e5555185e80a0c2d9c8cd80977ba9bd2a1ca921cade7f3a",
+      "usesPostalCode": true
+    },
+    "SO": {
+      "examples": "JH 09010,AD 11010",
+      "pattern": "[A-Z]{2} ?\\d{5}",
+      "sourceSHA256": "703b0cfbef53be638cf0d563733d5c1a35fa08a2bd6e72593273fa12385d6f02",
+      "usesPostalCode": true
+    },
+    "SR": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "1ceaab6db0cf7ba5b355cc3e1cacb747be13e12fcdd05b48d9efa06ec3d0ab58",
+      "usesPostalCode": false
+    },
+    "SS": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "ca8922faf68885704600db9c26bfd272174d56cfbd064465ceea3e581a31dfe2",
+      "usesPostalCode": false
+    },
+    "ST": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e75cbc5b8183f125b48435252eaeb39b8cb25737f51f9c22d83d09f798dd8115",
+      "usesPostalCode": false
+    },
+    "SV": {
+      "examples": "1101",
+      "pattern": "[1-3][1-7][0-2]\\d",
+      "sourceSHA256": "fd0438c9dfc00d2064be766cf2e17c226afc09daed08264275de7f014cb5c620",
+      "usesPostalCode": true
+    },
+    "SX": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "69c86574d14f430f4ebf04aa81e374156cc9516a80ea20263a279db01ad69560",
+      "usesPostalCode": false
+    },
+    "SY": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "2a1978c37bddbc29e77421f791f783bd69eca96ea643e1ad3dd7a5917375d318",
+      "usesPostalCode": false
+    },
+    "SZ": {
+      "examples": "H100",
+      "pattern": "[HLMS]\\d{3}",
+      "sourceSHA256": "ab85d8798ab20f5a4ebf49b638beb7306e7d80646f6d52eff06aa03fbe41afcb",
+      "usesPostalCode": true
+    },
+    "TA": {
+      "examples": "TDCU 1ZZ",
+      "pattern": "TDCU 1ZZ",
+      "sourceSHA256": "8779027a5eefa171311732750c32f24171c672e0758a5aaff353d03ca726bd9a",
+      "usesPostalCode": true
+    },
+    "TC": {
+      "examples": "TKCA 1ZZ",
+      "pattern": "TKCA 1ZZ",
+      "sourceSHA256": "228f47c70ead697c530585f42b42fb54afbfe6dfddd8cf2580eab89d08d98fe9",
+      "usesPostalCode": true
+    },
+    "TD": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "e540f9e18c23408b7eea331bdd2fde510a473c520881efa4652859c9c5bb3284",
+      "usesPostalCode": false
+    },
+    "TF": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "5d9985149afcfd654ec18a24307eed8e8b942a87702a2485526285fc6ff4117b",
+      "usesPostalCode": false
+    },
+    "TG": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "d5bd8f7ae2e1bae1a72b1ca511ae085a4bf2c05b4a5b849bcdb0f04620ca645f",
+      "usesPostalCode": false
+    },
+    "TH": {
+      "examples": "10150,10210",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "e44056783592afb19883643b0c259ce18ea60ed1a6bd757e55b9aaba17327518",
+      "usesPostalCode": true
+    },
+    "TJ": {
+      "examples": "735450,734025",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "ceaee306123b6324f5b99e7ca719bb83c73a3eec77f78a3f202d0fbcc7c7a77d",
+      "usesPostalCode": true
+    },
+    "TK": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "ab12b192a4bb7ff1be5b8a9bfa32536073df4dacbe8cd30656983558efc9125f",
+      "usesPostalCode": false
+    },
+    "TL": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "7b02dc51a85aac852d3708b571b508d8c70adbfcfb2c5567f52673886105bd3f",
+      "usesPostalCode": false
+    },
+    "TM": {
+      "examples": "744000",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "c037bedcfc95881dcbc0f75144314e4aa02d834cd64dbfe39116a933f7b9e7f5",
+      "usesPostalCode": true
+    },
+    "TN": {
+      "examples": "1002,8129,3100,1030",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "c518b88907cc9038798b574e674ad3e0d126aa3ea12bbfd4569488ed91b7c40f",
+      "usesPostalCode": true
+    },
+    "TO": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "b7b7a5f5676cfc71704c2be8e0f92d3162bd98f7a79e8fd5bd73a4afa93f3521",
+      "usesPostalCode": false
+    },
+    "TR": {
+      "examples": "01960,06101",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "a09e5070d9b463fd21c71d206acd67cc4702e954ed6b5218c481819d5b769b81",
+      "usesPostalCode": true
+    },
+    "TT": {
+      "examples": "500234",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "0585a899a95d589332ffd9da1864b25b121172b2ada2113cb9eae7d30c4583b2",
+      "usesPostalCode": true
+    },
+    "TV": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "d74bca3251524ddd002eacb69c809fbe17039caac77d8879deec0ccdbe6d280a",
+      "usesPostalCode": false
+    },
+    "TW": {
+      "examples": "104,106,10603,40867",
+      "pattern": "\\d{3}(?:\\d{2,3})?",
+      "sourceSHA256": "a6df212416236269bbd5244f6a9f5449a550d88eca15dc5b2b6f843c58bea461",
+      "usesPostalCode": true
+    },
+    "TZ": {
+      "examples": "6090,34413",
+      "pattern": "\\d{4,5}",
+      "sourceSHA256": "487f712ce75d78b29c30b6ee2f9120f2a19ea9a563498204095bca7ccdf04791",
+      "usesPostalCode": true
+    },
+    "UA": {
+      "examples": "15432,01055,01001",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "75ee6c04573f8116d6994e92e0c42e3da30d22b34c68f01e8c6a1faabe35ca34",
+      "usesPostalCode": true
+    },
+    "UG": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "dd2af60963dfc8f6f8150322a3b9b0346ae7092e75e9b8ac43eaa9bd5185ed88",
+      "usesPostalCode": false
+    },
+    "UM": {
+      "examples": "96898",
+      "pattern": "96898",
+      "sourceSHA256": "6e9b218044df4fd0950700d682741a6b3d3ce341f066bfd8a772b78e0d8dd203",
+      "usesPostalCode": true
+    },
+    "US": {
+      "examples": "95014,22162-1010",
+      "pattern": "(\\d{5})(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "c0a6350b8d5ccf8fc2b2ff591ea6a52a0cf1a4abd109413a56b4e259cbc8e8a9",
+      "usesPostalCode": true
+    },
+    "UY": {
+      "examples": "11600",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "bce3ee9c3e7fbf04ff6209e594c82d5ea92f27b7189858aae7b67d08100ed121",
+      "usesPostalCode": true
+    },
+    "UZ": {
+      "examples": "702100,700000",
+      "pattern": "\\d{6}",
+      "sourceSHA256": "a90536b783aae36a63575845f903d38b6a669d5e20e2e793a2265af8b0d7aa76",
+      "usesPostalCode": true
+    },
+    "VA": {
+      "examples": "00120",
+      "pattern": "00120",
+      "sourceSHA256": "d02fed6886907c0295c775defd4d03595b0685723906aef818bde5f87bb272d6",
+      "usesPostalCode": true
+    },
+    "VC": {
+      "examples": "VC0100,VC0110,VC0400",
+      "pattern": "VC\\d{4}",
+      "sourceSHA256": "1732df6420a3b963d1b6c7e38cd45e646cd01b49dc31c006a61ba04c045a66fc",
+      "usesPostalCode": true
+    },
+    "VE": {
+      "examples": "1010,3001,8011,1020",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "f95f0e38d7fe3f73cf84f227a99e71014e04f530058bd7eb51b614ad0f782b5d",
+      "usesPostalCode": true
+    },
+    "VG": {
+      "examples": "VG1110,VG1150,VG1160",
+      "pattern": "VG\\d{4}",
+      "sourceSHA256": "5dde010557df812a7948169af759c968efe60d25bfbd12a3a424c7423a65ac23",
+      "usesPostalCode": true
+    },
+    "VI": {
+      "examples": "00802-1222,00850-9802",
+      "pattern": "(008(?:(?:[0-4]\\d)|(?:5[01])))(?:[ \\-](\\d{4}))?",
+      "sourceSHA256": "f1f945624097d4a2d2ebe92f4e31e1a27d510027ddb34023c3df0c1f2ae4d6e4",
+      "usesPostalCode": true
+    },
+    "VN": {
+      "examples": "70010,55999",
+      "pattern": "\\d{5}\\d?",
+      "sourceSHA256": "407bad7bf5af377c27eba983bfa45f05bb2c7b0941c1e22d829e8f9d5874016c",
+      "usesPostalCode": true
+    },
+    "VU": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "52dad07fd3df7f442426c9e590be270ad7ad0b2e5c162f35ab5aecfec75aa6f2",
+      "usesPostalCode": false
+    },
+    "WF": {
+      "examples": "98600",
+      "pattern": "986\\d{2}",
+      "sourceSHA256": "4e973aa65c22559c86577c105f48aff364c26887edd410c82d4335e61739a24a",
+      "usesPostalCode": true
+    },
+    "WS": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "aac1731303aff750f78c1cc7ddfb65d11ee35ac15c84617e9ce350d9532afa0d",
+      "usesPostalCode": false
+    },
+    "XK": {
+      "examples": "10000",
+      "pattern": "[1-7]\\d{4}",
+      "sourceSHA256": "830cd8e14abfa3ec0a2a47738fede080f920b6df178306daf4c660ffe24eca98",
+      "usesPostalCode": true
+    },
+    "YE": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "ea93603603238f03c86ead88652207d78fe126ab2232b90694924886407ce14e",
+      "usesPostalCode": false
+    },
+    "YT": {
+      "examples": "97600",
+      "pattern": "976\\d{2}",
+      "sourceSHA256": "bebba338ebbdf501dff82a343ccec0eb2e5b5eb845d0ba832fe3f492ab4c473e",
+      "usesPostalCode": true
+    },
+    "ZA": {
+      "examples": "0083,1451,0001",
+      "pattern": "\\d{4}",
+      "sourceSHA256": "4cff239e26d5f359a69097a147763f534fdace5efbed44d84e63f65012579360",
+      "usesPostalCode": true
+    },
+    "ZM": {
+      "examples": "50100,50101",
+      "pattern": "\\d{5}",
+      "sourceSHA256": "3592da95d5d8ca5b009e1e8b7b4b33d19768e910f15ac362752b54802d397508",
+      "usesPostalCode": true
+    },
+    "ZW": {
+      "examples": "",
+      "pattern": null,
+      "sourceSHA256": "891dd5918d71da41f2f27732be6671fa784d4fa6f33b3e1c9b08100fee2ffacf",
+      "usesPostalCode": false
+    }
+  },
+  "retrieved": "2026-10-17",
+  "scope": "Country-level syntax only; not assigned-code or address verification.",
+  "source": "https://chromium-i18n.appspot.com/ssl-address/data"
+}

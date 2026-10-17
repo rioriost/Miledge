@@ -55,6 +55,10 @@ public struct RestorationPreview: Equatable, Sendable {
 public final class VaultSession {
     public private(set) var state = SessionState.locked
     public private(set) var heads: [VaultRevision] = []
+    public let defaultStorageScope: StorageScope
+    public private(set) var lastReadAt: Date?
+    public private(set) var refreshFailed = false
+    public private(set) var pendingRevisionCount = 0
     public var accessGeneration: Int { generation }
     private var revisions: [VaultRevision] = []
     private var generation = 0
@@ -71,6 +75,7 @@ public final class VaultSession {
         cancelAuthentication: @escaping @MainActor () -> Void = {},
         load: @escaping @MainActor () throws -> [Data],
         append: @escaping @MainActor (Data, String, StorageScope) throws -> Void,
+        defaultStorageScope: StorageScope = .deviceLocal,
         now: @escaping @MainActor () -> Date = Date.init,
         identifier: @escaping @MainActor () -> UUID = UUID.init
     ) {
@@ -78,6 +83,7 @@ public final class VaultSession {
         self.cancelAuthentication = cancelAuthentication
         self.load = load
         self.append = append
+        self.defaultStorageScope = defaultStorageScope
         self.now = now
         self.identifier = identifier
     }
@@ -98,9 +104,11 @@ public final class VaultSession {
             throw SessionError.interrupted
         }
         let loaded = try load().map(RevisionCodec.decode)
-        let loadedHeads = try RevisionGraph.heads(in: loaded)
-        revisions = loaded
-        heads = loadedHeads
+        let snapshot = try displaySnapshot(of: loaded)
+        revisions = snapshot.revisions
+        heads = snapshot.heads
+        lastReadAt = now()
+        refreshFailed = false
         state = .unlocked
         completed = true
     }
@@ -112,6 +120,9 @@ public final class VaultSession {
         cancelAuthentication()
         revisions.removeAll()
         heads.removeAll()
+        lastReadAt = nil
+        refreshFailed = false
+        pendingRevisionCount = 0
     }
 
     public func visibleItems(query: String = "", favoritesOnly: Bool = false) -> [VaultRevision] {
@@ -162,7 +173,7 @@ public final class VaultSession {
             revisionId: identifier(),
             templateId: template.id,
             templateVersion: template.version,
-            storageScope: .deviceLocal,
+            storageScope: defaultStorageScope,
             title: "",
             createdAt: now(),
             modifiedAt: now(),
@@ -200,9 +211,36 @@ public final class VaultSession {
 
     public func refresh() throws {
         guard state == .unlocked else { throw SessionError.locked }
-        let snapshot = try readSnapshot()
-        revisions = snapshot.revisions
-        heads = snapshot.heads
+        do {
+            let snapshot = try displaySnapshot(of: revisions + load().map(RevisionCodec.decode))
+            revisions = snapshot.revisions
+            heads = snapshot.heads
+            lastReadAt = now()
+            refreshFailed = false
+        } catch {
+            refreshFailed = true
+            throw error
+        }
+    }
+
+    /// Copies only the current values. Existing local data and immutable history remain intact.
+    public func copyForSynchronization(_ revision: VaultRevision) throws -> VaultRevision {
+        guard state == .unlocked else { throw SessionError.locked }
+        guard defaultStorageScope == .synchronizable, revision.storageScope == .deviceLocal,
+              !revision.deleted, revision.attachments.isEmpty else { throw SessionError.changedStorageScope }
+        try refresh()
+        guard heads.contains(revision) else { throw SessionError.staleRevision }
+        guard !hasConflict(revision) else { throw SessionError.conflictRequiresMerge }
+        try VaultPolicy.validateForWrite(revision)
+        var copy = revision
+        copy.recordId = identifier()
+        copy.revisionId = identifier()
+        copy.parentRevisionIds = []
+        copy.storageScope = .synchronizable
+        copy.createdAt = now()
+        copy.modifiedAt = now()
+        try save(copy)
+        return copy
     }
 
     public func revisionsForBackup() throws -> [VaultRevision] {
@@ -439,6 +477,48 @@ public final class VaultSession {
     private func readSnapshot() throws -> (revisions: [VaultRevision], heads: [VaultRevision]) {
         let combined = revisions + (try load().map(RevisionCodec.decode))
         return try snapshot(of: combined)
+    }
+
+    /// iCloud can deliver a child before its ancestors. Hide that incomplete branch,
+    /// keep complete items usable, and retry on the next read. Backups remain strict.
+    private func displaySnapshot(of combined: [VaultRevision]) throws -> (revisions: [VaultRevision], heads: [VaultRevision]) {
+        do {
+            let result = try snapshot(of: combined)
+            pendingRevisionCount = 0
+            return result
+        } catch let failure as RevisionError {
+            guard case .missingParent = failure else { throw failure }
+            var byID: [UUID: VaultRevision] = [:]
+            for revision in combined { byID[revision.id] = revision }
+            var children: [UUID: [UUID]] = [:]
+            var waiting = Set<UUID>()
+            for revision in byID.values {
+                for parentID in revision.parentRevisionIds {
+                    children[parentID, default: []].append(revision.id)
+                    if let parent = byID[parentID] {
+                        guard parent.recordId == revision.recordId, parent.storageScope == revision.storageScope,
+                              parent.unsupportedStorageScope == revision.unsupportedStorageScope else {
+                            throw RevisionError.invalidParent(revision: revision.id, parent: parentID)
+                        }
+                    } else {
+                        guard revision.storageScope == .synchronizable else { throw failure }
+                        waiting.insert(revision.id)
+                    }
+                }
+            }
+            var queue = Array(waiting)
+            var index = 0
+            while index < queue.count {
+                let parent = queue[index]
+                index += 1
+                for child in children[parent, default: []] where waiting.insert(child).inserted {
+                    queue.append(child)
+                }
+            }
+            let result = try snapshot(of: combined.filter { !waiting.contains($0.id) })
+            pendingRevisionCount = waiting.count
+            return result
+        }
     }
 
     private func snapshot(of combined: [VaultRevision]) throws -> (revisions: [VaultRevision], heads: [VaultRevision]) {

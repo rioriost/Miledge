@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP (antigo)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "Os campos e valores do tipo atual serão removidos. O título que você editou, a organização, os itens relacionados e os arquivos serão mantidos.";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "Ajustes";
+"iCloud Keychain" = "Chaves do iCloud";
+"Storage" = "Armazenamento";
+"Refresh" = "Atualizar";
+"Last checked on this device" = "Última verificação neste dispositivo";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "Ative “Senhas e Chaves” nos ajustes do iCloud em cada dispositivo. A Apple gerencia o momento da transferência.";
+"Waiting for iCloud Keychain history." = "Aguardando o histórico das Chaves do iCloud.";
+"Could not refresh. Try again." = "Não foi possível atualizar. Tente novamente.";
+"Copy to iCloud Keychain" = "Copiar para as Chaves do iCloud";
+"Copy this item to iCloud Keychain?" = "Copiar este item para as Chaves do iCloud?";
+"The current values will be copied. The original stays on this device." = "O conteúdo atual será copiado. O original permanecerá neste dispositivo.";
+"Files require device-only storage." = "Os arquivos exigem armazenamento somente neste dispositivo.";
+"The item could not be copied. The original is unchanged." = "Não foi possível copiar o item. O original não foi alterado.";
+"More" = "Mais";
+
+/* International input and advisory validation. */
+"Middle Name" = "Nome do meio";
+"Name Prefix" = "Prefixo do nome";
+"Name Suffix" = "Sufixo do nome";
+"Name In Original Script" = "Nome na escrita original";
+"Name details" = "Detalhes do nome";
+"Add name details" = "Adicionar detalhes do nome";
+"Phone region" = "País ou região do telefone";
+"Postal code" = "Código postal";
+"State / province" = "Estado / província";
+"City / locality" = "Cidade / localidade";
+"Street address" = "Endereço";
+"Add address fields" = "Adicionar campos de endereço";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "Preencha apenas as partes necessárias. O nome completo é preservado como foi escrito, sem divisão ou reorganização automática.";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "Os formatos são verificados neste dispositivo. Identidade, validade do documento, disponibilidade do telefone e existência do endereço não são verificadas. Os avisos não impedem o salvamento.";
+"Choose the phone region or include a + country calling code." = "Escolha o país ou a região do telefone ou inclua o código internacional com +.";
+"Check the phone number, country calling code, and extension." = "Confira o número de telefone, o código internacional e o ramal.";
+"Phone number format matches. Availability is not checked." = "O formato do telefone corresponde. A disponibilidade não foi verificada.";
+"Choose the address country. Postal format is not checked for this region." = "Escolha o país do endereço. O formato postal desta região não é verificado.";
+"Postal format is not checked for this region." = "O formato postal desta região não é verificado.";
+"This region does not normally use postal codes. The value will be kept." = "Esta região normalmente não usa códigos postais. O valor será mantido.";
+"Check the postal code for the selected country." = "Confira o código postal do país selecionado.";
+"Postal code format matches. Address existence is not checked." = "O formato do código postal corresponde. A existência do endereço não foi verificada.";
+"Passport number format matches. Authenticity and validity are not checked." = "O formato do passaporte corresponde. A autenticidade e a validade não foram verificadas.";
+"Japanese passports normally use two letters followed by seven digits." = "Passaportes japoneses normalmente usam duas letras seguidas de sete dígitos.";
+"US passport books normally use nine digits or one letter followed by eight digits." = "Passaportes dos EUA em formato de livreto normalmente usam nove dígitos ou uma letra seguida de oito dígitos.";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "As regras variam conforme o país emissor. As verificações por país abrangem atualmente o Japão e os EUA.";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "O valor é longo demais para verificar o formato. Ele será mantido.";
+"Format matches. Existence and validity are not checked." = "O formato corresponde. Existência e validade não foram verificadas.";
+"Check the email address: name@example.com." = "Confira o e-mail: name@example.com.";
+"This email format is not checked. The address will be kept." = "Este formato de e-mail não é verificado. O endereço será mantido.";
+"Check the URL, including its scheme, such as https://." = "Confira a URL e seu esquema, como https://.";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "A sintaxe do esquema da URL foi reconhecida. As regras do serviço não são verificadas.";
+"Check the card number length, digits, and check digit." = "Confira o tamanho, os números e o dígito verificador do cartão.";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "Esta bandeira pode usar outras regras de verificação. Confirme o número com o emissor.";
+"Card check digit matches. Card validity and issuer are not checked." = "O dígito verificador corresponde. A validade e o emissor do cartão não são verificados.";
+"Security codes usually contain three digits; American Express uses four." = "Os códigos de segurança costumam ter três dígitos; American Express usa quatro.";
+"Check the IBAN letters, digits, and check digits." = "Confira as letras, os números e os dígitos verificadores do IBAN.";
+"IBAN check digits match. National format and account existence are not checked." = "Os dígitos verificadores do IBAN correspondem. O formato nacional e a existência da conta não são verificados.";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "O BIC tem oito ou onze letras e números, com um código de país de duas letras.";
+"Enter a server port from 1 to 65535." = "Digite uma porta do servidor de 1 a 65535.";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "VINs modernos têm 17 letras e números, sem I, O ou Q. Números de chassi antigos ou locais podem ser diferentes.";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "O formato VIN corresponde. Dígitos verificadores regionais e a existência do veículo não são verificados.";
+"Check the ninth VIN character for a US-registered vehicle." = "Confira o nono caractere do VIN de um veículo registrado nos EUA.";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Confira o segredo Base32: letras A–Z e números 2–7.";
+"Enter the secret key here, rather than the whole otpauth URL." = "Digite a chave secreta aqui, não a URL otpauth inteira.";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "Esta data é anterior à data de início, emissão ou nascimento relacionada. Confira ambas as datas.";
+"Common ports" = "Portas comuns";
+"Choose the port specified by your server provider." = "Escolha a porta indicada pelo provedor do servidor.";
+"Add https://" = "Adicionar https://";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "O formato é verificado neste dispositivo. Isso não confirma a existência ou validade de contas, documentos, endereços ou serviços. Os avisos não impedem o salvamento.";
+
+"Privacy Policy" = "Política de privacidade";
+
+"Support" = "Suporte";

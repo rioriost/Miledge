@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP（舊版）";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "目前類型的欄位和值將被移除。您編輯過的標題、整理資訊、相關項目和檔案將保留。";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "設定";
+"iCloud Keychain" = "iCloud 鑰匙圈";
+"Storage" = "儲存位置";
+"Refresh" = "重新載入";
+"Last checked on this device" = "此裝置上次檢查時間";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "請在每部裝置的 iCloud 設定中啟用「密碼與鑰匙圈」。傳輸時間由 Apple 管理。";
+"Waiting for iCloud Keychain history." = "正在等待 iCloud 鑰匙圈歷史記錄。";
+"Could not refresh. Try again." = "無法重新載入，請再試一次。";
+"Copy to iCloud Keychain" = "拷貝到 iCloud 鑰匙圈";
+"Copy this item to iCloud Keychain?" = "將此項目拷貝到 iCloud 鑰匙圈？";
+"The current values will be copied. The original stays on this device." = "將拷貝目前的內容。原項目會保留在此裝置上。";
+"Files require device-only storage." = "附加檔案需要選擇僅儲存在此裝置。";
+"The item could not be copied. The original is unchanged." = "無法拷貝項目，原項目未更改。";
+"More" = "更多";
+
+/* International input and advisory validation. */
+"Middle Name" = "中間名";
+"Name Prefix" = "姓名前綴";
+"Name Suffix" = "姓名後綴";
+"Name In Original Script" = "原文字系統中的姓名";
+"Name details" = "姓名詳細資料";
+"Add name details" = "加入姓名詳細資料";
+"Phone region" = "電話號碼所屬國家或地區";
+"Postal code" = "郵遞區號";
+"State / province" = "省／州";
+"City / locality" = "城市／地區";
+"Street address" = "街道地址";
+"Add address fields" = "加入地址欄位";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "僅填寫需要的姓名部分。完整姓名會按原樣保留，不會自動拆分或調整順序。";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "格式檢查在此裝置上進行，不驗證身分、證件效力、電話可用性或地址是否存在。檢查提示不會阻止儲存。";
+"Choose the phone region or include a + country calling code." = "請選擇電話號碼所屬國家或地區，或加上以 + 開頭的國際電話區碼。";
+"Check the phone number, country calling code, and extension." = "請檢查電話號碼、國際電話區碼及分機號碼。";
+"Phone number format matches. Availability is not checked." = "電話號碼格式相符。尚未檢查可用性。";
+"Choose the address country. Postal format is not checked for this region." = "請選擇地址所在國家或地區。尚未檢查此地區的郵遞區號格式。";
+"Postal format is not checked for this region." = "尚未檢查此地區的郵遞區號格式。";
+"This region does not normally use postal codes. The value will be kept." = "此地區通常不使用郵遞區號。輸入值將予以保留。";
+"Check the postal code for the selected country." = "請檢查所選國家或地區的郵遞區號。";
+"Postal code format matches. Address existence is not checked." = "郵遞區號格式相符。尚未檢查地址是否存在。";
+"Passport number format matches. Authenticity and validity are not checked." = "護照號碼格式相符。尚未檢查真實性及有效性。";
+"Japanese passports normally use two letters followed by seven digits." = "日本護照號碼通常由兩個英文字母及七位數字組成。";
+"US passport books normally use nine digits or one letter followed by eight digits." = "美國護照號碼通常為九位數字，或一個英文字母及八位數字。";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "護照號碼規則因核發國家而異。目前支援日本及美國的特定格式檢查。";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "此值過長，無法檢查格式。將保留原值。";
+"Format matches. Existence and validity are not checked." = "格式相符。未檢查是否真實存在或有效。";
+"Check the email address: name@example.com." = "請檢查電子郵件地址：name@example.com。";
+"This email format is not checked. The address will be kept." = "此電子郵件格式不在檢查範圍內。將保留該地址。";
+"Check the URL, including its scheme, such as https://." = "請檢查URL，包括https://等協定前綴。";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "已辨識URL協定的語法。未檢查服務特定規則。";
+"Check the card number length, digits, and check digit." = "請檢查卡號的長度、數字和檢查碼。";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "此卡片品牌可能使用不同的檢查規則。請向發卡機構確認號碼。";
+"Card check digit matches. Card validity and issuer are not checked." = "卡號檢查碼相符。未檢查卡片有效性或發卡機構。";
+"Security codes usually contain three digits; American Express uses four." = "安全碼通常為3位數字；American Express使用4位。";
+"Check the IBAN letters, digits, and check digits." = "請檢查IBAN的字母、數字和檢查碼。";
+"IBAN check digits match. National format and account existence are not checked." = "IBAN檢查碼相符。未檢查國家格式或帳戶是否存在。";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "BIC由8位或11位字母和數字組成，其中包含2位字母的國家代碼。";
+"Enter a server port from 1 to 65535." = "請輸入1至65535之間的伺服器連接埠。";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "現代VIN由17位字母和數字組成，不含I、O、Q。舊式或地方車身編號可能不同。";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "VIN格式相符。未檢查地區檢查碼或車輛是否存在。";
+"Check the ninth VIN character for a US-registered vehicle." = "請檢查美國登記車輛VIN的第9位字元。";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "請檢查Base32密鑰：字母A–Z和數字2–7。";
+"Enter the secret key here, rather than the whole otpauth URL." = "請在此輸入密鑰，而非完整的otpauth URL。";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "此日期早於相關的開始日期、核發日期或出生日期。請檢查這兩個日期。";
+"Common ports" = "常用連接埠";
+"Choose the port specified by your server provider." = "請選擇伺服器供應商指定的連接埠。";
+"Add https://" = "加入https://";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "格式檢查在此裝置上進行，不確認帳戶、文件、地址或服務是否真實存在或有效。出現提示仍可儲存。";
+
+"Privacy Policy" = "隱私權政策";
+
+"Support" = "支援";

@@ -21,11 +21,23 @@ final class StoreScreenshotTests: XCTestCase {
             #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .phone { capture(app, name: "\(locale)__01-library") }
             #endif
+            #if os(macOS)
+            // The passive SwiftUI label is hosted inside an AppKit table row.
+            // Selection belongs to the table, so click the label's row position.
+            wifi.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).click()
+            #else
             activate(wifi)
+            #endif
             XCTAssertTrue(app.descendants(matching: .any)["item-detail-form"].waitForExistence(timeout: 5))
             capture(app, name: "\(locale)__02-details")
             #if os(macOS)
-            app.typeKey("n", modifierFlags: .command)
+            if locale == "ar" {
+                activate(app.buttons["category-favorites"])
+                capture(app, name: "\(locale)__03-favorites")
+                app.terminate()
+                continue
+            }
+            activate(app.buttons["ledger-add"])
             #else
             // Return to the list on compact layouts to reach the product add action.
             if UIDevice.current.userInterfaceIdiom == .phone { app.navigationBars.buttons.firstMatch.tap() }
@@ -47,6 +59,7 @@ final class StoreScreenshotTests: XCTestCase {
 
     private func capture(_ app: XCUIApplication, name: String) {
         #if os(macOS)
+        app.activate()
         let image = app.windows.firstMatch.screenshot()
         #else
         let image = app.screenshot()

@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP(이전 방식)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "현재 유형의 필드와 값이 삭제됩니다. 직접 수정한 제목, 정리 정보, 관련 항목과 파일은 유지됩니다.";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "설정";
+"iCloud Keychain" = "iCloud 키체인";
+"Storage" = "저장 위치";
+"Refresh" = "새로 고침";
+"Last checked on this device" = "이 기기에서 마지막으로 확인한 시간";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "각 기기의 iCloud 설정에서 ‘암호 및 키체인’을 켜십시오. 전송 시점은 Apple이 관리합니다.";
+"Waiting for iCloud Keychain history." = "iCloud 키체인 기록을 기다리는 중입니다.";
+"Could not refresh. Try again." = "새로 고칠 수 없습니다. 다시 시도하십시오.";
+"Copy to iCloud Keychain" = "iCloud 키체인으로 복사";
+"Copy this item to iCloud Keychain?" = "이 항목을 iCloud 키체인으로 복사하시겠습니까?";
+"The current values will be copied. The original stays on this device." = "현재 내용을 복사합니다. 원본은 이 기기에 남아 있습니다.";
+"Files require device-only storage." = "파일을 첨부하려면 이 기기에만 저장해야 합니다.";
+"The item could not be copied. The original is unchanged." = "항목을 복사할 수 없습니다. 원본은 변경되지 않았습니다.";
+"More" = "더 보기";
+
+/* International input and advisory validation. */
+"Middle Name" = "미들 네임";
+"Name Prefix" = "이름 앞 호칭";
+"Name Suffix" = "이름 뒤 접미사";
+"Name In Original Script" = "원래 문자로 쓴 이름";
+"Name details" = "이름 세부 정보";
+"Add name details" = "이름 세부 정보 추가";
+"Phone region" = "전화번호 국가 또는 지역";
+"Postal code" = "우편번호";
+"State / province" = "주 / 도";
+"City / locality" = "시 / 지역";
+"Street address" = "상세 주소";
+"Add address fields" = "주소 입력란 추가";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "필요한 이름 항목만 입력하세요. 전체 이름은 작성한 그대로 보존하며 자동으로 분리하거나 순서를 바꾸지 않습니다.";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "형식은 이 기기에서 확인합니다. 신원, 문서 유효성, 전화 사용 가능 여부, 주소의 실재 여부는 확인하지 않습니다. 확인 안내가 있어도 저장할 수 있습니다.";
+"Choose the phone region or include a + country calling code." = "전화번호의 국가 또는 지역을 선택하거나 +로 시작하는 국가 번호를 포함하세요.";
+"Check the phone number, country calling code, and extension." = "전화번호, 국가 번호, 내선 번호를 확인하세요.";
+"Phone number format matches. Availability is not checked." = "전화번호 형식이 일치합니다. 사용 가능 여부는 확인하지 않았습니다.";
+"Choose the address country. Postal format is not checked for this region." = "주소의 국가 또는 지역을 선택하세요. 이 지역의 우편번호 형식은 확인하지 않았습니다.";
+"Postal format is not checked for this region." = "이 지역의 우편번호 형식은 확인하지 않았습니다.";
+"This region does not normally use postal codes. The value will be kept." = "이 지역은 일반적으로 우편번호를 사용하지 않습니다. 입력값은 보존됩니다.";
+"Check the postal code for the selected country." = "선택한 국가 또는 지역의 우편번호를 확인하세요.";
+"Postal code format matches. Address existence is not checked." = "우편번호 형식이 일치합니다. 주소의 실재 여부는 확인하지 않았습니다.";
+"Passport number format matches. Authenticity and validity are not checked." = "여권 번호 형식이 일치합니다. 진위와 유효성은 확인하지 않았습니다.";
+"Japanese passports normally use two letters followed by seven digits." = "일본 여권 번호는 일반적으로 영문자 2개와 숫자 7자리입니다.";
+"US passport books normally use nine digits or one letter followed by eight digits." = "미국 여권 번호는 일반적으로 숫자 9자리 또는 영문자 1개와 숫자 8자리입니다.";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "여권 번호 규칙은 발급 국가에 따라 다릅니다. 현재 국가별 확인은 일본과 미국을 지원합니다.";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "값이 너무 길어 형식을 확인할 수 없습니다. 입력값은 유지됩니다.";
+"Format matches. Existence and validity are not checked." = "형식이 일치합니다. 실제 존재 여부와 유효성은 확인하지 않습니다.";
+"Check the email address: name@example.com." = "이메일 주소를 확인하세요: name@example.com.";
+"This email format is not checked. The address will be kept." = "이 이메일 형식은 확인 대상이 아닙니다. 주소는 유지됩니다.";
+"Check the URL, including its scheme, such as https://." = "https:// 등의 스킴을 포함하여 URL을 확인하세요.";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "URL 스킴의 구문을 인식했습니다. 서비스별 규칙은 확인하지 않습니다.";
+"Check the card number length, digits, and check digit." = "카드 번호의 길이, 숫자, 검증 숫자를 확인하세요.";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "이 카드 브랜드는 다른 검증 규칙을 사용할 수 있습니다. 발급사와 번호를 확인하세요.";
+"Card check digit matches. Card validity and issuer are not checked." = "카드 검증 숫자가 일치합니다. 카드 유효성과 발급사는 확인하지 않습니다.";
+"Security codes usually contain three digits; American Express uses four." = "보안 코드는 보통 3자리이며, American Express는 4자리입니다.";
+"Check the IBAN letters, digits, and check digits." = "IBAN의 영문자, 숫자, 검증 숫자를 확인하세요.";
+"IBAN check digits match. National format and account existence are not checked." = "IBAN 검증 숫자가 일치합니다. 국가별 형식과 계좌의 존재 여부는 확인하지 않습니다.";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "BIC는 영문자와 숫자 8자리 또는 11자리이며, 영문자 2자리 국가 코드가 포함됩니다.";
+"Enter a server port from 1 to 65535." = "1~65535 사이의 서버 포트를 입력하세요.";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "현재 VIN은 I, O, Q를 제외한 영문자와 숫자 17자리입니다. 구형 또는 지역별 차대 번호는 다를 수 있습니다.";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "VIN 형식이 일치합니다. 지역별 검증 숫자와 차량의 존재 여부는 확인하지 않습니다.";
+"Check the ninth VIN character for a US-registered vehicle." = "미국 등록 차량의 VIN 9번째 문자를 확인하세요.";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Base32 비밀 키를 확인하세요: 영문자 A~Z와 숫자 2~7.";
+"Enter the secret key here, rather than the whole otpauth URL." = "여기에는 otpauth URL 전체가 아닌 비밀 키를 입력하세요.";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "관련 시작일, 발급일 또는 생년월일보다 이른 날짜입니다. 두 날짜를 확인하세요.";
+"Common ports" = "자주 사용하는 포트";
+"Choose the port specified by your server provider." = "서버 제공업체가 지정한 포트를 선택하세요.";
+"Add https://" = "https:// 추가";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "형식은 이 기기에서 확인합니다. 계좌, 문서, 주소 또는 서비스의 존재 여부나 유효성은 확인하지 않습니다. 확인 메시지가 있어도 저장할 수 있습니다.";
+
+"Privacy Policy" = "개인정보 처리방침";
+
+"Support" = "지원";

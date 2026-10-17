@@ -2,7 +2,7 @@
 
 [日本語](release.ja.md) · [README](../README.md)
 
-The current version is **0.1.0**, build **2**. Mac and iOS/iPadOS builds have reached internal TestFlight. Device installation/acceptance, independent security approval and public-release readiness remain incomplete. No public App Store release has occurred. The guarded GitHub workflow must remain blocked until its evidence and configuration are complete.
+The current version is **0.1.0**, build **6**. Mac and iOS/iPadOS builds have reached internal TestFlight. Device installation/acceptance, independent security approval and public-release readiness remain incomplete. No public App Store release has occurred. The guarded GitHub workflow must remain blocked until its evidence and configuration are complete.
 
 ## 1. Configure Apple distribution
 
@@ -12,7 +12,7 @@ Configure the official signing team, shared Keychain Access Group, iCloud Drive 
 
 App and storage targets contain `PrivacyInfo.xcprivacy`. Review actual data handling, Required Reason API usage and export compliance before each release. The current `ITSAppUsesNonExemptEncryption=false` declaration covers the app's OS-provided encryption use; reassess it when encryption or dependencies change. Verify App Privacy answers, localized store metadata, privacy/support URLs, device support and eligible storefronts. Simplified Chinese localization does not determine mainland-China availability.
 
-Use a new build number; **2 has already been uploaded**. Preparing or uploading a binary does not submit it to App Review or publish it.
+Use a new build number; **2, 3, 4, 5 and 6 have already been uploaded**. Preparing or uploading a binary does not submit it to App Review or publish it.
 
 ## 2. Protect GitHub configuration and credentials
 
@@ -108,3 +108,8 @@ For serious defects, pause pending/phased publication as appropriate and submit 
 - [App Store submission](https://developer.apple.com/app-store/submitting/) and [uploading builds](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds/): recheck SDK and processing requirements at release time.
 - [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/): privacy, health exclusion, review and distribution conditions.
 - [Export compliance](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance/) and [Required Reason APIs](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api): review actual implementation, not assumptions.
+
+2026-10-17: Build 6, including international and structured input assistance and optional personal-name components, is Testing on both platforms in Miledge Internal. See the [delivery record](testflight-build6-2026-10-17.md).
+
+
+2026-10-17: **0.1.0 (build 7)** was submitted to App Review on both platforms and shows **Waiting for Review**. It includes the macOS synchronized-list correction and Settings links to the privacy policy and support. For this submission, the user explicitly selected **free, all 175 offered countries/regions, automatic release after approval**. Submission does not establish approval or independent security sign-off. See the [submission record](app-review-2026-10-17.md) for evidence and remaining verification limits.

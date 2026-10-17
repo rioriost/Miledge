@@ -4,6 +4,9 @@ import SwiftUI
 
 @main
 struct InteractionApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor(StoreArtworkAppDelegate.self) private var artworkDelegate
+    #endif
     private let scenario = ProcessInfo.processInfo.arguments.dropFirst().first ?? "validation"
     private let localeIdentifier = ProcessInfo.processInfo.environment["MILEDGE_UI_LOCALE"] ?? "en"
     private let minimumWindow = ProcessInfo.processInfo.environment["MILEDGE_UI_MINIMUM_WINDOW"] == "1"
@@ -25,7 +28,8 @@ struct InteractionApp: App {
         #if os(macOS)
         Window("Miledge", id: "ledger") { interactionContent }
         .defaultLaunchBehavior(.presented)
-        .defaultSize(width: minimumWindow ? 800 : 1100, height: minimumWindow ? 520 : 760)
+        .defaultSize(width: scenario == "synchronization-layout" ? 840 : (minimumWindow ? 800 : 1100),
+                     height: scenario == "synchronization-layout" ? 650 : (minimumWindow ? 520 : 760))
         .windowResizability(minimumWindow ? .contentSize : .contentMinSize)
         .commands { LedgerCommands() }
         Settings { DisplaySettingsView() }
@@ -41,6 +45,7 @@ struct InteractionApp: App {
             .preferredColorScheme(appearance)
             .displayPreferences()
             .resizeForDisplayText()
+            .accessibilityTestConfiguration()
         #if os(macOS)
             .frame(minWidth: 800, minHeight: 520)
             .frame(width: minimumWindow ? 800 : nil, height: minimumWindow ? 520 : nil)
@@ -54,12 +59,22 @@ struct InteractionView: View {
     @State private var showingSettings = false
 
     var body: some View {
-        if scenario == "store-screenshots" {
-            StoreScreenshotLedger()
+        if scenario == "synchronization-layout" {
+            SynchronizationLayoutFixture()
+        } else if scenario == "store-screenshots" || scenario == "accessibility-ledger" || scenario == "synchronization-ledger" {
+            StoreScreenshotLedger(automaticallyUnlock: scenario == "store-screenshots", synchronizable: scenario == "synchronization-ledger")
         } else if let result {
             Text("Saved")
                 .accessibilityIdentifier("saved-revision")
                 .accessibilityValue(result)
+        } else if scenario.hasPrefix("format-") {
+            ItemEditor(revision: StructuredInputFixture.make(scenario)) { revision in
+                result = String(decoding: try! RevisionCodec.encode(revision), as: UTF8.self)
+            }
+        } else if scenario.hasPrefix("international-") {
+            ItemEditor(revision: InternationalInputFixture.make(scenario)) { revision in
+                result = String(decoding: try! RevisionCodec.encode(revision), as: UTF8.self)
+            }
         } else if scenario == "attachments" {
             SyntheticAttachmentLedger()
         } else if scenario.hasPrefix("selection-") {

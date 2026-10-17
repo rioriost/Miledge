@@ -151,6 +151,7 @@ struct LedgerSidebar: View {
     let selection: LedgerCategory
     let select: (LedgerCategory) -> Void
     @Environment(\.dynamicTypeSize) private var textSize
+    @Environment(\.colorSchemeContrast) private var contrast
 
     var body: some View {
         ScrollView {
@@ -166,6 +167,11 @@ struct LedgerSidebar: View {
                                     .foregroundStyle(category.color)
                                     .accessibilityHidden(true)
                                 Spacer(minLength: 4)
+                                if selected {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(.primary)
+                                        .accessibilityHidden(true)
+                                }
                                 Text(count, format: .number).ledgerFont(.caption, weight: .semibold)
                             }
                             Text(category.title).ledgerFont(.headline)
@@ -178,7 +184,7 @@ struct LedgerSidebar: View {
                                     in: RoundedRectangle(cornerRadius: 12))
                         .overlay {
                             RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: 2)
+                                .strokeBorder(selected ? (contrast == .increased ? Color.primary : Color.accentColor) : .clear, lineWidth: 2)
                         }
                         .contentShape(RoundedRectangle(cornerRadius: 12))
                     }
@@ -198,16 +204,22 @@ struct LedgerSidebar: View {
 
 struct LedgerItemRow: View {
     let item: LedgerItem
+    @Environment(\.dynamicTypeSize) private var textSize
+    @ScaledMetric(relativeTo: .title3) private var iconSize: CGFloat = 36
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: LedgerCategory.group(for: item.revision?.templateId ?? "").symbol)
-                .ledgerFont(.title3)
-                .frame(width: 36, height: 36)
-                .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
-                .accessibilityHidden(true)
+            if !textSize.isAccessibilitySize {
+                Image(systemName: LedgerCategory.group(for: item.revision?.templateId ?? "").symbol)
+                    .ledgerFont(.title3)
+                    .frame(width: iconSize, height: iconSize)
+                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
+                    .accessibilityHidden(true)
+            }
             VStack(alignment: .leading, spacing: 4) {
-                Text(verbatim: item.title).ledgerFont(.headline).lineLimit(2)
+                Text(verbatim: item.title).ledgerFont(.headline)
+                    .lineLimit(textSize.isAccessibilitySize ? nil : 2)
+                    .fixedSize(horizontal: false, vertical: true)
                 if item.isConflicted {
                     Text("Conflicting changes").ledgerFont(.caption)
                 } else if let revision = item.revision {

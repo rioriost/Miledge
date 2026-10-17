@@ -47,7 +47,10 @@ struct ChoiceFieldInput: View {
                 #if os(macOS)
                 .popover(isPresented: $presented) { selectionList }
                 #else
-                .sheet(isPresented: $presented) { selectionList }
+                .sheet(isPresented: $presented) {
+                    selectionList
+                        .presentationSizing(.form)
+                }
                 #endif
             } else {
                 Picker(selection: selection) {
@@ -90,6 +93,7 @@ struct ChoiceFieldInput: View {
             cancel: { presented = false }
         )
     }
+
 }
 
 private struct ChoiceSelectionList: View {
@@ -102,38 +106,83 @@ private struct ChoiceSelectionList: View {
     @State private var query = ""
     @Environment(\.locale) private var locale
 
+    private var filteredChoices: [FieldChoice] {
+        let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return choices }
+        let matches = choices.filter { $0.matches(term, locale: locale) }
+        // A complete country code is more specific than a substring in a country name.
+        return matches.filter { $0.value.caseInsensitiveCompare(term) == .orderedSame }
+            + matches.filter { $0.value.caseInsensitiveCompare(term) != .orderedSame }
+    }
+
     var body: some View {
-        NavigationStack {
-            List {
-                Button("Not set") { select("") }.accessibilityIdentifier("choice-clear")
-                if !text.isEmpty, !choices.contains(where: { $0.value == text }) {
-                    Text(verbatim: text).textSelection(.disabled)
-                }
-                ForEach(choices.filter { query.isEmpty || $0.matches(query, locale: locale) }) { choice in
-                    Button { select(choice.value) } label: {
-                        HStack {
-                            Text(verbatim: choice.label).fixedSize(horizontal: false, vertical: true)
-                            Spacer()
-                            if choice.value == text { Image(systemName: "checkmark") }
-                        }
-                    }
-                    .accessibilityIdentifier("choice-\(choice.value)")
-                }
-            }
-            .ledgerFont(.body)
-            .searchable(text: $query)
-            .navigationTitle(Text(verbatim: label))
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Cancel", action: cancel) }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Other…", action: custom).accessibilityIdentifier("choice-custom")
-                }
-            }
-        }
         #if os(macOS)
-        .frame(minWidth: 240, idealWidth: 360, maxWidth: 420, minHeight: 360, idealHeight: 480)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(verbatim: label).font(.headline)
+                Spacer()
+                Button("Cancel", action: cancel).keyboardShortcut(.cancelAction)
+            }
+            CountrySearchField(text: $query, label: label) {
+                guard !query.isEmpty, let choice = filteredChoices.first else { return }
+                select(choice.value)
+            }
+                .frame(height: 28)
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 4) {
+                    choiceRows
+                }
+            }
+            .buttonStyle(.borderless)
+            Button("Other…", action: custom).accessibilityIdentifier("choice-custom")
+        }
+        .padding(16)
+        .frame(width: 360, height: 440)
+        #else
+        VStack(spacing: 0) {
+            HStack {
+                Button("Cancel", action: cancel)
+                Spacer()
+                Text(verbatim: label).font(.headline).multilineTextAlignment(.center)
+                Spacer()
+                Button("Other…", action: custom).accessibilityIdentifier("choice-custom")
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
+            CountrySearchField(text: $query, label: label)
+                .frame(height: 52)
+            choicesList
+        }
         #endif
     }
+
+    private var choicesList: some View {
+        List { choiceRows }
+            .ledgerFont(.body)
+            .buttonStyle(.plain)
+    }
+
+    @ViewBuilder
+    private var choiceRows: some View {
+            Button("Not set") { select("") }.accessibilityIdentifier("choice-clear")
+            if !text.isEmpty, !choices.contains(where: { $0.value == text }) {
+                Text(verbatim: text).textSelection(.disabled)
+            }
+            ForEach(filteredChoices) { choice in
+                Button { select(choice.value) } label: {
+                    HStack {
+                        Text(verbatim: choice.label).fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                        if choice.value == text { Image(systemName: "checkmark") }
+                    }
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                }
+                .accessibilityIdentifier("choice-\(choice.value)")
+            }
+    }
+
 }
 
 struct CalendarFieldInput: View {
@@ -144,7 +193,29 @@ struct CalendarFieldInput: View {
     @State private var presented = false
 
     var body: some View {
-        Button { presented = true } label: {
+        #if os(macOS)
+        if let date = try? CalendarFieldValue.date(text, kind: kind) {
+            HStack {
+                MacCalendarInput(date: Binding(get: { date }, set: {
+                    if let value = try? CalendarFieldValue.string($0, kind: kind) { text = value }
+                }), kind: kind, label: label, identifier: "field-calendar-\(identifier)")
+                Button("Clear") { text = "" }
+                    .accessibilityIdentifier("calendar-clear-\(identifier)")
+            }
+        } else {
+            trigger.popover(isPresented: $presented) { panel }
+        }
+        #else
+        VStack(alignment: .leading, spacing: 8) {
+            trigger
+            if presented { panel }
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        #endif
+    }
+
+    private var trigger: some View {
+        Button { presented.toggle() } label: {
             HStack {
                 if text.isEmpty { Text(kind == "year-month" ? "Choose a month" : "Choose a date") }
                 else { Text(verbatim: text) }
@@ -156,15 +227,17 @@ struct CalendarFieldInput: View {
         .buttonStyle(.bordered)
         .accessibilityLabel(Text(verbatim: label))
         .accessibilityIdentifier("field-calendar-\(identifier)")
-        .popover(isPresented: $presented) {
-            CalendarSelectionPanel(text: text, kind: kind, label: label) {
-                text = $0
-                presented = false
-            } cancel: {
-                presented = false
-            }
+    }
+
+    private var panel: some View {
+        CalendarSelectionPanel(text: text, kind: kind, label: label) {
+            text = $0
+            presented = false
+        } cancel: {
+            presented = false
         }
     }
+
 }
 
 struct CalendarSelectionPanel: View {
@@ -192,42 +265,14 @@ struct CalendarSelectionPanel: View {
         }
     }
 
-    private var year: Binding<Int> {
-        Binding(get: { CalendarFieldValue.calendar.component(.year, from: pending) },
-                set: { update(year: $0, month: month.wrappedValue) })
-    }
-
-    private var month: Binding<Int> {
-        Binding(get: { CalendarFieldValue.calendar.component(.month, from: pending) },
-                set: { update(year: year.wrappedValue, month: $0) })
-    }
-
-    private var monthNames: [String] {
-        let formatter = DateFormatter()
-        formatter.locale = locale
-        formatter.calendar = CalendarFieldValue.calendar
-        return formatter.monthSymbols
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            #if os(macOS)
             Text(verbatim: label).ledgerFont(.headline).fixedSize(horizontal: false, vertical: true)
+            MacCalendarInput(date: $pending, kind: kind, label: label, identifier: "calendar-date")
+            #else
             if kind == "year-month" {
-                Picker("Month", selection: month) {
-                    ForEach(1...12, id: \.self) { month in
-                        Text(verbatim: monthNames[month - 1]).tag(month)
-                    }
-                }
-                .pickerStyle(.menu)
-                .accessibilityIdentifier("calendar-month")
-                Stepper(value: year, in: 1...9999) {
-                    HStack {
-                        Text("Year")
-                        Spacer()
-                        Text(verbatim: String(year.wrappedValue))
-                    }
-                }
-                .accessibilityIdentifier("calendar-year")
+                MonthYearInput(date: $pending, label: label)
             } else {
                 DatePicker("Date", selection: $pending, in: CalendarFieldValue.range, displayedComponents: .date)
                     .datePickerStyle(.graphical)
@@ -235,6 +280,7 @@ struct CalendarSelectionPanel: View {
                     .environment(\.timeZone, CalendarFieldValue.calendar.timeZone)
                     .accessibilityIdentifier("calendar-date")
             }
+            #endif
             if issue {
                 Text("Check the value and format.").ledgerFont(.caption).foregroundStyle(.red)
             }
@@ -252,15 +298,86 @@ struct CalendarSelectionPanel: View {
             }
             .buttonStyle(.bordered)
         }
+        .onChange(of: pending) { _, _ in issue = false }
         .ledgerFont(.body)
-        .padding()
+        .fixedSize(horizontal: false, vertical: true)
         #if os(macOS)
+        .padding()
         .frame(minWidth: 300, idealWidth: 340 * textSize.scale)
         #endif
     }
 
-    private func update(year: Int, month: Int) {
-        do { pending = try CalendarFieldValue.month(year: year, month: month); issue = false }
-        catch { issue = true }
+}
+
+#if os(macOS)
+/// A native search field keeps the search and cancel controls inside the popover.
+private struct CountrySearchField: NSViewRepresentable {
+    @Binding var text: String
+    let label: String
+    let submit: () -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator(text: $text, submit: submit) }
+    func makeNSView(context: Context) -> NSSearchField {
+        let field = NSSearchField()
+        field.delegate = context.coordinator
+        field.controlSize = .large
+        field.setAccessibilityLabel(label)
+        field.setAccessibilityIdentifier("country-choice-search")
+        return field
+    }
+    func updateNSView(_ field: NSSearchField, context: Context) {
+        context.coordinator.text = $text
+        context.coordinator.submit = submit
+        if field.stringValue != text { field.stringValue = text }
+        field.setAccessibilityLabel(label)
+    }
+    final class Coordinator: NSObject, NSSearchFieldDelegate {
+        var text: Binding<String>
+        var submit: () -> Void
+        init(text: Binding<String>, submit: @escaping () -> Void) { self.text = text; self.submit = submit }
+        func controlTextDidChange(_ notification: Notification) {
+            if let field = notification.object as? NSSearchField { text.wrappedValue = field.stringValue }
+        }
+        func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+            if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+                submit()
+                return true
+            }
+            return false
+        }
     }
 }
+#endif
+
+#if os(iOS)
+/// Keep the native search field local to the selector rather than sharing navigation toolbar state.
+private struct CountrySearchField: UIViewRepresentable {
+    @Binding var text: String
+    let label: String
+
+    func makeCoordinator() -> Coordinator { Coordinator(text: $text) }
+    func makeUIView(context: Context) -> UISearchBar {
+        let field = UISearchBar()
+        field.searchBarStyle = .minimal
+        field.delegate = context.coordinator
+        field.searchTextField.accessibilityLabel = label
+        field.searchTextField.accessibilityIdentifier = "country-choice-search"
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        return field
+    }
+    func updateUIView(_ field: UISearchBar, context: Context) {
+        context.coordinator.text = $text
+        if field.text != text { field.text = text }
+        field.searchTextField.accessibilityLabel = label
+    }
+    final class Coordinator: NSObject, UISearchBarDelegate {
+        var text: Binding<String>
+        init(text: Binding<String>) { self.text = text }
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text.wrappedValue = searchText
+        }
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { searchBar.resignFirstResponder() }
+    }
+}
+#endif

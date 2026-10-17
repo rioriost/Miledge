@@ -140,16 +140,22 @@ final class SelectionInteractionTests: XCTestCase {
         launch()
         activate(app.buttons["field-calendar-issueDate"])
         activate(app.buttons["calendar-done"])
-        activate(app.buttons["field-calendar-expiry"])
         #if os(macOS)
-        activate(app.popUpButtons["calendar-month"])
-        activate(app.menuItems["February"])
+        let expiry = app.datePickers["field-calendar-expiry"]
+        XCTAssertTrue(expiry.waitForExistence(timeout: 5))
+        expiry.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.5)).click()
+        expiry.typeText("2")
+        expiry.typeKey(XCUIKeyboardKey.tab, modifierFlags: [])
         #else
-        activate(app.buttons["calendar-month"])
-        activate(app.buttons["February"])
+        activate(app.buttons["field-calendar-expiry"])
+        let month = app.pickerWheels.element(boundBy: 0)
+        makeReachable(month, in: app)
+        month.adjust(toPickerWheelValue: "February")
         #endif
         capture("Native month selector")
+        #if os(iOS)
         activate(app.buttons["calendar-done"])
+        #endif
         let fields = try values(saved())
         let date = try XCTUnwrap(fields["issueDate"])
         XCTAssertNotNil(date.range(of: #"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"#, options: .regularExpression))
@@ -164,15 +170,40 @@ final class SelectionInteractionTests: XCTestCase {
 
     func testDateAndMonthClearAreExplicit() throws {
         launch("selection-dates", largest: true)
+        #if os(macOS)
+        activate(app.buttons["calendar-clear-issueDate"])
+        activate(app.buttons["calendar-clear-expiry"])
+        #else
         activate(app.buttons["field-calendar-issueDate"])
+        makeReachable(app.buttons["DatePicker.Show"], in: app)
         capture("Largest native date picker")
         activate(app.buttons["calendar-clear"])
         activate(app.buttons["field-calendar-expiry"])
         activate(app.buttons["calendar-clear"])
+        #endif
         let fields = try values(saved())
         XCTAssertEqual(fields["issueDate"], "")
         XCTAssertEqual(fields["expiry"], "")
     }
+
+    #if os(iOS)
+    func testInlineCalendarSelectsYearAndMonthWithoutMonthByMonthNavigation() throws {
+        launch("selection-dates")
+        activate(app.buttons["field-calendar-issueDate"])
+        let header = app.buttons["DatePicker.Show"]
+        makeReachable(header, in: app)
+        capture("Inline calendar")
+        activate(header)
+        XCTAssertEqual(app.pickerWheels.count, 2)
+        app.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: "1996")
+        app.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "January")
+        capture("Native month and year selection")
+        activate(app.buttons["DatePicker.Hide"])
+        activate(app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "January 15")).firstMatch)
+        activate(app.buttons["calendar-done"])
+        XCTAssertEqual(try values(saved())["issueDate"], "1996-01-15")
+    }
+    #endif
 
     func testOnlyConfirmedTypeChangesUpdateAutomaticTitle() throws {
         launch("selection-title")

@@ -21,7 +21,7 @@ struct MiledgeApp: App {
             LedgerCommands()
             BackupCommands()
         }
-        Settings { DisplaySettingsView() }
+        Settings { DisplaySettingsView(session: session) }
         #else
         WindowGroup { ledgerContent.displayPreferences() }
         #endif
@@ -54,8 +54,15 @@ struct MiledgeApp: App {
     @MainActor
     private func initialize() {
         do {
+            guard let accessGroup = Bundle.main.object(forInfoDictionaryKey: "MiledgeKeychainAccessGroup") as? String,
+                  !accessGroup.isEmpty, !accessGroup.contains("$(") else {
+                throw KeychainStorageError.invalidConfiguration
+            }
             let store = try KeychainRevisionStore(
-                configuration: KeychainConfiguration(service: "st.rio.miledge.development.revisions")
+                // Keep the existing service and default access group so build 2/3 data stays readable.
+                configuration: KeychainConfiguration(
+                    service: "st.rio.miledge.development.revisions", accessGroup: accessGroup
+                )
             )
             let directory = try FileManager.default.url(
                 for: .applicationSupportDirectory, in: .userDomainMask,
@@ -72,7 +79,8 @@ struct MiledgeApp: App {
                         data: data, account: account,
                         scope: scope == .deviceLocal ? .deviceLocal : .synchronizable
                     )
-                }
+                },
+                defaultStorageScope: .synchronizable
             )
         } catch {
             session = nil

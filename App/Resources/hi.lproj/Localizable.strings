@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP (पुराना)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "मौजूदा प्रकार के फ़ील्ड और मान हटा दिए जाएंगे। आपका संपादित शीर्षक, संगठन, संबंधित आइटम और फ़ाइलें बनी रहेंगी।";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "सेटिंग्स";
+"iCloud Keychain" = "iCloud कीचेन";
+"Storage" = "स्टोरेज";
+"Refresh" = "रीफ़्रेश करें";
+"Last checked on this device" = "इस डिवाइस पर आख़िरी जाँच";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "हर डिवाइस की iCloud सेटिंग्स में “पासवर्ड और कीचेन” चालू करें। ट्रांसफ़र का समय Apple तय करता है।";
+"Waiting for iCloud Keychain history." = "iCloud कीचेन के इतिहास की प्रतीक्षा है।";
+"Could not refresh. Try again." = "रीफ़्रेश नहीं हो सका। फिर कोशिश करें।";
+"Copy to iCloud Keychain" = "iCloud कीचेन में कॉपी करें";
+"Copy this item to iCloud Keychain?" = "इस आइटम को iCloud कीचेन में कॉपी करें?";
+"The current values will be copied. The original stays on this device." = "मौजूदा सामग्री कॉपी की जाएगी। मूल आइटम इस डिवाइस पर रहेगा।";
+"Files require device-only storage." = "फ़ाइलों के लिए केवल इस डिवाइस पर स्टोरेज चुनें।";
+"The item could not be copied. The original is unchanged." = "आइटम कॉपी नहीं हो सका। मूल आइटम बदला नहीं है।";
+"More" = "और";
+
+/* International input and advisory validation. */
+"Middle Name" = "मध्य नाम";
+"Name Prefix" = "नाम से पहले की उपाधि";
+"Name Suffix" = "नाम के बाद का प्रत्यय";
+"Name In Original Script" = "मूल लिपि में नाम";
+"Name details" = "नाम का विवरण";
+"Add name details" = "नाम का विवरण जोड़ें";
+"Phone region" = "फ़ोन का देश या क्षेत्र";
+"Postal code" = "डाक कोड";
+"State / province" = "राज्य / प्रांत";
+"City / locality" = "शहर / इलाक़ा";
+"Street address" = "सड़क का पता";
+"Add address fields" = "पते के फ़ील्ड जोड़ें";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "केवल ज़रूरी नाम-भाग भरें। पूरा नाम जैसा लिखा गया है वैसा ही रखा जाता है; उसे अपने-आप बाँटा या पुनः क्रमबद्ध नहीं किया जाता।";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "प्रारूप की जाँच इसी डिवाइस पर होती है। पहचान, दस्तावेज़ की वैधता, फ़ोन की उपलब्धता या पते के अस्तित्व की पुष्टि नहीं होती। जाँच के संदेश सहेजने से नहीं रोकते।";
+"Choose the phone region or include a + country calling code." = "फ़ोन का देश या क्षेत्र चुनें, या + से शुरू होने वाला अंतरराष्ट्रीय कोड जोड़ें।";
+"Check the phone number, country calling code, and extension." = "फ़ोन नंबर, अंतरराष्ट्रीय कोड और एक्सटेंशन जाँचें।";
+"Phone number format matches. Availability is not checked." = "फ़ोन नंबर का प्रारूप मेल खाता है। उपलब्धता नहीं जाँची गई है।";
+"Choose the address country. Postal format is not checked for this region." = "पते का देश चुनें। इस क्षेत्र के डाक कोड का प्रारूप नहीं जाँचा गया है।";
+"Postal format is not checked for this region." = "इस क्षेत्र के डाक कोड का प्रारूप नहीं जाँचा गया है।";
+"This region does not normally use postal codes. The value will be kept." = "इस क्षेत्र में आम तौर पर डाक कोड नहीं होते। दर्ज मान रखा जाएगा।";
+"Check the postal code for the selected country." = "चुने हुए देश का डाक कोड जाँचें।";
+"Postal code format matches. Address existence is not checked." = "डाक कोड का प्रारूप मेल खाता है। पते के अस्तित्व की पुष्टि नहीं हुई है।";
+"Passport number format matches. Authenticity and validity are not checked." = "पासपोर्ट नंबर का प्रारूप मेल खाता है। प्रामाणिकता और वैधता नहीं जाँची गई हैं।";
+"Japanese passports normally use two letters followed by seven digits." = "जापानी पासपोर्ट नंबर में आम तौर पर दो लैटिन अक्षरों के बाद सात अंक होते हैं।";
+"US passport books normally use nine digits or one letter followed by eight digits." = "अमेरिकी पासपोर्ट पुस्तिका के नंबर में आम तौर पर नौ अंक या एक लैटिन अक्षर के बाद आठ अंक होते हैं।";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "नियम जारी करने वाले देश पर निर्भर करते हैं। फ़िलहाल देश-विशिष्ट जाँच जापान और अमेरिका के लिए उपलब्ध है।";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "यह मान फ़ॉर्मैट जाँच के लिए बहुत लंबा है। इसे रखा जाएगा।";
+"Format matches. Existence and validity are not checked." = "फ़ॉर्मैट मेल खाता है। अस्तित्व और वैधता की जाँच नहीं की गई है।";
+"Check the email address: name@example.com." = "ईमेल पता जाँचें: name@example.com।";
+"This email format is not checked. The address will be kept." = "इस ईमेल फ़ॉर्मैट की जाँच नहीं की जाती। पता रखा जाएगा।";
+"Check the URL, including its scheme, such as https://." = "URL और उसका स्कीम, जैसे https://, जाँचें।";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "URL स्कीम की संरचना पहचानी गई है। सेवा के खास नियमों की जाँच नहीं की जाती।";
+"Check the card number length, digits, and check digit." = "कार्ड नंबर की लंबाई, अंक और जाँच अंक देखें।";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "इस कार्ड ब्रांड के जाँच अंक के नियम अलग हो सकते हैं। जारीकर्ता से नंबर की पुष्टि करें।";
+"Card check digit matches. Card validity and issuer are not checked." = "कार्ड का जाँच अंक मेल खाता है। कार्ड की वैधता और जारीकर्ता की जाँच नहीं की गई है।";
+"Security codes usually contain three digits; American Express uses four." = "सुरक्षा कोड आम तौर पर तीन अंकों का होता है; American Express चार अंक इस्तेमाल करता है।";
+"Check the IBAN letters, digits, and check digits." = "IBAN के अक्षर, अंक और जाँच अंक देखें।";
+"IBAN check digits match. National format and account existence are not checked." = "IBAN के जाँच अंक मेल खाते हैं। देश के फ़ॉर्मैट और खाते के अस्तित्व की जाँच नहीं की गई है।";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "BIC में आठ या ग्यारह अक्षर और अंक होते हैं, जिसमें दो अक्षरों का देश कोड शामिल है।";
+"Enter a server port from 1 to 65535." = "1 से 65535 के बीच सर्वर पोर्ट दर्ज करें।";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "आधुनिक VIN में I, O और Q के बिना 17 अक्षर और अंक होते हैं। पुराने या स्थानीय चेसिस नंबर अलग हो सकते हैं।";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "VIN फ़ॉर्मैट मेल खाता है। क्षेत्रीय जाँच अंकों और वाहन के अस्तित्व की जाँच नहीं की गई है।";
+"Check the ninth VIN character for a US-registered vehicle." = "अमेरिका में पंजीकृत वाहन के VIN का नौवाँ अक्षर जाँचें।";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Base32 गोपनीय कुंजी जाँचें: A–Z अक्षर और 2–7 अंक।";
+"Enter the secret key here, rather than the whole otpauth URL." = "यहाँ पूरी otpauth URL के बजाय गोपनीय कुंजी दर्ज करें।";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "यह तारीख संबंधित शुरुआत, जारी करने या जन्म की तारीख से पहले है। दोनों तारीखें जाँचें।";
+"Common ports" = "आम पोर्ट";
+"Choose the port specified by your server provider." = "सर्वर प्रदाता द्वारा बताया गया पोर्ट चुनें।";
+"Add https://" = "https:// जोड़ें";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "फ़ॉर्मैट की जाँच इस डिवाइस पर होती है। इससे खाते, दस्तावेज़, पते या सेवा के अस्तित्व या वैधता की पुष्टि नहीं होती। चेतावनी संदेश सहेजने से नहीं रोकते।";
+
+"Privacy Policy" = "गोपनीयता नीति";
+
+"Support" = "सहायता";

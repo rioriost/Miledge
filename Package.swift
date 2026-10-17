@@ -10,12 +10,16 @@ let package = Package(
         .library(name: "MiledgeStorage", targets: ["MiledgeStorage"]),
         .library(name: "MiledgeApplication", targets: ["MiledgeApplication"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit", exact: "5.0.12"),
+    ],
     targets: [
         .target(name: "MiledgeDomain"),
         .target(name: "MiledgeStorage", resources: [.copy("PrivacyInfo.xcprivacy")]),
         .target(
             name: "MiledgeApplication",
-            dependencies: ["MiledgeDomain", "MiledgeStorage"]
+            dependencies: ["MiledgeDomain", "MiledgeStorage", .product(name: "PhoneNumberKit", package: "PhoneNumberKit")],
+            resources: [.copy("Resources/PostalRules.json"), .copy("Resources/ThirdPartyNotices.txt")]
         ),
         .testTarget(name: "MiledgeDomainTests", dependencies: ["MiledgeDomain"]),
         .testTarget(name: "MiledgeStorageTests", dependencies: ["MiledgeStorage"]),

@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP (قديم)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "ستُزال حقول النوع الحالي وقيمها. سيُحتفظ بالعنوان الذي عدّلته ومعلومات التنظيم والعناصر المرتبطة والملفات.";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "الإعدادات";
+"iCloud Keychain" = "سلسلة مفاتيح iCloud";
+"Storage" = "مكان التخزين";
+"Refresh" = "تحديث";
+"Last checked on this device" = "آخر تحقق على هذا الجهاز";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "فعّل «كلمات السر وسلسلة المفاتيح» في إعدادات iCloud على كل جهاز. تدير Apple توقيت النقل.";
+"Waiting for iCloud Keychain history." = "في انتظار سجل سلسلة مفاتيح iCloud.";
+"Could not refresh. Try again." = "تعذر التحديث. حاول مرة أخرى.";
+"Copy to iCloud Keychain" = "نسخ إلى سلسلة مفاتيح iCloud";
+"Copy this item to iCloud Keychain?" = "هل تريد نسخ هذا العنصر إلى سلسلة مفاتيح iCloud؟";
+"The current values will be copied. The original stays on this device." = "سيتم نسخ المحتوى الحالي. ستبقى النسخة الأصلية على هذا الجهاز.";
+"Files require device-only storage." = "تتطلب الملفات التخزين على هذا الجهاز فقط.";
+"The item could not be copied. The original is unchanged." = "تعذر نسخ العنصر. لم تتغير النسخة الأصلية.";
+"More" = "المزيد";
+
+/* International input and advisory validation. */
+"Middle Name" = "الاسم الأوسط";
+"Name Prefix" = "لقب قبل الاسم";
+"Name Suffix" = "لاحقة الاسم";
+"Name In Original Script" = "الاسم بالكتابة الأصلية";
+"Name details" = "تفاصيل الاسم";
+"Add name details" = "إضافة تفاصيل الاسم";
+"Phone region" = "بلد أو منطقة الهاتف";
+"Postal code" = "الرمز البريدي";
+"State / province" = "الولاية / المحافظة";
+"City / locality" = "المدينة / المنطقة";
+"Street address" = "عنوان الشارع";
+"Add address fields" = "إضافة حقول العنوان";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "أدخل أجزاء الاسم التي تحتاج إليها فقط. يُحفظ الاسم الكامل كما كُتب، دون تقسيمه أو إعادة ترتيبه تلقائيًا.";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "يُفحص التنسيق على هذا الجهاز. لا يتم التحقق من الهوية أو صلاحية الوثيقة أو توفر الهاتف أو وجود العنوان. لا تمنع رسائل المراجعة الحفظ.";
+"Choose the phone region or include a + country calling code." = "اختر بلد أو منطقة الهاتف، أو أضف رمز الاتصال الدولي الذي يبدأ بعلامة +.";
+"Check the phone number, country calling code, and extension." = "راجع رقم الهاتف ورمز الاتصال الدولي والرقم الداخلي.";
+"Phone number format matches. Availability is not checked." = "تنسيق رقم الهاتف مطابق. لم يتم التحقق من توفره.";
+"Choose the address country. Postal format is not checked for this region." = "اختر بلد العنوان. لم يُفحص تنسيق الرمز البريدي لهذه المنطقة.";
+"Postal format is not checked for this region." = "لم يُفحص تنسيق الرمز البريدي لهذه المنطقة.";
+"This region does not normally use postal codes. The value will be kept." = "لا تستخدم هذه المنطقة رموزًا بريدية عادةً. ستُحفظ القيمة كما هي.";
+"Check the postal code for the selected country." = "راجع الرمز البريدي للبلد المحدد.";
+"Postal code format matches. Address existence is not checked." = "تنسيق الرمز البريدي مطابق. لم يتم التحقق من وجود العنوان.";
+"Passport number format matches. Authenticity and validity are not checked." = "تنسيق رقم جواز السفر مطابق. لم يتم التحقق من أصالته أو صلاحيته.";
+"Japanese passports normally use two letters followed by seven digits." = "تتكون أرقام جوازات السفر اليابانية عادةً من حرفين لاتينيين ثم سبعة أرقام.";
+"US passport books normally use nine digits or one letter followed by eight digits." = "تستخدم دفاتر جوازات السفر الأمريكية عادةً تسعة أرقام أو حرفًا لاتينيًا ثم ثمانية أرقام.";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "تختلف القواعد حسب بلد الإصدار. تشمل الفحوص الخاصة بالبلد حاليًا اليابان والولايات المتحدة.";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "هذه القيمة أطول من أن يُفحص تنسيقها. سيتم الاحتفاظ بها.";
+"Format matches. Existence and validity are not checked." = "التنسيق مطابق. لم يُفحص الوجود أو الصلاحية.";
+"Check the email address: name@example.com." = "تحقق من عنوان البريد الإلكتروني: name@example.com.";
+"This email format is not checked. The address will be kept." = "لا يُفحص تنسيق هذا البريد الإلكتروني. سيتم الاحتفاظ بالعنوان.";
+"Check the URL, including its scheme, such as https://." = "تحقق من الرابط ومخططه، مثل https://.";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "تم التعرف على بنية مخطط الرابط. لا تُفحص القواعد الخاصة بالخدمة.";
+"Check the card number length, digits, and check digit." = "تحقق من طول رقم البطاقة وأرقامه ورقم التحقق.";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "قد تستخدم هذه العلامة قواعد مختلفة لرقم التحقق. أكّد الرقم مع الجهة المُصدرة.";
+"Card check digit matches. Card validity and issuer are not checked." = "رقم تحقق البطاقة مطابق. لم تُفحص صلاحية البطاقة أو الجهة المُصدرة.";
+"Security codes usually contain three digits; American Express uses four." = "يتكون رمز الأمان عادةً من ثلاثة أرقام؛ وتستخدم American Express أربعة أرقام.";
+"Check the IBAN letters, digits, and check digits." = "تحقق من حروف IBAN وأرقامه وأرقام التحقق.";
+"IBAN check digits match. National format and account existence are not checked." = "أرقام تحقق IBAN مطابقة. لم يُفحص التنسيق الوطني أو وجود الحساب.";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "يتكون BIC من ثمانية أو أحد عشر حرفًا ورقمًا، ويتضمن رمز بلد من حرفين.";
+"Enter a server port from 1 to 65535." = "أدخل منفذ خادم من 1 إلى 65535.";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "يتكون VIN الحديث من 17 حرفًا ورقمًا دون I أو O أو Q. قد تختلف أرقام الهيكل القديمة أو المحلية.";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "تنسيق VIN مطابق. لم تُفحص أرقام التحقق الإقليمية أو وجود المركبة.";
+"Check the ninth VIN character for a US-registered vehicle." = "تحقق من الحرف التاسع في VIN لمركبة مسجلة في الولايات المتحدة.";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "تحقق من مفتاح Base32 السري: الحروف A–Z والأرقام 2–7.";
+"Enter the secret key here, rather than the whole otpauth URL." = "أدخل المفتاح السري هنا بدلًا من رابط otpauth كاملًا.";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "هذا التاريخ أسبق من تاريخ البدء أو الإصدار أو الميلاد المرتبط به. تحقق من التاريخين.";
+"Common ports" = "المنافذ الشائعة";
+"Choose the port specified by your server provider." = "اختر المنفذ الذي حدده مزود الخادم.";
+"Add https://" = "إضافة https://";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "تُجرى فحوص التنسيق على هذا الجهاز. ولا تؤكد وجود الحسابات أو المستندات أو العناوين أو الخدمات أو صلاحيتها. رسائل المراجعة لا تمنع الحفظ.";
+
+"Privacy Policy" = "سياسة الخصوصية";
+
+"Support" = "الدعم";

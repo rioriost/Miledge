@@ -4,7 +4,7 @@
 
 **My Ledger, for private information that does not fit in Apple Passwords.** Miledge is a native SwiftUI app for Apple Silicon Mac, iPhone and iPad. It supports 30 item types plus custom items, including credentials, affiliate accounts, non-health insurance, identity and tax documents, contracts, keys and private notes. Health information is excluded; there is no HealthKit integration.
 
-Current version: **0.1.0** (build **2**). Both platforms have been distributed to an internal TestFlight group. **Miledge has not been released yet** on the App Store; TestFlight distribution is not production or security approval.
+Current version: **0.1.0** (build **7**). Both platforms have been distributed to an internal TestFlight group. **Miledge has not been released yet** on the App Store; TestFlight distribution is not production or security approval.
 
 ## Installation
 
@@ -14,11 +14,11 @@ Public installation will be through the App Store or Mac App Store. Store links 
 
 Browsing follows category → list → detail, with three columns on Mac and wide iPad windows and native back navigation on iPhone. The editor uses a scrolling grouped form, fixed Save/Cancel actions, optional and custom fields, tags, favorites and related items.
 
-Country/region and currency fields have searchable selection; common categories have native pop-ups and an Other option. Dates use a calendar; month-only values use month/year controls. Existing custom values remain intact. New titles default to the localized type plus registration date and stop updating after a manual edit or clear. Display settings control font size and initial concealment; concealed fields support eye buttons and copying without revealing.
+Country/region and currency fields have searchable selection; common categories have native pop-ups and an Other option. Dates use a calendar; month-only values use month/year controls. Existing custom values remain intact. New titles default to the localized type plus registration date and stop updating after a manual edit or clear. Display settings control font size and initial concealment; concealed values reveal on hover and copy on click on Mac; on iOS, tapping reveals a value and offers a copy action.
 
 Records are immutable Keychain revisions. Attachments use encrypted local storage, with explicit preview and export. Encrypted backup and restore use native file dialogs. Conflicts require choosing a complete revision; this is not field-by-field merging. Unknown data, original strings and attachment bytes are preserved.
 
-There is no proprietary account or server. The current app uses a development vault; official shared Keychain/iCloud configuration and cloud attachment delivery are incomplete. Health exclusion also applies to custom items and backups, but arbitrary text or files cannot be perfectly classified automatically.
+There is no proprietary account or server. The current app uses a development vault; the signed apps share a Keychain access group and new records synchronize through iCloud Keychain. Attachments remain device-local. Health exclusion also applies to custom items and backups, but arbitrary text or files cannot be perfectly classified automatically.
 
 **Do not use this version for real secrets.** Signed-device authentication and persistence, cross-device synchronization/recovery, complete native UI and accessibility acceptance, reviewed translations, and independent security approval remain outstanding. Use synthetic data in TestFlight, tests, issues and screenshots.
 
@@ -59,7 +59,7 @@ Both production schemes, `Miledge-iOS` and `Miledge-macOS`, produce **`Miledge.a
 
 `MiledgeInteraction-iOS` and `MiledgeInteraction-macOS` use synthetic fixtures and in-memory callbacks, not personal Keychain records, authentication or the general clipboard. These targets are excluded from product archives. Their results do not establish production persistence.
 
-There are no third-party application dependencies. Draft resources cover 12 localizations: `en`, `ja`, `zh-Hans`, `zh-Hant`, `ko`, `fr`, `de`, `es`, `pt-BR`, `it`, `ar`, `hi`. Native-speaker review and complete visual/RTL acceptance are pending. Simplified Chinese localization does not decide mainland-China distribution.
+PhoneNumberKit provides offline phone-number parsing; bundled postal rules and their license notices are included. Draft resources cover 12 localizations: `en`, `ja`, `zh-Hans`, `zh-Hant`, `ko`, `fr`, `de`, `es`, `pt-BR`, `it`, `ar`, `hi`. Native-speaker review and complete visual/RTL acceptance are pending. Simplified Chinese localization does not decide mainland-China distribution.
 
 ## Release and contributions
 

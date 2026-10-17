@@ -192,8 +192,8 @@ extension TemplateCatalogTests {
         let sections = (TemplateCatalog.all + TemplateCatalog.apiCredentialProfiles).flatMap { $0.sections + $0.optionalSections }
             + TemplateCatalog.affiliateProfiles.flatMap { $0.sections + $0.optionalSections }
         let fields = sections.flatMap(\.fields)
-        XCTAssertEqual(Set(fields.map(\.id)).count, 187)
-        XCTAssertEqual(TemplateCatalog.fieldLocalizationKeys.count, 187)
+        XCTAssertEqual(Set(fields.map(\.id)).count, 191)
+        XCTAssertEqual(TemplateCatalog.fieldLocalizationKeys.count, 191)
         for field in fields {
             XCTAssertEqual(TemplateCatalog.fieldLocalizationKeys[field.id], field.label, field.id)
             XCTAssertTrue(TemplateCatalog.localizationKeys.contains(field.label ?? ""), field.id)

@@ -26,6 +26,7 @@ public struct VaultSectionOption: Identifiable, Sendable {
 
 /// Validated value-draft edits. This does not persist revisions, generate credentials, or normalize input.
 public enum VaultEditor {
+    public static let phoneRegionPrefix = "phone-region:"
     public static var supportedKinds: [String] { VaultPolicy.supportedFieldKinds.sorted() }
 
     public static func emptyValue(forKind kind: String) throws -> JSONValue {
@@ -108,7 +109,9 @@ public enum VaultEditor {
         if let index = edited.sections.firstIndex(where: { $0.id == option.section.id }) {
             edited.sections[index].fields.append(contentsOf: fields)
         } else {
-            edited.sections.append(option.section)
+            var section = option.section
+            section.fields = fields
+            edited.sections.append(section)
         }
         try validateDraft(edited)
         return edited
@@ -119,6 +122,7 @@ public enum VaultEditor {
               let section = revision.sections.first(where: { $0.id == sectionID }),
               section.fields.contains(where: { $0.id == fieldID }) else { return false }
         if UUID(uuidString: fieldID) != nil || sectionID == "custom" || UUID(uuidString: sectionID) != nil { return true }
+        if fieldID.hasPrefix(phoneRegionPrefix) { return true }
         return optionalDefinitions(for: revision).contains { $0.id == sectionID && $0.fields.contains { $0.id == fieldID } }
     }
 
@@ -135,7 +139,10 @@ public enum VaultEditor {
         }
         var edited = revision
         let index = edited.sections.firstIndex { $0.id == sectionID }!
-        edited.sections[index].fields.removeAll { $0.id == fieldID }
+        let removingPhone = edited.sections[index].fields.first { $0.id == fieldID }?.kind == "phone"
+        edited.sections[index].fields.removeAll {
+            $0.id == fieldID || (removingPhone && $0.id == phoneRegionPrefix + fieldID)
+        }
         // Retain the section identity even when empty; addition can restore its catalog fields.
         try validateDraft(edited)
         return edited
@@ -235,12 +242,32 @@ public enum VaultEditor {
     }
 
     private static func missingFields(for definition: VaultSection, in revision: VaultRevision) throws -> [VaultField] {
-        guard let existing = revision.sections.first(where: { $0.id == definition.id }) else { return definition.fields }
+        // Older identity items already keep given/family names in their optional section.
+        // Adding name details must reuse those values, never create a competing empty copy.
+        if definition.id == "name-details" {
+            let existing = revision.sections.flatMap(\.fields)
+            for field in definition.fields {
+                if existing.contains(where: { $0.id == field.id && $0.kind != field.kind }) {
+                    throw VaultEditingError.fieldKindConflict(section: definition.id, field: field.id)
+                }
+            }
+            return definition.fields.filter { field in !existing.contains(where: { $0.id == field.id }) }
+        }
+        guard let existing = revision.sections.first(where: { $0.id == definition.id }) else {
+            return definition.fields.filter { field in
+                !TemplateCatalog.personalNameFieldIDs.contains(field.id)
+                    || !revision.sections.flatMap(\.fields).contains(where: { $0.id == field.id })
+            }
+        }
         for field in definition.fields {
             if let previous = existing.fields.first(where: { $0.id == field.id }), previous.kind != field.kind {
                 throw VaultEditingError.fieldKindConflict(section: definition.id, field: field.id)
             }
         }
-        return definition.fields.filter { field in !existing.fields.contains(where: { $0.id == field.id }) }
+        return definition.fields.filter { field in
+            !existing.fields.contains(where: { $0.id == field.id })
+                && !(TemplateCatalog.personalNameFieldIDs.contains(field.id)
+                     && revision.sections.flatMap(\.fields).contains(where: { $0.id == field.id }))
+        }
     }
 }

@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP (obsoleto)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "I campi e i valori del tipo attuale verranno rimossi. Il titolo modificato, l'organizzazione, gli elementi correlati e i file verranno mantenuti.";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "Impostazioni";
+"iCloud Keychain" = "Portachiavi iCloud";
+"Storage" = "Archiviazione";
+"Refresh" = "Aggiorna";
+"Last checked on this device" = "Ultimo controllo su questo dispositivo";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "Attiva “Password e Portachiavi” nelle impostazioni di iCloud su ogni dispositivo. Apple gestisce i tempi di trasferimento.";
+"Waiting for iCloud Keychain history." = "In attesa della cronologia del portachiavi iCloud.";
+"Could not refresh. Try again." = "Impossibile aggiornare. Riprova.";
+"Copy to iCloud Keychain" = "Copia nel portachiavi iCloud";
+"Copy this item to iCloud Keychain?" = "Copiare questo elemento nel portachiavi iCloud?";
+"The current values will be copied. The original stays on this device." = "Verrà copiato il contenuto attuale. L’originale rimane su questo dispositivo.";
+"Files require device-only storage." = "I file richiedono l’archiviazione solo su questo dispositivo.";
+"The item could not be copied. The original is unchanged." = "Impossibile copiare l’elemento. L’originale non è stato modificato.";
+"More" = "Altro";
+
+/* International input and advisory validation. */
+"Middle Name" = "Secondo nome";
+"Name Prefix" = "Prefisso del nome";
+"Name Suffix" = "Suffisso del nome";
+"Name In Original Script" = "Nome nella scrittura originale";
+"Name details" = "Dettagli del nome";
+"Add name details" = "Aggiungi dettagli del nome";
+"Phone region" = "Paese o regione del telefono";
+"Postal code" = "Codice postale";
+"State / province" = "Stato / provincia";
+"City / locality" = "Città / località";
+"Street address" = "Indirizzo";
+"Add address fields" = "Aggiungi campi dell’indirizzo";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "Compila solo le parti necessarie. Il nome completo viene conservato così com’è, senza suddivisioni o riordinamenti automatici.";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "I formati vengono controllati su questo dispositivo. Non vengono verificate l’identità, la validità dei documenti, la disponibilità del telefono o l’esistenza dell’indirizzo. Gli avvisi non impediscono il salvataggio.";
+"Choose the phone region or include a + country calling code." = "Scegli il paese o la regione del telefono oppure includi il prefisso internazionale con +.";
+"Check the phone number, country calling code, and extension." = "Controlla il numero di telefono, il prefisso internazionale e l’interno.";
+"Phone number format matches. Availability is not checked." = "Il formato del telefono corrisponde. La disponibilità non è stata verificata.";
+"Choose the address country. Postal format is not checked for this region." = "Scegli il paese dell’indirizzo. Il formato postale di questa regione non viene controllato.";
+"Postal format is not checked for this region." = "Il formato postale di questa regione non viene controllato.";
+"This region does not normally use postal codes. The value will be kept." = "Questa regione di solito non usa codici postali. Il valore verrà conservato.";
+"Check the postal code for the selected country." = "Controlla il codice postale del paese selezionato.";
+"Postal code format matches. Address existence is not checked." = "Il formato del codice postale corrisponde. L’esistenza dell’indirizzo non è stata verificata.";
+"Passport number format matches. Authenticity and validity are not checked." = "Il formato del passaporto corrisponde. Autenticità e validità non sono state verificate.";
+"Japanese passports normally use two letters followed by seven digits." = "I passaporti giapponesi usano normalmente due lettere seguite da sette cifre.";
+"US passport books normally use nine digits or one letter followed by eight digits." = "I libretti dei passaporti statunitensi usano normalmente nove cifre o una lettera seguita da otto cifre.";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "Le regole variano in base al paese emittente. I controlli specifici coprono attualmente il Giappone e gli Stati Uniti.";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "Il valore è troppo lungo per verificarne il formato. Verrà conservato.";
+"Format matches. Existence and validity are not checked." = "Il formato corrisponde. Esistenza e validità non sono verificate.";
+"Check the email address: name@example.com." = "Controlla l’indirizzo email: name@example.com.";
+"This email format is not checked. The address will be kept." = "Questo formato email non viene verificato. L’indirizzo verrà conservato.";
+"Check the URL, including its scheme, such as https://." = "Controlla l’URL, incluso lo schema, ad esempio https://.";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "La sintassi dello schema URL è riconosciuta. Le regole specifiche del servizio non sono verificate.";
+"Check the card number length, digits, and check digit." = "Controlla lunghezza, cifre e cifra di controllo del numero della carta.";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "Questo circuito potrebbe usare altre regole di controllo. Conferma il numero con l’emittente.";
+"Card check digit matches. Card validity and issuer are not checked." = "La cifra di controllo corrisponde. Validità ed emittente della carta non sono verificati.";
+"Security codes usually contain three digits; American Express uses four." = "I codici di sicurezza hanno solitamente tre cifre; American Express ne usa quattro.";
+"Check the IBAN letters, digits, and check digits." = "Controlla lettere, cifre e cifre di controllo dell’IBAN.";
+"IBAN check digits match. National format and account existence are not checked." = "Le cifre di controllo IBAN corrispondono. Il formato nazionale e l’esistenza del conto non sono verificati.";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "Il BIC ha otto o undici lettere e cifre, con un codice paese di due lettere.";
+"Enter a server port from 1 to 65535." = "Inserisci una porta del server da 1 a 65535.";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "I VIN moderni hanno 17 lettere e cifre senza I, O o Q. I numeri di telaio più vecchi o locali possono differire.";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "Il formato VIN corrisponde. Le cifre di controllo regionali e l’esistenza del veicolo non sono verificate.";
+"Check the ninth VIN character for a US-registered vehicle." = "Controlla il nono carattere del VIN per un veicolo immatricolato negli Stati Uniti.";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Controlla il segreto Base32: lettere A–Z e cifre 2–7.";
+"Enter the secret key here, rather than the whole otpauth URL." = "Inserisci qui la chiave segreta, non l’intero URL otpauth.";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "Questa data precede la relativa data di inizio, emissione o nascita. Controlla entrambe le date.";
+"Common ports" = "Porte comuni";
+"Choose the port specified by your server provider." = "Scegli la porta indicata dal fornitore del server.";
+"Add https://" = "Aggiungi https://";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "Il formato viene verificato su questo dispositivo. Non si confermano l’esistenza o la validità di conti, documenti, indirizzi o servizi. Gli avvisi non impediscono il salvataggio.";
+
+"Privacy Policy" = "Informativa sulla privacy";
+
+"Support" = "Assistenza";

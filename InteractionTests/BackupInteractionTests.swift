@@ -49,6 +49,9 @@ final class BackupInteractionTests: XCTestCase {
     }
 
     private func openAction(_ name: String) {
+        #if os(iOS)
+        activate(app.buttons["More"])
+        #endif
         activate(app.buttons["Backup"])
         activate(app.buttons[name])
     }

@@ -1,3 +1,4 @@
+import MiledgeApplication
 import MiledgeDomain
 import SwiftUI
 
@@ -76,6 +77,7 @@ struct MacFieldInput: NSViewRepresentable {
     var placeholder: String? = nil
     var alignment: NSTextAlignment = .left
     var secure = false
+    var onEditingChanged: (Bool) -> Void = { _ in }
     var inputSource = MacFieldInputSource.unrestricted
     @Environment(\.displayTextSize) private var size
     @Environment(\.isEnabled) private var enabled
@@ -91,6 +93,11 @@ struct MacFieldInput: NSViewRepresentable {
         view.isSelectable = true
         view.isBezeled = true
         view.bezelStyle = .roundedBezel
+        view.drawsBackground = true
+        view.backgroundColor = .textBackgroundColor
+        view.wantsLayer = true
+        view.layer?.cornerRadius = 6
+        view.layer?.borderWidth = 1
         view.controlSize = .large
         view.usesSingleLineMode = true
         view.cell?.isScrollable = true
@@ -104,6 +111,9 @@ struct MacFieldInput: NSViewRepresentable {
         view.font = .systemFont(ofSize: max(10, points * size.scale))
         view.alignment = alignment
         view.isEnabled = enabled
+        view.effectiveAppearance.performAsCurrentDrawingAppearance {
+            view.layer?.borderColor = NSColor.secondaryLabelColor.cgColor
+        }
         view.placeholderString = placeholder
         view.setAccessibilityLabel(label)
         if let cell = view.cell as? MacFieldCell { cell.inputSource = inputSource }
@@ -131,7 +141,10 @@ struct MacFieldInput: NSViewRepresentable {
             input.text = view.stringValue
         }
 
+        func controlTextDidEndEditing(_ notification: Notification) { input.onEditingChanged(false) }
+
         func controlTextDidBeginEditing(_ notification: Notification) {
+            input.onEditingChanged(true)
             guard let view = notification.object as? NSTextField else {
                 preconditionFailure("Text editing notifications must identify their text field")
             }
@@ -156,7 +169,7 @@ struct MacMultilineFieldInput: NSViewRepresentable {
     func makeNSView(context: Context) -> NSScrollView {
         let scroll = NSTextView.scrollableTextView()
         scroll.hasVerticalScroller = true
-        scroll.borderType = .noBorder
+        scroll.borderType = .bezelBorder
         guard let editor = scroll.documentView as? NSTextView else {
             preconditionFailure("Mac multiline fields require a native text view")
         }
@@ -211,9 +224,8 @@ struct FieldRevealButton: View {
 
     var body: some View {
         Button { revealed.toggle() } label: {
-            Label(LocalizedStringKey(revealed ? "Hide" : "Reveal"), systemImage: revealed ? "eye.slash" : "eye")
-                .labelStyle(.iconOnly)
-                .fieldControlFrame(square: true)
+            Text(LocalizedStringKey(revealed ? "Hide" : "Reveal"))
+                .fieldControlFrame()
                 .contentShape(Rectangle())
         }
         .buttonStyle(.borderless)
@@ -229,19 +241,25 @@ struct StringFieldInput: View {
     @State var text: String
     let templateID: String?
     let initiallyVisible: Bool
-    @State private var lastWrittenValue: JSONValue?
+    @State private var pendingWrites: [JSONValue] = []
+    @FocusState private var focused: Bool
+    private let onEditingChanged: (Bool) -> Void
     @State private var revealed: Bool
     @Environment(\.locale) private var locale
     private var rowLayout = FieldRowLayout()
 
-    init(field: Binding<VaultField>, invalid: Binding<Bool>, text: String, templateID: String? = nil, initiallyVisible: Bool = false) {
+    init(field: Binding<VaultField>, invalid: Binding<Bool>, text: String, templateID: String? = nil,
+         initiallyVisible: Bool = false, onEditingChanged: @escaping (Bool) -> Void = { _ in }) {
         _field = field
         _invalid = invalid
         _text = State(initialValue: text)
         self.templateID = templateID
+        self.onEditingChanged = onEditingChanged
         self.initiallyVisible = initiallyVisible
         _revealed = State(initialValue: initiallyVisible || !field.wrappedValue.concealed)
     }
+
+    private var format: StructuredInput? { StructuredInput.format(for: field, templateID: templateID) }
 
     private var multiline: Bool {
         ["multiline", "key-material"].contains(field.kind) || text.contains("\n") || text.contains("\r")
@@ -254,7 +272,7 @@ struct StringFieldInput: View {
             text = value
             do {
                 let replacement = try VaultEditor.replacingValue(in: field, with: .string(value))
-                lastWrittenValue = replacement.value
+                if pendingWrites.last != replacement.value { pendingWrites.append(replacement.value) }
                 field = replacement
                 invalid = false
             } catch {
@@ -273,6 +291,20 @@ struct StringFieldInput: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 if field.concealed { FieldRevealButton(revealed: $revealed, field: field) }
             }
+            if revealed, !multiline, format == .port {
+                Menu("Common ports") {
+                    ForEach(StructuredInput.portChoices(fieldID: field.id), id: \.value) { choice in
+                        Button(choice.label) { textBinding.wrappedValue = choice.value }
+                            .accessibilityIdentifier("port-option-" + choice.value)
+                    }
+                }
+                .accessibilityIdentifier("port-suggestions-" + field.id)
+                .help("Choose the port specified by your server provider.")
+            }
+            if revealed, format == .url, let suggestion = StructuredInput.httpsSuggestion(text) {
+                Button("Add https://") { textBinding.wrappedValue = suggestion }
+                    .accessibilityIdentifier("url-add-scheme-" + field.id)
+            }
             if let hint = FieldPresentation.formatHint(for: field.kind), field.kind == "number" || invalid {
                 Text(LocalizedStringKey(hint))
                     .ledgerFont(.caption)
@@ -286,17 +318,23 @@ struct StringFieldInput: View {
         #if os(iOS)
         .textInputAutocapitalization(.never)
         .keyboardType(keyboardType)
+        .textContentType(contentType)
         #endif
+        .onChange(of: focused) { _, focused in onEditingChanged(focused) }
+        .onDisappear { onEditingChanged(false) }
         .onChange(of: field.value) { _, value in
-            guard value != lastWrittenValue else { return }
-            lastWrittenValue = nil
+            if let index = pendingWrites.lastIndex(of: value) {
+                pendingWrites.removeFirst(index + 1)
+                return
+            }
+            pendingWrites.removeAll()
             if case .string(let replacement) = value, replacement != text {
                 text = replacement
                 invalid = false
             }
         }
         .onChange(of: field.id) { _, _ in
-            lastWrittenValue = nil
+            pendingWrites.removeAll()
             if case .string(let replacement) = field.value { text = replacement }
             invalid = false
         }
@@ -322,6 +360,7 @@ struct StringFieldInput: View {
                     alignment: field.kind == "number" ? .right : .left, inputSource: .roman
                 )
                 .frame(minHeight: 100, idealHeight: 120, maxHeight: 180)
+                .ledgerInputSurface()
                 .accessibilityIdentifier("field-input-\(field.id)")
             } else {
                 multilineInput
@@ -347,6 +386,9 @@ struct StringFieldInput: View {
 
     private var multilineInput: some View {
         TextEditor(text: textBinding)
+            .scrollContentBackground(.hidden)
+            .padding(6)
+            .ledgerInputSurface()
             .frame(minHeight: 100, idealHeight: 120, maxHeight: 180)
             .accessibilityLabel(Text(verbatim: FieldPresentation.name(for: field, locale: locale)))
             .accessibilityIdentifier("field-input-\(field.id)")
@@ -358,6 +400,7 @@ struct StringFieldInput: View {
         MacFieldInput(
             text: textBinding, label: FieldPresentation.name(for: field, locale: locale),
             placeholder: promptString, alignment: field.kind == "number" ? .right : .left, secure: secure,
+            onEditingChanged: onEditingChanged,
             inputSource: FieldPresentation.usesRomanInput(for: field.kind) ? .roman : .unrestricted
         )
         .id(secure)
@@ -365,10 +408,12 @@ struct StringFieldInput: View {
         #else
         if secure {
             SecureField("", text: textBinding, prompt: prompt)
+                .focused($focused)
                 .accessibilityLabel(Text(verbatim: FieldPresentation.name(for: field, locale: locale)))
                 .accessibilityIdentifier("field-input-\(field.id)")
         } else {
             TextField("", text: textBinding, prompt: prompt)
+                .focused($focused)
                 .accessibilityLabel(Text(verbatim: FieldPresentation.name(for: field, locale: locale)))
                 .accessibilityIdentifier("field-input-\(field.id)")
         }
@@ -379,7 +424,7 @@ struct StringFieldInput: View {
         switch field.kind {
         case "date": "YYYY-MM-DD"
         case "year-month": "YYYY-MM"
-        default: nil
+        default: format?.example
         }
     }
 
@@ -388,8 +433,19 @@ struct StringFieldInput: View {
     }
 
     #if os(iOS)
+    private var contentType: UITextContentType? {
+        switch format {
+        case .email: .emailAddress
+        case .url: .URL
+        case .cardNumber: .creditCardNumber
+        default: field.kind == "phone" ? .telephoneNumber : nil
+        }
+    }
+
     private var keyboardType: UIKeyboardType {
-        switch field.kind {
+        if format?.usesDigits == true { return .asciiCapableNumberPad }
+        if [.iban, .bic, .vin, .otpSeed].contains(format) { return .asciiCapable }
+        return switch field.kind {
         case "email": .emailAddress
         case "url": .URL
         case "phone": .phonePad

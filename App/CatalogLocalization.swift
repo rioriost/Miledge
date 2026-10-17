@@ -19,6 +19,9 @@ enum CatalogLocalization {
     }
 
     static func fieldLabel(_ field: VaultField, locale: Locale = .current) -> String {
+        if field.id.hasPrefix("phone-region:"), field.label == "Phone region" {
+            return string("Phone region", locale: locale)
+        }
         guard let defaultLabel = TemplateCatalog.fieldLocalizationKeys[field.id],
               field.label == nil || field.label == defaultLabel else {
             return field.label ?? field.id

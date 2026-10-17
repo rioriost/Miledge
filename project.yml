@@ -1,4 +1,8 @@
 name: Miledge
+packages:
+  PhoneNumberKit:
+    url: https://github.com/PhoneNumberKit/PhoneNumberKit
+    exactVersion: 5.0.12
 options:
   minimumXcodeGenVersion: 2.46.0
   developmentLanguage: en
@@ -11,7 +15,7 @@ settings:
     SWIFT_STRICT_CONCURRENCY: complete
     ARCHS: arm64
     MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "2"
+    CURRENT_PROJECT_VERSION: "7"
     GENERATE_INFOPLIST_FILE: YES
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 23889H77KX
@@ -42,6 +46,8 @@ targetTemplates:
   Application:
     type: framework
     sources: [Sources/MiledgeApplication]
+    dependencies:
+      - package: PhoneNumberKit
     settings:
       base:
         PRODUCT_NAME: MiledgeApplication
@@ -163,10 +169,11 @@ targets:
     productName: Miledge
     sources:
       - path: App
-        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-macOS.entitlements]
+        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-iOS.entitlements, Miledge-macOS.entitlements]
     info:
       path: App/Miledge-iOS-Info.plist
       properties:
+        MiledgeKeychainAccessGroup: "$(AppIdentifierPrefix)st.rio.miledge"
         ITSAppUsesNonExemptEncryption: false
         UTExportedTypeDeclarations: *backupType
         UISupportedInterfaceOrientations:
@@ -196,16 +203,21 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_CFBundleDevelopmentRegion: en
+    entitlements:
+      path: App/Miledge-iOS.entitlements
+      properties:
+        keychain-access-groups: ["$(AppIdentifierPrefix)st.rio.miledge"]
   Miledge-macOS:
     type: application
     platform: macOS
     productName: Miledge
     sources:
       - path: App
-        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-macOS.entitlements]
+        excludes: [Miledge-iOS-Info.plist, Miledge-macOS-Info.plist, Miledge-iOS.entitlements, Miledge-macOS.entitlements]
     info:
       path: App/Miledge-macOS-Info.plist
       properties:
+        MiledgeKeychainAccessGroup: "$(AppIdentifierPrefix)st.rio.miledge"
         ITSAppUsesNonExemptEncryption: false
         UTExportedTypeDeclarations: *backupType
     dependencies:
@@ -227,6 +239,7 @@ targets:
       properties:
         com.apple.security.app-sandbox: true
         com.apple.security.files.user-selected.read-write: true
+        keychain-access-groups: ["$(AppIdentifierPrefix)st.rio.miledge"]
   Miledge-iOSTests:
     type: bundle.unit-test
     platform: iOS

@@ -12,21 +12,29 @@
 		03953F5A90309B00C524B5CE /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = DE014E219208B954AD51160A /* AppIcon.icon */; };
 		053B23AD8895A43CE39F508A /* GUIReviewRegressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19782C3FB57EEED0C2E900A4 /* GUIReviewRegressionTests.swift */; };
 		0548F27877D1D43C0635D3D0 /* EditorFieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */; };
+		0549BE71F8AD68A962B4C9C3 /* InternationalInputFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC6B98759DDFE461ADA88D /* InternationalInputFixture.swift */; };
 		05E21C1C68500CC58A24E9F8 /* BackupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415CC229F9049F9799BDF86 /* BackupFlow.swift */; };
+		06FFC5D28DB6F6B311B55BCF /* ThirdPartyNotices.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A6CC730E95D3D6135E4D0D6 /* ThirdPartyNotices.txt */; };
+		077127B1E3ABA4FD0BDB06E7 /* InputValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0302D313BC21B5A8C559BB /* InputValidationTests.swift */; };
 		0797268CF6837D0DD21AC401 /* SelectionInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4349FD9015DF8EB21B91DA /* SelectionInteractionTests.swift */; };
 		07B95C33AA9B882C8813C81B /* TemplateCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41E961854858E1DF81E641D /* TemplateCatalogTests.swift */; };
 		0855CFBC4F7EEC1A6CEFF6ED /* VaultPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13C93C2ED78414327AADAB8 /* VaultPolicyTests.swift */; };
 		085B5438B0796F9BD60359F6 /* FieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572371AF961812E169CBAC4F /* FieldValueView.swift */; };
+		08DCC4D2E8B0E1E5051EBF70 /* MacCalendarInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */; };
 		098550F845BBC946C946885E /* EncryptedBlobStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6827D30485D9EAC7AF9CD8F /* EncryptedBlobStoreTests.swift */; };
 		0AB2E4684EBE5CC4209316CF /* StoreScreenshotLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13DD2F70B00AD7DD31EE4E /* StoreScreenshotLedger.swift */; };
+		0AE819D581D41CD766F0FDD9 /* FieldCopyEditMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */; };
 		0C061E1937F1142D0D4012E4 /* BackupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9CBB6ED69DD8A91035449 /* BackupViews.swift */; };
 		0C5597267938D642847B0C6E /* MiledgeStorage-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E66550B6907CC70FD3BD254C /* MiledgeStorage-iOS.framework */; };
 		0E812A9704CA109ECABB03CA /* AttachmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61648115B8EC7624F1CD344A /* AttachmentService.swift */; };
 		0EB3BB96C00E62175E1A861C /* MiledgeDomain-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03137B26B3A8A7065479BD8B /* MiledgeDomain-macOS.framework */; };
+		0F5745317354045487BD22B4 /* MonthYearInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */; };
 		10251EA875A83F41C23C95E1 /* BackupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415CC229F9049F9799BDF86 /* BackupFlow.swift */; };
 		10F370C81227A6CDA0672407 /* MiledgeStorage-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1255512C7D00130B63B4F94A /* AccessibilityTestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0A6D4889DF3824F25A0374 /* AccessibilityTestConfiguration.swift */; };
 		13FF34D88F32E26446A02C31 /* MiledgeDomain-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; };
 		145037116B158E4B0E2C8814 /* ConflictResolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF3097F7EEB38347930DAD /* ConflictResolutionTests.swift */; };
+		16F3EF22E76AC768269203D6 /* FieldCopyEditMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */; };
 		1773A10D8AD830C9DF7988E2 /* AttachmentInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9322E3190886907A108D0147 /* AttachmentInteraction.swift */; };
 		181A541A73EF16C1ED585197 /* VaultPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13C93C2ED78414327AADAB8 /* VaultPolicyTests.swift */; };
 		1AE0AA6BDC09807FA000F149 /* ConflictViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A00D90E9677FB976817A7DB /* ConflictViews.swift */; };
@@ -44,17 +52,23 @@
 		2213C7BB9EE6AAF070AFDD6D /* MiledgeApplication-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B651893802EE39A60AF013F7 /* MiledgeApplication-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2280A99A062CBABA48F1B00F /* FieldSelectionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E7A45399FB1A68D6398BBA /* FieldSelectionInputs.swift */; };
 		2507C6A784B3A8512C720C43 /* MiledgeDomain-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03137B26B3A8A7065479BD8B /* MiledgeDomain-macOS.framework */; };
+		26FA2631471C297ABBAE1A15 /* MonthYearInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */; };
 		288AD7A6BB950A4B096ABAE9 /* TemplatePickerSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D9050C8B4834074BB7ACD /* TemplatePickerSelectionTests.swift */; };
 		29522EC16C09E6EEA1434790 /* StructuredFieldDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A1D535A64F32EBC1FBB1A /* StructuredFieldDraft.swift */; };
+		2996181AE2C22CE1A87C7669 /* MacCalendarInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */; };
 		29A49E80DF653011C55C2967 /* TemplateCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A686FD1E8694F14FCB9F93 /* TemplateCatalog.swift */; };
 		29AF484F7B9D74613695771D /* FieldSelectionCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */; };
 		2A801D426C18860D1A5D05DF /* EditorFieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */; };
 		2B062026FE752F7914944ED6 /* MiledgeStorage-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */; };
+		2B246AEA2DAED97466969AF2 /* MacLedgerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */; };
 		2B297A97D0446ACAA472E16D /* MiledgeApplication-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; };
 		2B977EC47F26A797CE4A8F92 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0CC804C98BACDFD7842EE23D /* Localizable.stringsdict */; };
 		2C96C3263D0937D3585AE99A /* VaultEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A9DE94232A9708841A59F /* VaultEditor.swift */; };
+		2E7A04F7130D16FD39723A83 /* MonthYearInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */; };
 		2EB46B54F7A58DBDB4D0A079 /* KeychainRevisionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CBECEF81C87CB58C9471D7 /* KeychainRevisionStoreTests.swift */; };
+		2EF097D0B30746E72C71C9FF /* InputValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4893951F4DE363E5B271F0A /* InputValidationView.swift */; };
 		2EF4B4C3A5369212AC1DC7BA /* TemplateCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41E961854858E1DF81E641D /* TemplateCatalogTests.swift */; };
+		2F7FFC8EA3370861E2913AEA /* SynchronizationSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ABC7407224D7F3973C0420 /* SynchronizationSessionTests.swift */; };
 		30A18B7A58C5FEC1088D270E /* RevisionPolicyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3F4E442C6C425D4193F /* RevisionPolicyGraph.swift */; };
 		3131C86A3BA46A859982B887 /* FieldPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D308DBA8AB087DAAF44A18 /* FieldPresentationTests.swift */; };
 		313C72185C12B1C45E9DC8B2 /* FieldSelectionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E7A45399FB1A68D6398BBA /* FieldSelectionInputs.swift */; };
@@ -67,18 +81,24 @@
 		353245361D71D6D9BD08F1B0 /* MiledgeStorage-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */; };
 		36D4D7A602091F14BCA23B3F /* StoreScreenshotLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13DD2F70B00AD7DD31EE4E /* StoreScreenshotLedger.swift */; };
 		3835C69ADB0ACFECFCDB1CBD /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42852C8D2932ABD290FCF23C /* LedgerView.swift */; };
+		3B03DB831F078CA0B279973D /* PostalRules.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB3CD254015D730E7FA3F7A /* PostalRules.json */; };
 		3C68B67D2801F29297D24361 /* BackupInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397DBC60D09D665EBC137DD /* BackupInteractionTests.swift */; };
 		3D5EF9B8C6516CBF90D21F10 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B64CAA7DE14EDEC4F09EDFCB /* PrivacyInfo.xcprivacy */; };
 		3EEA735A11F3BA16C49E4ED3 /* EditorDefaultTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F851D1CE26C3C190DF709 /* EditorDefaultTitle.swift */; };
 		40B7E295957752A81791F847 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0CC804C98BACDFD7842EE23D /* Localizable.stringsdict */; };
+		413D23D38B3E80D3C081DFBD /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22FC3F42ED6E33976FFF1A4 /* InputValidation.swift */; };
+		4176BB18ACD6CCAEA211B424 /* StructuredInputFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E20E6070D2189D2A1434F /* StructuredInputFixture.swift */; };
 		430A7A428EFBC368E486AAE6 /* AppRenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B1A209B4C16968F820EBB /* AppRenderingTests.swift */; };
 		440C2EB372C2DE61F7CB2DBB /* MiledgeStorage-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44AC79A6BC113DF2DCE212A3 /* BackupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9CBB6ED69DD8A91035449 /* BackupViews.swift */; };
 		44C2D8DD9AFF9C87BDDB4884 /* SecureClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDC666DDB268785267931E0 /* SecureClipboardTests.swift */; };
+		45518A78400DBD10CE1DC294 /* LedgerSynchronizationLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A79FF596C2DE76BA54609 /* LedgerSynchronizationLayoutTests.swift */; };
 		48A91F943FCB485C505D7F68 /* JSONValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF58070CCCA24C05A601B7E /* JSONValue.swift */; };
 		48D0A7B48DC8A244FB343423 /* AttachmentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0458533B90869231CFFB2B9 /* AttachmentServiceTests.swift */; };
 		4A276E1301F8AB231DCF7537 /* FieldSelectionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E7A45399FB1A68D6398BBA /* FieldSelectionInputs.swift */; };
+		4A3F4D5F22F110ACCD889FDF /* PersonalNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BB100806FC62B110098D23 /* PersonalNameTests.swift */; };
 		4A63CD2F298EDF8EB240DFAA /* LedgerBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2CED693A9B8FDB442D33D /* LedgerBrowserTests.swift */; };
+		4B09B5503AB4DC0E39CE5B44 /* MacCalendarInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */; };
 		4CB46BA5C67523AD7695E3EF /* BackupInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F471A1DDCE246C8F1B54B62 /* BackupInteraction.swift */; };
 		50BB0E1144F784C13CED98B0 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42852C8D2932ABD290FCF23C /* LedgerView.swift */; };
 		50FE244966E50A56289B1EB1 /* CatalogLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFAB8BC5BD5D0778C38F3A /* CatalogLocalization.swift */; };
@@ -89,16 +109,19 @@
 		56F5EEF9E01FA734085A90DB /* MiledgeDomain-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		571E508D27739F507E729972 /* TypedInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F13E8FE8EBA0193E925DC4 /* TypedInteractionTests.swift */; };
 		57996E783FC4C23F2D6E7955 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B64CAA7DE14EDEC4F09EDFCB /* PrivacyInfo.xcprivacy */; };
+		580BFA2035C519E61795174C /* InputValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4893951F4DE363E5B271F0A /* InputValidationView.swift */; };
 		583ED6BBE875D8ABFB65A09E /* StoreScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566FC3414467C36C2A93859 /* StoreScreenshotTests.swift */; };
 		5A47A935A3F174B603367002 /* FieldInputViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153BCDF47D144B925C9E547 /* FieldInputViews.swift */; };
 		5BA2965D4B270A025FFB3052 /* SecureClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701787A26E6517E3D233DE19 /* SecureClipboard.swift */; };
 		5D31E27EF3FED9F2A0979455 /* EncryptedBlobStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341EA555067CB92C746C3A /* EncryptedBlobStore.swift */; };
 		5D45A3CB3AFA252854257905 /* MiledgeDomain-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03137B26B3A8A7065479BD8B /* MiledgeDomain-macOS.framework */; };
+		5DEF6A9A3B3612EDF9BC71B7 /* FieldCopyEditMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */; };
 		5F95D3D8FB36DE694FDDF157 /* MiledgeApplication-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5FBBC9B735E432531D0C0351 /* FieldSelectionCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */; };
 		6045ABE4137C46E886293502 /* RevisionGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D484DB5C0AFA5F0409E68 /* RevisionGraphTests.swift */; };
 		60918CBC9B3B67830D3FDCE8 /* ItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D26F51F0EB053C29FE018 /* ItemViews.swift */; };
 		60BCC1D7CA6624D4A4558225 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CED582BC46975A6D9F9536 /* BackupService.swift */; };
+		60DC24E74668A45FA869953F /* InputAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */; };
 		611C83F7DEBF73A3976B8B60 /* DisplaySettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F571392624C69FC79925A51 /* DisplaySettingsTests.swift */; };
 		625186632843B9949DA436FE /* MiledgeDomain-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; };
 		62F176152F3A9274271A5075 /* AttachmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61648115B8EC7624F1CD344A /* AttachmentService.swift */; };
@@ -110,22 +133,28 @@
 		66C978702EF71E52EB80E93C /* AttachmentExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64191AB96E9187109E6902C6 /* AttachmentExportTests.swift */; };
 		6753ED56561040F6F440B4A5 /* LedgerBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2CED693A9B8FDB442D33D /* LedgerBrowserTests.swift */; };
 		6796CCDFAC95181546ECE222 /* FieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572371AF961812E169CBAC4F /* FieldValueView.swift */; };
+		679710CCAD9605DDDD7AF74B /* StructuredInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C427EE5A9A13F55B5329991 /* StructuredInput.swift */; };
 		68B036A12F780EAAF1350C2E /* BackupServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA2CA10551A3AEE92E79BB9 /* BackupServiceTests.swift */; };
+		68C57077EE6F259B10E5E8F3 /* MacLedgerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */; };
+		6919931E8349AE5BC4D4B73C /* MacLedgerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */; };
 		6A1DF2344AC7E0FABC200F7E /* AccessibilitySupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA102754980C88D4DA90BE91 /* AccessibilitySupport.swift */; };
 		6A20E10EEB03B7CC2A4626FB /* BackupFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B08B6286CC25A88769AD9C2 /* BackupFlowTests.swift */; };
 		6A8E9D116B4CAAFBF1C9A9E7 /* MiledgeDomain-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03137B26B3A8A7065479BD8B /* MiledgeDomain-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B5F22AAA91ADEF1E60E952A /* BackupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9CBB6ED69DD8A91035449 /* BackupViews.swift */; };
 		6BA9E4364C0BF8AEEC7BD93A /* MiledgeDomain-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E6B2E1111AC5E845AA627CE /* InputAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */; };
 		6EA12BBE8FD2D44EEA0B8AF4 /* BackupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9CBB6ED69DD8A91035449 /* BackupViews.swift */; };
 		6EDB9E260FE5C2FF3751A0F7 /* EditorRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CAC46A98A392FAECD1A58 /* EditorRecoveryTests.swift */; };
 		709509139393221777F2824F /* CatalogLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFAB8BC5BD5D0778C38F3A /* CatalogLocalization.swift */; };
 		73BFE9187F29ACED573FA0D0 /* AttachmentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0458533B90869231CFFB2B9 /* AttachmentServiceTests.swift */; };
 		7403372953BDD36827600C3C /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0CC804C98BACDFD7842EE23D /* Localizable.stringsdict */; };
 		7467494C3D6BE9C11B20D403 /* MiledgeDomain-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; };
+		75D49744F766AFCBAF48A417 /* LedgerSynchronizationLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A79FF596C2DE76BA54609 /* LedgerSynchronizationLayoutTests.swift */; };
 		77A4ECD3509ACCE08FB68D1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B530CDF95F5A266E9883FA1 /* InfoPlist.strings */; };
 		797D126BADE252E732580FA4 /* MiledgeApplication-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B651893802EE39A60AF013F7 /* MiledgeApplication-iOS.framework */; };
 		7B27A984BF1764936BCCC0C0 /* InteractionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13361D4F47E58DB9B628552F /* InteractionApp.swift */; };
 		7C1723B3A94C2A44BDB89083 /* TemplatePickerSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D9050C8B4834074BB7ACD /* TemplatePickerSelectionTests.swift */; };
+		7D2631A774B33B227E259953 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7408AC7E8D0693215C3691AA /* PhoneNumberKit */; };
 		7D29AC734897D63454685B3C /* KeychainRevisionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CBECEF81C87CB58C9471D7 /* KeychainRevisionStoreTests.swift */; };
 		7D2C449DC36415B863069B05 /* AttachmentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7846CB2E5B97FB65108A /* AttachmentViews.swift */; };
 		7EE113E06C10FAD51DFAB508 /* BackupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415CC229F9049F9799BDF86 /* BackupFlow.swift */; };
@@ -136,8 +165,12 @@
 		8154972E3F2DF52B33C63854 /* AttachmentExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64191AB96E9187109E6902C6 /* AttachmentExportTests.swift */; };
 		839E4E56F2EC0E5C420279D2 /* EditorFieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */; };
 		83C20FEB0D54B2C7AA9FAC89 /* BackupServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA2CA10551A3AEE92E79BB9 /* BackupServiceTests.swift */; };
+		843B26A989AA9D66FDC5471B /* ThirdPartyNotices.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A6CC730E95D3D6135E4D0D6 /* ThirdPartyNotices.txt */; };
 		85224A56539C46DA55CD92F9 /* MiledgeStorage-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E66550B6907CC70FD3BD254C /* MiledgeStorage-iOS.framework */; };
+		862D41035E64F9A61CA7B19B /* InternationalInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EE11E771AA79CBB958C11 /* InternationalInputTests.swift */; };
 		8660C3B489C7A599018D7DE8 /* SecureClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701787A26E6517E3D233DE19 /* SecureClipboard.swift */; };
+		884EE52D38D9CA01062BC824 /* InputAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */; };
+		887F10B8B029CDB9390869B0 /* PersonalNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BB100806FC62B110098D23 /* PersonalNameTests.swift */; };
 		8A4ABC2E2C32AF7E49FC3B48 /* PasswordArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63058E3BA5FF3CEB19E226AE /* PasswordArchive.swift */; };
 		8B809B809C2B856D043D1AC3 /* FieldSelectionCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */; };
 		8C3D57E2064FDD0EE6F58489 /* ConflictViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A00D90E9677FB976817A7DB /* ConflictViews.swift */; };
@@ -148,8 +181,10 @@
 		8F9D0AA2041FE666B12B6FB5 /* SecureClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701787A26E6517E3D233DE19 /* SecureClipboard.swift */; };
 		8FEE1D3A64D9C767370124D5 /* FieldInputViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153BCDF47D144B925C9E547 /* FieldInputViews.swift */; };
 		91344497B6685EF8623AB80A /* FieldSelectionCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */; };
+		915150D20975290C422F4155 /* VisualAccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33149A98F8D9D9F88FB52A /* VisualAccessibilityTests.swift */; };
 		9267E576D1732F629217DD70 /* MiledgeApplication-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; };
 		9407C338CAB9884A12C9916A /* ConflictViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A00D90E9677FB976817A7DB /* ConflictViews.swift */; };
+		948EAE61983F968BEA091233 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22FC3F42ED6E33976FFF1A4 /* InputValidation.swift */; };
 		95B5AC500C17BF7AF01A3C90 /* AppRenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B1A209B4C16968F820EBB /* AppRenderingTests.swift */; };
 		967A85BF821D95CDD37B4274 /* MiledgeApplication-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		983E74B6468E127DF5269DA5 /* PasswordArchiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDC5131395D5193A9FB53B /* PasswordArchiveTests.swift */; };
@@ -157,11 +192,13 @@
 		9A1E582D2E438BF90E272FB1 /* ItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D26F51F0EB053C29FE018 /* ItemViews.swift */; };
 		9C093A88B65FC2219C3913FD /* EditorFieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */; };
 		9D3F192F0595E9521C0E3EBF /* CollectionFieldInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D2FE899FF9D084108422B /* CollectionFieldInputs.swift */; };
+		9FF5679AE13F57522AF564EB /* AccessibilityTestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0A6D4889DF3824F25A0374 /* AccessibilityTestConfiguration.swift */; };
 		A10A0EE953BA573699061CB0 /* StructuredFieldDraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47625F51972AAA5913AFB105 /* StructuredFieldDraftTests.swift */; };
 		A11E0A87B8501AC89A9AB830 /* PasswordArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63058E3BA5FF3CEB19E226AE /* PasswordArchive.swift */; };
 		A3520A02C33C0187F0982012 /* EditorTypeChangeStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311CCD3EC21AEC9555FCA59E /* EditorTypeChangeStateTests.swift */; };
 		A42AC6188B3FEBE3CF230072 /* BackupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415CC229F9049F9799BDF86 /* BackupFlow.swift */; };
 		A5050FD57E946BBA3643AF6F /* BackupFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B08B6286CC25A88769AD9C2 /* BackupFlowTests.swift */; };
+		A5C2A97E5DAA5BBD27D0D32B /* InternationalInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EE11E771AA79CBB958C11 /* InternationalInputTests.swift */; };
 		A78D109BA0A226D83A80B433 /* FieldSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B524CB9FC338BDB805EB37 /* FieldSelectionTests.swift */; };
 		A7E5DA8C4A04EEA24B96FBB0 /* MiledgeApplication-macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; };
 		A87401E07A53F4D48682DF10 /* ClipboardTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F72167413E46C465DD4288 /* ClipboardTextTests.swift */; };
@@ -172,6 +209,7 @@
 		ADC2CF39879CB4ADC52435A0 /* MiledgeDomain-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; };
 		AEA205DA850D10FA87E06E26 /* InteractionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13361D4F47E58DB9B628552F /* InteractionApp.swift */; };
 		AEECFC9BABD55A78C106CA52 /* DisplaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328BFB2C407A8DA4A94ABCF9 /* DisplaySettings.swift */; };
+		AF2C6121B12A640F010305DE /* MacLedgerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */; };
 		AFAC139143D327CB36A98E5F /* TypedInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F13E8FE8EBA0193E925DC4 /* TypedInteractionTests.swift */; };
 		B05E4FF0A7DAD2B7384AC75E /* DisplaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328BFB2C407A8DA4A94ABCF9 /* DisplaySettings.swift */; };
 		B0E6B2DAB125D9A9F6937E90 /* StructuredFieldDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A1D535A64F32EBC1FBB1A /* StructuredFieldDraft.swift */; };
@@ -181,22 +219,32 @@
 		B37691F009A6A50FC1C7CBFB /* StructuredFieldDraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47625F51972AAA5913AFB105 /* StructuredFieldDraftTests.swift */; };
 		B3FB8A75A86737518E9B24F7 /* FieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572371AF961812E169CBAC4F /* FieldValueView.swift */; };
 		B6379C06F07DF07E34AFE449 /* MiledgeApplication-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B779198C0415E93E7AE6C6D0 /* MacCalendarInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */; };
 		B7CC9F6417A2F8A0A24D2CF5 /* VaultSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9027A42C58016783E5DCF5E /* VaultSessionTests.swift */; };
 		B82B6B23C63E0080683876F6 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42852C8D2932ABD290FCF23C /* LedgerView.swift */; };
+		B92BC080B6E5A4A6917044E4 /* SynchronizationLayoutFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3596865936E88E28348F28A4 /* SynchronizationLayoutFixture.swift */; };
+		BA233E335829C9273E0C7499 /* InternationalInputFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC6B98759DDFE461ADA88D /* InternationalInputFixture.swift */; };
 		BB7E2775B4FEAFE7B47B7FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441BBFDE9D19104EF2DC6346 /* Localizable.strings */; };
+		BC791670F41C4BAA7413ADFE /* MonthYearInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */; };
+		C0055D791870871F2642CA94 /* SynchronizationLayoutFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3596865936E88E28348F28A4 /* SynchronizationLayoutFixture.swift */; };
 		C06A29E029D6DD2BC1CE6E41 /* ItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D26F51F0EB053C29FE018 /* ItemViews.swift */; };
 		C0A2A8568E1E97C7E2920721 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A9E23C570FA44E0F82465213 /* PrivacyInfo.xcprivacy */; };
+		C48022A8D7970D26E381C301 /* StructuredInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03729314D3E80FF5AE5344DD /* StructuredInputTests.swift */; };
 		C5D274748BB8134767DDBD7A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B64CAA7DE14EDEC4F09EDFCB /* PrivacyInfo.xcprivacy */; };
 		C760AACCD5C39B9A02AC77E4 /* KeychainRevisionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E1590F8EAAC945B45A87B /* KeychainRevisionStore.swift */; };
 		C80A62BDB0C436FADD25CADF /* FieldInputViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153BCDF47D144B925C9E547 /* FieldInputViews.swift */; };
 		C88A480A89388AA0B3222EE8 /* BackupInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397DBC60D09D665EBC137DD /* BackupInteractionTests.swift */; };
 		C8FE68F78991E175938C0A0F /* FieldInputViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153BCDF47D144B925C9E547 /* FieldInputViews.swift */; };
+		C99D971A17F7DF17AF1D87E8 /* StructuredInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C427EE5A9A13F55B5329991 /* StructuredInput.swift */; };
 		CAB7068313E8D7712255DBC3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0CC804C98BACDFD7842EE23D /* Localizable.stringsdict */; };
 		CBDB91FE4D3F13C62F52073F /* EditorRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CAC46A98A392FAECD1A58 /* EditorRecoveryTests.swift */; };
 		CD40A883CCC79B955C88869C /* MiledgeStorage-macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE02384BAA0C5EB95704EBCD /* LedgerBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079E4AECCA0CA7B410A20F74 /* LedgerBrowser.swift */; };
+		CEA9E926FB2A0FDF51361B5E /* SynchronizationSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ABC7407224D7F3973C0420 /* SynchronizationSessionTests.swift */; };
 		CEBF5D875ADD9EA178537AEE /* CooperativeRestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7919024C910DC6059FBC7446 /* CooperativeRestoreTests.swift */; };
+		CEF7616A953B20BD1E34ACF0 /* StructuredInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346949F9F27759379F94780 /* StructuredInputTests.swift */; };
 		CF68E886873A910A2003DF12 /* CollectionFieldInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D2FE899FF9D084108422B /* CollectionFieldInputs.swift */; };
+		D19E2827A1CDAE7591FF6D11 /* PostalRules.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB3CD254015D730E7FA3F7A /* PostalRules.json */; };
 		D2C13171015564AF3615019A /* VaultSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9027A42C58016783E5DCF5E /* VaultSessionTests.swift */; };
 		D376C6698226D7197E6CB25C /* VaultEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A9DE94232A9708841A59F /* VaultEditor.swift */; };
 		D5488F4326E9458A8C1E7C78 /* SelectionInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4349FD9015DF8EB21B91DA /* SelectionInteractionTests.swift */; };
@@ -211,9 +259,12 @@
 		DE4294F9064A0E12FCEB90D7 /* MiledgeApplication-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B651893802EE39A60AF013F7 /* MiledgeApplication-iOS.framework */; };
 		DE5903566F48E4EB5554B451 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B530CDF95F5A266E9883FA1 /* InfoPlist.strings */; };
 		DEE51470E5EDA9866339BBE8 /* EditorDefaultTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F851D1CE26C3C190DF709 /* EditorDefaultTitle.swift */; };
+		DF71964079B2D706DE9119E3 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = E3E1DF6AD907E10EBC93D0DD /* PhoneNumberKit */; };
+		E1066442F534DBEFAEE192FE /* InputValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0302D313BC21B5A8C559BB /* InputValidationTests.swift */; };
 		E1CE6AA5D2AA2A02E2DAB929 /* FieldSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B524CB9FC338BDB805EB37 /* FieldSelectionTests.swift */; };
 		E28082FC79EDAF1FA0C090FB /* MiledgeDomain-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55015F0EE9A3AD644C31C99A /* MiledgeDomain-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E286409EDB5B33CF813D1108 /* AccessibilitySupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA102754980C88D4DA90BE91 /* AccessibilitySupport.swift */; };
+		E2B16DA899959C7E68AE023F /* VisualAccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33149A98F8D9D9F88FB52A /* VisualAccessibilityTests.swift */; };
 		E3362A04320FFA1BDAFC1CC4 /* ConflictReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850AD1716DB48BEA58D611C /* ConflictReviewTests.swift */; };
 		E49A5A7909A6B8B9B3101DEA /* ConflictInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CBEF933E1828B830B3936 /* ConflictInteraction.swift */; };
 		E5DDE9C117111F8DC2940329 /* MiledgeStorage-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E66550B6907CC70FD3BD254C /* MiledgeStorage-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -223,23 +274,30 @@
 		E77EBE4CCB4DA176D6980EBF /* VaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB53B54CAC41AC13F0A63B /* VaultSession.swift */; };
 		E9FABF8E05866E511E92741D /* PasswordArchiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDC5131395D5193A9FB53B /* PasswordArchiveTests.swift */; };
 		EAB10A9101A964E84697AD7F /* ConflictResolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF3097F7EEB38347930DAD /* ConflictResolutionTests.swift */; };
+		ECABD53130DBBC64A129B615 /* FieldCopyEditMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */; };
 		ED3A6822F026B2DFBD222E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B530CDF95F5A266E9883FA1 /* InfoPlist.strings */; };
 		EDAC212335575711C825206C /* EditorClipboardInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38C9227BCC5E67DB4488DAF /* EditorClipboardInteraction.swift */; };
 		EDF559AFA12CC631B270A988 /* VaultEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306DF48EA0340A4257453C6 /* VaultEditorTests.swift */; };
+		EEDFF654577F2BD205296EA0 /* StructuredInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03729314D3E80FF5AE5344DD /* StructuredInputTests.swift */; };
 		F09CAE64B4F913CE0D2FB547 /* ItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D26F51F0EB053C29FE018 /* ItemViews.swift */; };
 		F0B36D7DE98EE299AF84F03D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441BBFDE9D19104EF2DC6346 /* Localizable.strings */; };
+		F0FED50016C8DA4788000E94 /* StructuredInputFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E20E6070D2189D2A1434F /* StructuredInputFixture.swift */; };
 		F166474B18B054E04AA0FA39 /* FieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572371AF961812E169CBAC4F /* FieldValueView.swift */; };
 		F30A5C50FBBD272B32E2FDFE /* CollectionFieldInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D2FE899FF9D084108422B /* CollectionFieldInputs.swift */; };
 		F38927B76D4DEDCA6689447B /* FieldPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D308DBA8AB087DAAF44A18 /* FieldPresentationTests.swift */; };
 		F39581A580DEFEB2C339C739 /* DisplaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328BFB2C407A8DA4A94ABCF9 /* DisplaySettings.swift */; };
 		F3E003CE0685CE2921F1CF7B /* MiledgeStorage-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E66550B6907CC70FD3BD254C /* MiledgeStorage-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F42422048074615C298A05A4 /* StructuredInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346949F9F27759379F94780 /* StructuredInputTests.swift */; };
 		F44C112B95FD5FBA1DB3D0E3 /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9EDAD5B70DBD50BD0D011 /* LocalizationTests.swift */; };
+		F480ACA12B29306F3BAE4F30 /* InputValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4893951F4DE363E5B271F0A /* InputValidationView.swift */; };
 		F52106F0B828857BA9D5F0D2 /* AttachmentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7846CB2E5B97FB65108A /* AttachmentViews.swift */; };
 		F6DF2FFCDE22E2AAA871D36A /* VaultEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306DF48EA0340A4257453C6 /* VaultEditorTests.swift */; };
 		F7CBCA3029F338D265D071A7 /* RevisionPolicyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3F4E442C6C425D4193F /* RevisionPolicyGraph.swift */; };
+		F864A23F98A9B0B64E0FE6E4 /* InputValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4893951F4DE363E5B271F0A /* InputValidationView.swift */; };
 		F89000FB07304D072510435E /* MiledgeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533C35B71A9D40C7FA83D265 /* MiledgeApp.swift */; };
 		F9498A30CBD34418E7D173EA /* ClipboardTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F72167413E46C465DD4288 /* ClipboardTextTests.swift */; };
 		FC6BFE02D43B3C3AE14D9705 /* RevisionCodecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D245C07C8B50E4576CF3BD8 /* RevisionCodecTests.swift */; };
+		FC94C0D55B1539F9BE31066E /* InputAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */; };
 		FE0609ACDA68446D8829CF9C /* BackupInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F471A1DDCE246C8F1B54B62 /* BackupInteraction.swift */; };
 		FFA3005F1AA90654E78F608F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441BBFDE9D19104EF2DC6346 /* Localizable.strings */; };
 		FFB7EE9382EE92048600EE25 /* TemplatePickerKeyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCC5513C8C69A01FAC15EB6 /* TemplatePickerKeyboardTests.swift */; };
@@ -514,21 +572,26 @@
 /* Begin PBXFileReference section */
 		001ECB3C8EE3EB9FEBC732FC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03137B26B3A8A7065479BD8B /* MiledgeDomain-macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MiledgeDomain-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03729314D3E80FF5AE5344DD /* StructuredInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredInputTests.swift; sourceTree = "<group>"; };
 		045D9050C8B4834074BB7ACD /* TemplatePickerSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePickerSelectionTests.swift; sourceTree = "<group>"; };
 		079E4AECCA0CA7B410A20F74 /* LedgerBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerBrowser.swift; sourceTree = "<group>"; };
 		07F72167413E46C465DD4288 /* ClipboardTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTextTests.swift; sourceTree = "<group>"; };
 		0A00D90E9677FB976817A7DB /* ConflictViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictViews.swift; sourceTree = "<group>"; };
+		0E0302D313BC21B5A8C559BB /* InputValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationTests.swift; sourceTree = "<group>"; };
 		0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldSelectionCatalog.swift; sourceTree = "<group>"; };
 		0EBDC5131395D5193A9FB53B /* PasswordArchiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordArchiveTests.swift; sourceTree = "<group>"; };
 		12F13E8FE8EBA0193E925DC4 /* TypedInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedInteractionTests.swift; sourceTree = "<group>"; };
 		13361D4F47E58DB9B628552F /* InteractionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionApp.swift; sourceTree = "<group>"; };
+		1346949F9F27759379F94780 /* StructuredInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredInputTests.swift; sourceTree = "<group>"; };
 		15F13F7B09F59AFE49C195C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		165EE11E771AA79CBB958C11 /* InternationalInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalInputTests.swift; sourceTree = "<group>"; };
 		181B7846CB2E5B97FB65108A /* AttachmentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViews.swift; sourceTree = "<group>"; };
 		19782C3FB57EEED0C2E900A4 /* GUIReviewRegressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUIReviewRegressionTests.swift; sourceTree = "<group>"; };
 		19DDA6ADDA7DB628A08366AD /* Miledge-iOSTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Miledge-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C52158D366FDE5A2D8C0973 /* MiledgeInteraction-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MiledgeInteraction-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDC666DDB268785267931E0 /* SecureClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureClipboardTests.swift; sourceTree = "<group>"; };
 		1D245C07C8B50E4576CF3BD8 /* RevisionCodecTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionCodecTests.swift; sourceTree = "<group>"; };
+		1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAppearance.swift; sourceTree = "<group>"; };
 		1EE5C2C04C25829B3D7E4BFE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		204D2FE899FF9D084108422B /* CollectionFieldInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFieldInputs.swift; sourceTree = "<group>"; };
 		221B3357A4A38F5476B44057 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -539,20 +602,27 @@
 		311192C5BEDBC1B77507080B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		311CCD3EC21AEC9555FCA59E /* EditorTypeChangeStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTypeChangeStateTests.swift; sourceTree = "<group>"; };
 		328BFB2C407A8DA4A94ABCF9 /* DisplaySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettings.swift; sourceTree = "<group>"; };
+		3596865936E88E28348F28A4 /* SynchronizationLayoutFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizationLayoutFixture.swift; sourceTree = "<group>"; };
 		3687FB7D8F5EF20BFF504170 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3812E177705C8192552CC8E7 /* MiledgeStorage-macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MiledgeStorage-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38DB53B54CAC41AC13F0A63B /* VaultSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultSession.swift; sourceTree = "<group>"; };
 		3A6B1A209B4C16968F820EBB /* AppRenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRenderingTests.swift; sourceTree = "<group>"; };
+		3C427EE5A9A13F55B5329991 /* StructuredInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredInput.swift; sourceTree = "<group>"; };
 		3CDC4D221CCFCA918AE0555A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CE50C8869C43F089695C1B7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		41616753281881105E39D7DD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		42852C8D2932ABD290FCF23C /* LedgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerView.swift; sourceTree = "<group>"; };
+		43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCopyEditMenu.swift; sourceTree = "<group>"; };
 		4415CC229F9049F9799BDF86 /* BackupFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFlow.swift; sourceTree = "<group>"; };
+		44EC6B98759DDFE461ADA88D /* InternationalInputFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalInputFixture.swift; sourceTree = "<group>"; };
 		450A1D535A64F32EBC1FBB1A /* StructuredFieldDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredFieldDraft.swift; sourceTree = "<group>"; };
 		45F9EDAD5B70DBD50BD0D011 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		46CBECEF81C87CB58C9471D7 /* KeychainRevisionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRevisionStoreTests.swift; sourceTree = "<group>"; };
 		47625F51972AAA5913AFB105 /* StructuredFieldDraftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredFieldDraftTests.swift; sourceTree = "<group>"; };
 		49CBC7BA1BFCD9186295F15E /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4A6CC730E95D3D6135E4D0D6 /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyNotices.txt; sourceTree = "<group>"; };
+		4E3E20E6070D2189D2A1434F /* StructuredInputFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredInputFixture.swift; sourceTree = "<group>"; };
+		4FA1BFE8C3BBA87BE5DBBE5D /* Miledge-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Miledge-iOS.entitlements"; sourceTree = "<group>"; };
 		5153BCDF47D144B925C9E547 /* FieldInputViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldInputViews.swift; sourceTree = "<group>"; };
 		51E7A45399FB1A68D6398BBA /* FieldSelectionInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldSelectionInputs.swift; sourceTree = "<group>"; };
 		533C35B71A9D40C7FA83D265 /* MiledgeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiledgeApp.swift; sourceTree = "<group>"; };
@@ -562,7 +632,9 @@
 		566CAC46A98A392FAECD1A58 /* EditorRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorRecoveryTests.swift; sourceTree = "<group>"; };
 		56A686FD1E8694F14FCB9F93 /* TemplateCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCatalog.swift; sourceTree = "<group>"; };
 		572371AF961812E169CBAC4F /* FieldValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValueView.swift; sourceTree = "<group>"; };
+		5BB3CD254015D730E7FA3F7A /* PostalRules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PostalRules.json; sourceTree = "<group>"; };
 		5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MiledgeApplication-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearInput.swift; sourceTree = "<group>"; };
 		5F471A1DDCE246C8F1B54B62 /* BackupInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupInteraction.swift; sourceTree = "<group>"; };
 		61648115B8EC7624F1CD344A /* AttachmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentService.swift; sourceTree = "<group>"; };
 		6251D52CA83C0025ED6BD3E2 /* VaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModels.swift; sourceTree = "<group>"; };
@@ -576,6 +648,7 @@
 		6E96A4710AE034CF0E80D91A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		701787A26E6517E3D233DE19 /* SecureClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureClipboard.swift; sourceTree = "<group>"; };
 		719F851D1CE26C3C190DF709 /* EditorDefaultTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorDefaultTitle.swift; sourceTree = "<group>"; };
+		71BB100806FC62B110098D23 /* PersonalNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalNameTests.swift; sourceTree = "<group>"; };
 		72B2CED693A9B8FDB442D33D /* LedgerBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerBrowserTests.swift; sourceTree = "<group>"; };
 		743580BE028E3DF235FBB13A /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		76D308DBA8AB087DAAF44A18 /* FieldPresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldPresentationTests.swift; sourceTree = "<group>"; };
@@ -598,7 +671,10 @@
 		9B08B6286CC25A88769AD9C2 /* BackupFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFlowTests.swift; sourceTree = "<group>"; };
 		9BA2E02CDFAF69B1F26A0953 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9BCC5513C8C69A01FAC15EB6 /* TemplatePickerKeyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePickerKeyboardTests.swift; sourceTree = "<group>"; };
+		9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCalendarInput.swift; sourceTree = "<group>"; };
+		9E0A6D4889DF3824F25A0374 /* AccessibilityTestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityTestConfiguration.swift; sourceTree = "<group>"; };
 		9E4349FD9015DF8EB21B91DA /* SelectionInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionInteractionTests.swift; sourceTree = "<group>"; };
+		A4893951F4DE363E5B271F0A /* InputValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationView.swift; sourceTree = "<group>"; };
 		A9DD12AA9C8A4D40E56FB1D2 /* Miledge-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Miledge-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E23C570FA44E0F82465213 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AFA2CA10551A3AEE92E79BB9 /* BackupServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupServiceTests.swift; sourceTree = "<group>"; };
@@ -612,10 +688,12 @@
 		C29A00A75D7943E30ADBE91F /* MiledgeInteraction-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MiledgeInteraction-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41E961854858E1DF81E641D /* TemplateCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCatalogTests.swift; sourceTree = "<group>"; };
 		C6827D30485D9EAC7AF9CD8F /* EncryptedBlobStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedBlobStoreTests.swift; sourceTree = "<group>"; };
+		CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacLedgerList.swift; sourceTree = "<group>"; };
 		D00E1590F8EAAC945B45A87B /* KeychainRevisionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRevisionStore.swift; sourceTree = "<group>"; };
 		D13C93C2ED78414327AADAB8 /* VaultPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultPolicyTests.swift; sourceTree = "<group>"; };
 		D2341EA555067CB92C746C3A /* EncryptedBlobStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedBlobStore.swift; sourceTree = "<group>"; };
 		D306DF48EA0340A4257453C6 /* VaultEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultEditorTests.swift; sourceTree = "<group>"; };
+		D69A79FF596C2DE76BA54609 /* LedgerSynchronizationLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerSynchronizationLayoutTests.swift; sourceTree = "<group>"; };
 		DDEE005112F84282D40E51F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		DE014E219208B954AD51160A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		DF456AB0563F7FA5102510FC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -627,9 +705,12 @@
 		EB13DD2F70B00AD7DD31EE4E /* StoreScreenshotLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreenshotLedger.swift; sourceTree = "<group>"; };
 		EB983D6A804712BBF7FC90E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBDFAB8BC5BD5D0778C38F3A /* CatalogLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogLocalization.swift; sourceTree = "<group>"; };
+		EF33149A98F8D9D9F88FB52A /* VisualAccessibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualAccessibilityTests.swift; sourceTree = "<group>"; };
 		F0DF3F94E0B0117AED44AAA2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F22FC3F42ED6E33976FFF1A4 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
 		F38C9227BCC5E67DB4488DAF /* EditorClipboardInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorClipboardInteraction.swift; sourceTree = "<group>"; };
 		F73F1205BC71AA7FE91BB35C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F7ABC7407224D7F3973C0420 /* SynchronizationSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizationSessionTests.swift; sourceTree = "<group>"; };
 		F9027A42C58016783E5DCF5E /* VaultSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultSessionTests.swift; sourceTree = "<group>"; };
 		FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFieldViews.swift; sourceTree = "<group>"; };
 		FBAA757F2C66C0784389C280 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -653,6 +734,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D2631A774B33B227E259953 /* PhoneNumberKit in Frameworks */,
 				0EB3BB96C00E62175E1A861C /* MiledgeDomain-macOS.framework in Frameworks */,
 				1BED705678C7061F94E02A42 /* MiledgeStorage-macOS.framework in Frameworks */,
 			);
@@ -662,6 +744,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF71964079B2D706DE9119E3 /* PhoneNumberKit in Frameworks */,
 				ADC2CF39879CB4ADC52435A0 /* MiledgeDomain-iOS.framework in Frameworks */,
 				85224A56539C46DA55CD92F9 /* MiledgeStorage-iOS.framework in Frameworks */,
 			);
@@ -755,11 +838,21 @@
 				76D308DBA8AB087DAAF44A18 /* FieldPresentationTests.swift */,
 				B4B524CB9FC338BDB805EB37 /* FieldSelectionTests.swift */,
 				72B2CED693A9B8FDB442D33D /* LedgerBrowserTests.swift */,
+				D69A79FF596C2DE76BA54609 /* LedgerSynchronizationLayoutTests.swift */,
 				45F9EDAD5B70DBD50BD0D011 /* LocalizationTests.swift */,
 				1CDC666DDB268785267931E0 /* SecureClipboardTests.swift */,
 				045D9050C8B4834074BB7ACD /* TemplatePickerSelectionTests.swift */,
 			);
 			path = AppTests;
+			sourceTree = "<group>";
+		};
+		4A8C85EDE535BD4E44CC12F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5BB3CD254015D730E7FA3F7A /* PostalRules.json */,
+				4A6CC730E95D3D6135E4D0D6 /* ThirdPartyNotices.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		5028989F2479928A699A4691 /* MiledgeDomain */ = {
@@ -778,12 +871,16 @@
 		6CF95CCA6AFB4601CB8C5458 /* InteractionHost */ = {
 			isa = PBXGroup;
 			children = (
+				9E0A6D4889DF3824F25A0374 /* AccessibilityTestConfiguration.swift */,
 				9322E3190886907A108D0147 /* AttachmentInteraction.swift */,
 				5F471A1DDCE246C8F1B54B62 /* BackupInteraction.swift */,
 				FF8CBEF933E1828B830B3936 /* ConflictInteraction.swift */,
 				F38C9227BCC5E67DB4488DAF /* EditorClipboardInteraction.swift */,
 				13361D4F47E58DB9B628552F /* InteractionApp.swift */,
+				44EC6B98759DDFE461ADA88D /* InternationalInputFixture.swift */,
 				EB13DD2F70B00AD7DD31EE4E /* StoreScreenshotLedger.swift */,
+				4E3E20E6070D2189D2A1434F /* StructuredInputFixture.swift */,
+				3596865936E88E28348F28A4 /* SynchronizationLayoutFixture.swift */,
 			);
 			path = InteractionHost;
 			sourceTree = "<group>";
@@ -793,8 +890,11 @@
 			children = (
 				61648115B8EC7624F1CD344A /* AttachmentService.swift */,
 				E4CED582BC46975A6D9F9536 /* BackupService.swift */,
+				F22FC3F42ED6E33976FFF1A4 /* InputValidation.swift */,
 				450A1D535A64F32EBC1FBB1A /* StructuredFieldDraft.swift */,
+				3C427EE5A9A13F55B5329991 /* StructuredInput.swift */,
 				38DB53B54CAC41AC13F0A63B /* VaultSession.swift */,
+				4A8C85EDE535BD4E44CC12F8 /* Resources */,
 			);
 			name = MiledgeApplication;
 			path = Sources/MiledgeApplication;
@@ -815,6 +915,7 @@
 			children = (
 				07F72167413E46C465DD4288 /* ClipboardTextTests.swift */,
 				566CAC46A98A392FAECD1A58 /* EditorRecoveryTests.swift */,
+				71BB100806FC62B110098D23 /* PersonalNameTests.swift */,
 				1D245C07C8B50E4576CF3BD8 /* RevisionCodecTests.swift */,
 				BB3D484DB5C0AFA5F0409E68 /* RevisionGraphTests.swift */,
 				C41E961854858E1DF81E641D /* TemplateCatalogTests.swift */,
@@ -851,14 +952,21 @@
 				328BFB2C407A8DA4A94ABCF9 /* DisplaySettings.swift */,
 				719F851D1CE26C3C190DF709 /* EditorDefaultTitle.swift */,
 				FB9BB5285DC3C572F2890E20 /* EditorFieldViews.swift */,
+				43F9F57F04F3C23E46317AF2 /* FieldCopyEditMenu.swift */,
 				5153BCDF47D144B925C9E547 /* FieldInputViews.swift */,
 				0EBA8420F4946273743C7946 /* FieldSelectionCatalog.swift */,
 				51E7A45399FB1A68D6398BBA /* FieldSelectionInputs.swift */,
 				572371AF961812E169CBAC4F /* FieldValueView.swift */,
+				1D4A748E0EB64EB91643EC7E /* InputAppearance.swift */,
+				A4893951F4DE363E5B271F0A /* InputValidationView.swift */,
 				827D26F51F0EB053C29FE018 /* ItemViews.swift */,
 				079E4AECCA0CA7B410A20F74 /* LedgerBrowser.swift */,
 				42852C8D2932ABD290FCF23C /* LedgerView.swift */,
+				9C77BF2D8F7B942E459C7691 /* MacCalendarInput.swift */,
+				CA375F5CABFA489C9FED4CB0 /* MacLedgerList.swift */,
+				4FA1BFE8C3BBA87BE5DBBE5D /* Miledge-iOS.entitlements */,
 				533C35B71A9D40C7FA83D265 /* MiledgeApp.swift */,
+				5D5BC74B9DE7C2DF4AEF6A4F /* MonthYearInput.swift */,
 				B64CAA7DE14EDEC4F09EDFCB /* PrivacyInfo.xcprivacy */,
 				701787A26E6517E3D233DE19 /* SecureClipboard.swift */,
 				3D3F7C0180F036F512CA2E37 /* Resources */,
@@ -873,7 +981,10 @@
 				AFA2CA10551A3AEE92E79BB9 /* BackupServiceTests.swift */,
 				FCCF3097F7EEB38347930DAD /* ConflictResolutionTests.swift */,
 				7919024C910DC6059FBC7446 /* CooperativeRestoreTests.swift */,
+				0E0302D313BC21B5A8C559BB /* InputValidationTests.swift */,
 				47625F51972AAA5913AFB105 /* StructuredFieldDraftTests.swift */,
+				1346949F9F27759379F94780 /* StructuredInputTests.swift */,
+				F7ABC7407224D7F3973C0420 /* SynchronizationSessionTests.swift */,
 				F9027A42C58016783E5DCF5E /* VaultSessionTests.swift */,
 			);
 			path = MiledgeApplicationTests;
@@ -885,10 +996,13 @@
 				BA102754980C88D4DA90BE91 /* AccessibilitySupport.swift */,
 				9397DBC60D09D665EBC137DD /* BackupInteractionTests.swift */,
 				19782C3FB57EEED0C2E900A4 /* GUIReviewRegressionTests.swift */,
+				165EE11E771AA79CBB958C11 /* InternationalInputTests.swift */,
 				9E4349FD9015DF8EB21B91DA /* SelectionInteractionTests.swift */,
 				B566FC3414467C36C2A93859 /* StoreScreenshotTests.swift */,
+				03729314D3E80FF5AE5344DD /* StructuredInputTests.swift */,
 				9BCC5513C8C69A01FAC15EB6 /* TemplatePickerKeyboardTests.swift */,
 				12F13E8FE8EBA0193E925DC4 /* TypedInteractionTests.swift */,
+				EF33149A98F8D9D9F88FB52A /* VisualAccessibilityTests.swift */,
 			);
 			path = InteractionTests;
 			sourceTree = "<group>";
@@ -985,6 +1099,7 @@
 			buildConfigurationList = B365E979754DBFDA501798A2 /* Build configuration list for PBXNativeTarget "MiledgeApplication-iOS" */;
 			buildPhases = (
 				0BD696644DFBB4E23CF5F4B4 /* Sources */,
+				993A73A8BF7D82C094D64D3A /* Resources */,
 				3E337CDB3B3395B5DA61F03B /* Frameworks */,
 			);
 			buildRules = (
@@ -995,6 +1110,7 @@
 			);
 			name = "MiledgeApplication-iOS";
 			packageProductDependencies = (
+				E3E1DF6AD907E10EBC93D0DD /* PhoneNumberKit */,
 			);
 			productName = "MiledgeApplication-iOS";
 			productReference = B651893802EE39A60AF013F7 /* MiledgeApplication-iOS.framework */;
@@ -1138,6 +1254,7 @@
 			buildConfigurationList = 7121CB02E6C102DE1DB6A3FA /* Build configuration list for PBXNativeTarget "MiledgeApplication-macOS" */;
 			buildPhases = (
 				B4FFAB6342E3D9182A9C662D /* Sources */,
+				5279B615A8BD7F4D4E268E54 /* Resources */,
 				29F2A7206C4CF4F03A831F5A /* Frameworks */,
 			);
 			buildRules = (
@@ -1148,6 +1265,7 @@
 			);
 			name = "MiledgeApplication-macOS";
 			packageProductDependencies = (
+				7408AC7E8D0693215C3691AA /* PhoneNumberKit */,
 			);
 			productName = "MiledgeApplication-macOS";
 			productReference = 5C0104218E9648968A5DD775 /* MiledgeApplication-macOS.framework */;
@@ -1300,6 +1418,9 @@
 			);
 			mainGroup = A06447F2459787462AEC5624;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EC34D01A8BE209A8BDAA5A4E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E0C0288F496663136E27CBF6 /* Products */;
 			projectDirPath = "";
@@ -1355,6 +1476,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5279B615A8BD7F4D4E268E54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B03DB831F078CA0B279973D /* PostalRules.json in Resources */,
+				06FFC5D28DB6F6B311B55BCF /* ThirdPartyNotices.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		993A73A8BF7D82C094D64D3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D19E2827A1CDAE7591FF6D11 /* PostalRules.json in Resources */,
+				843B26A989AA9D66FDC5471B /* ThirdPartyNotices.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4636B115C63E3BF1E84758B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1395,7 +1534,9 @@
 			files = (
 				0E812A9704CA109ECABB03CA /* AttachmentService.swift in Sources */,
 				E5EA3E0884A4B06C73243A96 /* BackupService.swift in Sources */,
+				948EAE61983F968BEA091233 /* InputValidation.swift in Sources */,
 				29522EC16C09E6EEA1434790 /* StructuredFieldDraft.swift in Sources */,
+				C99D971A17F7DF17AF1D87E8 /* StructuredInput.swift in Sources */,
 				201F441CFB5F70E52A863C85 /* VaultSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1404,6 +1545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF5679AE13F57522AF564EB /* AccessibilityTestConfiguration.swift in Sources */,
 				D85786774D46B5808D9D17FA /* AttachmentInteraction.swift in Sources */,
 				54142579D5315DFAFA2EEB23 /* AttachmentViews.swift in Sources */,
 				05E21C1C68500CC58A24E9F8 /* BackupFlow.swift in Sources */,
@@ -1417,16 +1559,25 @@
 				63B03410E59D25507AC3EF50 /* EditorClipboardInteraction.swift in Sources */,
 				1F40ADDBB8E82B567D090E21 /* EditorDefaultTitle.swift in Sources */,
 				0548F27877D1D43C0635D3D0 /* EditorFieldViews.swift in Sources */,
+				ECABD53130DBBC64A129B615 /* FieldCopyEditMenu.swift in Sources */,
 				5A47A935A3F174B603367002 /* FieldInputViews.swift in Sources */,
 				91344497B6685EF8623AB80A /* FieldSelectionCatalog.swift in Sources */,
 				4A276E1301F8AB231DCF7537 /* FieldSelectionInputs.swift in Sources */,
 				6796CCDFAC95181546ECE222 /* FieldValueView.swift in Sources */,
+				60DC24E74668A45FA869953F /* InputAppearance.swift in Sources */,
+				2EF097D0B30746E72C71C9FF /* InputValidationView.swift in Sources */,
 				7B27A984BF1764936BCCC0C0 /* InteractionApp.swift in Sources */,
+				BA233E335829C9273E0C7499 /* InternationalInputFixture.swift in Sources */,
 				60918CBC9B3B67830D3FDCE8 /* ItemViews.swift in Sources */,
 				8069A13148BFD63D36CEEF24 /* LedgerBrowser.swift in Sources */,
 				B82B6B23C63E0080683876F6 /* LedgerView.swift in Sources */,
+				4B09B5503AB4DC0E39CE5B44 /* MacCalendarInput.swift in Sources */,
+				6919931E8349AE5BC4D4B73C /* MacLedgerList.swift in Sources */,
+				26FA2631471C297ABBAE1A15 /* MonthYearInput.swift in Sources */,
 				8F9D0AA2041FE666B12B6FB5 /* SecureClipboard.swift in Sources */,
 				0AB2E4684EBE5CC4209316CF /* StoreScreenshotLedger.swift in Sources */,
+				4176BB18ACD6CCAEA211B424 /* StructuredInputFixture.swift in Sources */,
+				B92BC080B6E5A4A6917044E4 /* SynchronizationLayoutFixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1449,10 +1600,13 @@
 				E286409EDB5B33CF813D1108 /* AccessibilitySupport.swift in Sources */,
 				C88A480A89388AA0B3222EE8 /* BackupInteractionTests.swift in Sources */,
 				053B23AD8895A43CE39F508A /* GUIReviewRegressionTests.swift in Sources */,
+				A5C2A97E5DAA5BBD27D0D32B /* InternationalInputTests.swift in Sources */,
 				D5488F4326E9458A8C1E7C78 /* SelectionInteractionTests.swift in Sources */,
 				3269510C3811669DEBEA8280 /* StoreScreenshotTests.swift in Sources */,
+				EEDFF654577F2BD205296EA0 /* StructuredInputTests.swift in Sources */,
 				FFB7EE9382EE92048600EE25 /* TemplatePickerKeyboardTests.swift in Sources */,
 				AFAC139143D327CB36A98E5F /* TypedInteractionTests.swift in Sources */,
+				915150D20975290C422F4155 /* VisualAccessibilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1463,10 +1617,13 @@
 				6A1DF2344AC7E0FABC200F7E /* AccessibilitySupport.swift in Sources */,
 				3C68B67D2801F29297D24361 /* BackupInteractionTests.swift in Sources */,
 				556779CC7922F3EE886482AA /* GUIReviewRegressionTests.swift in Sources */,
+				862D41035E64F9A61CA7B19B /* InternationalInputTests.swift in Sources */,
 				0797268CF6837D0DD21AC401 /* SelectionInteractionTests.swift in Sources */,
 				583ED6BBE875D8ABFB65A09E /* StoreScreenshotTests.swift in Sources */,
+				C48022A8D7970D26E381C301 /* StructuredInputTests.swift in Sources */,
 				51F28B220C4704B0E29A6FF3 /* TemplatePickerKeyboardTests.swift in Sources */,
 				571E508D27739F507E729972 /* TypedInteractionTests.swift in Sources */,
+				E2B16DA899959C7E68AE023F /* VisualAccessibilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1489,14 +1646,19 @@
 				098550F845BBC946C946885E /* EncryptedBlobStoreTests.swift in Sources */,
 				F38927B76D4DEDCA6689447B /* FieldPresentationTests.swift in Sources */,
 				A78D109BA0A226D83A80B433 /* FieldSelectionTests.swift in Sources */,
+				077127B1E3ABA4FD0BDB06E7 /* InputValidationTests.swift in Sources */,
 				7D29AC734897D63454685B3C /* KeychainRevisionStoreTests.swift in Sources */,
 				6753ED56561040F6F440B4A5 /* LedgerBrowserTests.swift in Sources */,
+				75D49744F766AFCBAF48A417 /* LedgerSynchronizationLayoutTests.swift in Sources */,
 				343FA09E3C85624C7E883A0C /* LocalizationTests.swift in Sources */,
 				E9FABF8E05866E511E92741D /* PasswordArchiveTests.swift in Sources */,
+				887F10B8B029CDB9390869B0 /* PersonalNameTests.swift in Sources */,
 				FC6BFE02D43B3C3AE14D9705 /* RevisionCodecTests.swift in Sources */,
 				A9CB6F4FF7459AED1815E4E9 /* RevisionGraphTests.swift in Sources */,
 				B173FC30C3B110BA64BA59C2 /* SecureClipboardTests.swift in Sources */,
 				B37691F009A6A50FC1C7CBFB /* StructuredFieldDraftTests.swift in Sources */,
+				F42422048074615C298A05A4 /* StructuredInputTests.swift in Sources */,
+				CEA9E926FB2A0FDF51361B5E /* SynchronizationSessionTests.swift in Sources */,
 				07B95C33AA9B882C8813C81B /* TemplateCatalogTests.swift in Sources */,
 				7C1723B3A94C2A44BDB89083 /* TemplatePickerSelectionTests.swift in Sources */,
 				EDF559AFA12CC631B270A988 /* VaultEditorTests.swift in Sources */,
@@ -1528,14 +1690,20 @@
 				AEECFC9BABD55A78C106CA52 /* DisplaySettings.swift in Sources */,
 				DEE51470E5EDA9866339BBE8 /* EditorDefaultTitle.swift in Sources */,
 				2A801D426C18860D1A5D05DF /* EditorFieldViews.swift in Sources */,
+				5DEF6A9A3B3612EDF9BC71B7 /* FieldCopyEditMenu.swift in Sources */,
 				C8FE68F78991E175938C0A0F /* FieldInputViews.swift in Sources */,
 				8B809B809C2B856D043D1AC3 /* FieldSelectionCatalog.swift in Sources */,
 				313C72185C12B1C45E9DC8B2 /* FieldSelectionInputs.swift in Sources */,
 				B3FB8A75A86737518E9B24F7 /* FieldValueView.swift in Sources */,
+				FC94C0D55B1539F9BE31066E /* InputAppearance.swift in Sources */,
+				F864A23F98A9B0B64E0FE6E4 /* InputValidationView.swift in Sources */,
 				F09CAE64B4F913CE0D2FB547 /* ItemViews.swift in Sources */,
 				CE02384BAA0C5EB95704EBCD /* LedgerBrowser.swift in Sources */,
 				3835C69ADB0ACFECFCDB1CBD /* LedgerView.swift in Sources */,
+				08DCC4D2E8B0E1E5051EBF70 /* MacCalendarInput.swift in Sources */,
+				2B246AEA2DAED97466969AF2 /* MacLedgerList.swift in Sources */,
 				F89000FB07304D072510435E /* MiledgeApp.swift in Sources */,
+				BC791670F41C4BAA7413ADFE /* MonthYearInput.swift in Sources */,
 				1EFA83AC0199C2594ED390B9 /* SecureClipboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1553,14 +1721,20 @@
 				1D9F9FA4A0BC5FE6110256EA /* DisplaySettings.swift in Sources */,
 				3EEA735A11F3BA16C49E4ED3 /* EditorDefaultTitle.swift in Sources */,
 				9C093A88B65FC2219C3913FD /* EditorFieldViews.swift in Sources */,
+				16F3EF22E76AC768269203D6 /* FieldCopyEditMenu.swift in Sources */,
 				C80A62BDB0C436FADD25CADF /* FieldInputViews.swift in Sources */,
 				29AF484F7B9D74613695771D /* FieldSelectionCatalog.swift in Sources */,
 				7EE49451FBD22AEF4CC348A1 /* FieldSelectionInputs.swift in Sources */,
 				085B5438B0796F9BD60359F6 /* FieldValueView.swift in Sources */,
+				6E6B2E1111AC5E845AA627CE /* InputAppearance.swift in Sources */,
+				580BFA2035C519E61795174C /* InputValidationView.swift in Sources */,
 				C06A29E029D6DD2BC1CE6E41 /* ItemViews.swift in Sources */,
 				1E1CFD39C3F104EDAC4E9410 /* LedgerBrowser.swift in Sources */,
 				D96C0932A07B18D5CE1EDD13 /* LedgerView.swift in Sources */,
+				B779198C0415E93E7AE6C6D0 /* MacCalendarInput.swift in Sources */,
+				AF2C6121B12A640F010305DE /* MacLedgerList.swift in Sources */,
 				80FF899D20D9C52E4E3140F8 /* MiledgeApp.swift in Sources */,
+				0F5745317354045487BD22B4 /* MonthYearInput.swift in Sources */,
 				8660C3B489C7A599018D7DE8 /* SecureClipboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1581,7 +1755,9 @@
 			files = (
 				62F176152F3A9274271A5075 /* AttachmentService.swift in Sources */,
 				60BCC1D7CA6624D4A4558225 /* BackupService.swift in Sources */,
+				413D23D38B3E80D3C081DFBD /* InputValidation.swift in Sources */,
 				B0E6B2DAB125D9A9F6937E90 /* StructuredFieldDraft.swift in Sources */,
+				679710CCAD9605DDDD7AF74B /* StructuredInput.swift in Sources */,
 				E77EBE4CCB4DA176D6980EBF /* VaultSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1605,14 +1781,19 @@
 				3290DE994412DD4AFBD8FDB0 /* EncryptedBlobStoreTests.swift in Sources */,
 				3131C86A3BA46A859982B887 /* FieldPresentationTests.swift in Sources */,
 				E1CE6AA5D2AA2A02E2DAB929 /* FieldSelectionTests.swift in Sources */,
+				E1066442F534DBEFAEE192FE /* InputValidationTests.swift in Sources */,
 				2EB46B54F7A58DBDB4D0A079 /* KeychainRevisionStoreTests.swift in Sources */,
 				4A63CD2F298EDF8EB240DFAA /* LedgerBrowserTests.swift in Sources */,
+				45518A78400DBD10CE1DC294 /* LedgerSynchronizationLayoutTests.swift in Sources */,
 				F44C112B95FD5FBA1DB3D0E3 /* LocalizationTests.swift in Sources */,
 				983E74B6468E127DF5269DA5 /* PasswordArchiveTests.swift in Sources */,
+				4A3F4D5F22F110ACCD889FDF /* PersonalNameTests.swift in Sources */,
 				ABCFD50CF2346A8033405DE3 /* RevisionCodecTests.swift in Sources */,
 				6045ABE4137C46E886293502 /* RevisionGraphTests.swift in Sources */,
 				44C2D8DD9AFF9C87BDDB4884 /* SecureClipboardTests.swift in Sources */,
 				A10A0EE953BA573699061CB0 /* StructuredFieldDraftTests.swift in Sources */,
+				CEF7616A953B20BD1E34ACF0 /* StructuredInputTests.swift in Sources */,
+				2F7FFC8EA3370861E2913AEA /* SynchronizationSessionTests.swift in Sources */,
 				2EF4B4C3A5369212AC1DC7BA /* TemplateCatalogTests.swift in Sources */,
 				288AD7A6BB950A4B096ABAE9 /* TemplatePickerSelectionTests.swift in Sources */,
 				F6DF2FFCDE22E2AAA871D36A /* VaultEditorTests.swift in Sources */,
@@ -1625,6 +1806,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1255512C7D00130B63B4F94A /* AccessibilityTestConfiguration.swift in Sources */,
 				1773A10D8AD830C9DF7988E2 /* AttachmentInteraction.swift in Sources */,
 				F52106F0B828857BA9D5F0D2 /* AttachmentViews.swift in Sources */,
 				10251EA875A83F41C23C95E1 /* BackupFlow.swift in Sources */,
@@ -1638,16 +1820,25 @@
 				EDAC212335575711C825206C /* EditorClipboardInteraction.swift in Sources */,
 				535493622C1CB7E6AAE8A2D6 /* EditorDefaultTitle.swift in Sources */,
 				839E4E56F2EC0E5C420279D2 /* EditorFieldViews.swift in Sources */,
+				0AE819D581D41CD766F0FDD9 /* FieldCopyEditMenu.swift in Sources */,
 				8FEE1D3A64D9C767370124D5 /* FieldInputViews.swift in Sources */,
 				5FBBC9B735E432531D0C0351 /* FieldSelectionCatalog.swift in Sources */,
 				2280A99A062CBABA48F1B00F /* FieldSelectionInputs.swift in Sources */,
 				F166474B18B054E04AA0FA39 /* FieldValueView.swift in Sources */,
+				884EE52D38D9CA01062BC824 /* InputAppearance.swift in Sources */,
+				F480ACA12B29306F3BAE4F30 /* InputValidationView.swift in Sources */,
 				AEA205DA850D10FA87E06E26 /* InteractionApp.swift in Sources */,
+				0549BE71F8AD68A962B4C9C3 /* InternationalInputFixture.swift in Sources */,
 				9A1E582D2E438BF90E272FB1 /* ItemViews.swift in Sources */,
 				DCB248997C2B0441C6E832F9 /* LedgerBrowser.swift in Sources */,
 				50BB0E1144F784C13CED98B0 /* LedgerView.swift in Sources */,
+				2996181AE2C22CE1A87C7669 /* MacCalendarInput.swift in Sources */,
+				68C57077EE6F259B10E5E8F3 /* MacLedgerList.swift in Sources */,
+				2E7A04F7130D16FD39723A83 /* MonthYearInput.swift in Sources */,
 				5BA2965D4B270A025FFB3052 /* SecureClipboard.swift in Sources */,
 				36D4D7A602091F14BCA23B3F /* StoreScreenshotLedger.swift in Sources */,
+				F0FED50016C8DA4788000E94 /* StructuredInputFixture.swift in Sources */,
+				C0055D791870871F2642CA94 /* SynchronizationLayoutFixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2002,7 +2193,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 23889H77KX;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2200,6 +2391,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App/Miledge-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "App/Miledge-iOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDevelopmentRegion = en;
@@ -2387,6 +2579,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App/Miledge-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "App/Miledge-iOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDevelopmentRegion = en;
@@ -2466,7 +2659,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 23889H77KX;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2740,6 +2933,30 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC34D01A8BE209A8BDAA5A4E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PhoneNumberKit/PhoneNumberKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.12;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7408AC7E8D0693215C3691AA /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC34D01A8BE209A8BDAA5A4E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
+		};
+		E3E1DF6AD907E10EBC93D0DD /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC34D01A8BE209A8BDAA5A4E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3D9511A3977F93314BC9CFB2 /* Project object */;
 }

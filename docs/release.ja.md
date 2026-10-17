@@ -2,7 +2,7 @@
 
 [English](release.en.md) · [README](../README.ja.md)
 
-現在のバージョンは**0.1.0**、buildは**2**です。Mac・iOS/iPadOS版は内部TestFlightへ配信しました。実機へのインストールと動作承認、独立したセキュリティ承認、一般公開の準備は未完了です。App Storeでの一般公開は行っていません。GitHubの公開ワークフローも、必要な設定と根拠が揃うまでは停止する設計を維持します。
+現在のバージョンは**0.1.0**、buildは**6**です。Mac・iOS/iPadOS版は内部TestFlightへ配信しました。実機へのインストールと動作承認、独立したセキュリティ承認、一般公開の準備は未完了です。App Storeでの一般公開は行っていません。GitHubの公開ワークフローも、必要な設定と根拠が揃うまでは停止する設計を維持します。
 
 ## 1. Appleの配布設定を揃える
 
@@ -12,7 +12,7 @@
 
 アプリと保存用ターゲットには`PrivacyInfo.xcprivacy`があります。公開ごとに実際のデータ処理、Required Reason API、輸出規制を確認してください。現在の`ITSAppUsesNonExemptEncryption=false`はOS内の暗号化を使う実装に対する申告であり、暗号化や依存を変更したら再判断します。App Privacy、翻訳したストア説明、プライバシー・サポートURL、対応機器、提供地域も確認します。簡体字の翻訳だけで中国本土の提供を決めません。
 
-build番号は新しい値を使ってください。**2はアップロード済み**です。ビルドやアップロードは、App Reviewへの提出・公開とは別です。
+build番号は新しい値を使ってください。**2・3・4・5・6はアップロード済み**です。ビルドやアップロードは、App Reviewへの提出・公開とは別です。
 
 ## 2. GitHubの設定と秘密を保護する
 
@@ -108,3 +108,8 @@ App Reviewへの提出と一般公開は手動で行います。架空の確認�
 - [App Storeへの提出](https://developer.apple.com/app-store/submitting/)・[ビルドのアップロード](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds/)：公開時のSDK要件と処理条件を再確認する。
 - [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)：プライバシー、健康情報の除外、審査・提供条件。
 - [輸出規制](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance/)・[Required Reason API](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api)：実装に基づいて申告する。
+
+2026-10-17: 入力補助・形式チェックと氏名構成欄を含むbuild 6を両OSの内部TestFlightへ配信。詳細は[配信記録](testflight-build6-2026-10-17.md)。
+
+
+2026-10-17: **0.1.0（build 7）**を両OSでApp Reviewへ提出し、「審査待ち」を確認しました。macOSの同期時のリスト表示修正と、設定画面のプライバシーポリシー・サポートリンクを含みます。今回の公開方法は、ユーザーの明示指定により**無料・全175地域・承認後に自動公開**です。審査承認や独立したセキュリティレビューの完了を意味しません。詳細と未確認範囲は[提出記録](app-review-2026-10-17.md)を参照してください。

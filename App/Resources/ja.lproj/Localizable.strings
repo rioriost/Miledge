@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP（旧方式）";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "現在の種類の入力欄と値を削除します。手動で変更したタイトル、整理情報、関連項目、ファイルは残します。";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "設定";
+"iCloud Keychain" = "iCloudキーチェーン";
+"Storage" = "保存先";
+"Refresh" = "再読み込み";
+"Last checked on this device" = "この端末での最終確認";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "各端末のiCloud設定で「パスワードとキーチェーン」を有効にしてください。転送のタイミングはAppleが管理します。";
+"Waiting for iCloud Keychain history." = "iCloudキーチェーンからの履歴の到着を待っています。";
+"Could not refresh. Try again." = "再読み込みできませんでした。もう一度お試しください。";
+"Copy to iCloud Keychain" = "iCloudキーチェーンにコピー";
+"Copy this item to iCloud Keychain?" = "この項目をiCloudキーチェーンにコピーしますか？";
+"The current values will be copied. The original stays on this device." = "現在の内容をコピーします。元の項目はこの端末に残ります。";
+"Files require device-only storage." = "ファイルを添付するには、この端末のみの保存を選んでください。";
+"The item could not be copied. The original is unchanged." = "コピーできませんでした。元の項目は変更されていません。";
+"More" = "その他";
+
+/* International input and advisory validation. */
+"Middle Name" = "ミドルネーム";
+"Name Prefix" = "敬称など（氏名の前）";
+"Name Suffix" = "接尾辞など（氏名の後）";
+"Name In Original Script" = "元の文字体系での氏名";
+"Name details" = "氏名の詳細";
+"Add name details" = "氏名の詳細を追加";
+"Phone region" = "電話番号の国・地域";
+"Postal code" = "郵便番号";
+"State / province" = "都道府県・州";
+"City / locality" = "市区町村";
+"Street address" = "町名・番地・建物名";
+"Add address fields" = "住所の入力欄を追加";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "必要な項目だけ入力してください。氏名全体は記載どおりに保持し、自動で分割したり、順序を変えたりしません。";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "形式はこの端末内で確認します。本人確認、書類の有効性、電話の利用可否、住所の実在性は確認しません。確認を促す表示があっても保存できます。";
+"Choose the phone region or include a + country calling code." = "電話番号の国・地域を選ぶか、+で始まる国番号を付けてください。";
+"Check the phone number, country calling code, and extension." = "電話番号、国番号、内線番号を確認してください。";
+"Phone number format matches. Availability is not checked." = "電話番号の形式は一致しています。利用可否は未確認です。";
+"Choose the address country. Postal format is not checked for this region." = "住所の国・地域を選んでください。この地域の郵便番号の形式は未チェックです。";
+"Postal format is not checked for this region." = "この地域の郵便番号の形式は未チェックです。";
+"This region does not normally use postal codes. The value will be kept." = "この地域では通常、郵便番号を使いません。入力した値は保持します。";
+"Check the postal code for the selected country." = "選択した国・地域の郵便番号を確認してください。";
+"Postal code format matches. Address existence is not checked." = "郵便番号の形式は一致しています。住所の実在性は未確認です。";
+"Passport number format matches. Authenticity and validity are not checked." = "旅券番号の形式は一致しています。真正性・有効性は未確認です。";
+"Japanese passports normally use two letters followed by seven digits." = "日本の旅券番号は通常、英字2文字と数字7桁です。";
+"US passport books normally use nine digits or one letter followed by eight digits." = "米国の旅券番号は通常、数字9桁、または英字1文字と数字8桁です。";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "旅券番号の規則は発行国により異なります。現在、国別チェックは日本と米国に対応しています。";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "長すぎるため形式を確認できません。入力値はそのまま保存できます。";
+"Format matches. Existence and validity are not checked." = "形式は一致しています。実在性や有効性は確認していません。";
+"Check the email address: name@example.com." = "メールアドレスを確認してください（例：name@example.com）。";
+"This email format is not checked. The address will be kept." = "この形式のメールアドレスは確認対象外です。入力値はそのまま保存できます。";
+"Check the URL, including its scheme, such as https://." = "URLを確認してください。https:// などのスキームも必要です。";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "URLのスキーム形式は認識できました。サービス固有の規則は確認していません。";
+"Check the card number length, digits, and check digit." = "カード番号の桁数、数字、チェック桁を確認してください。";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "このブランドではチェック桁の規則が異なる場合があります。発行元の番号と照合してください。";
+"Card check digit matches. Card validity and issuer are not checked." = "カード番号のチェック桁は一致しています。カードの有効性や発行元は確認していません。";
+"Security codes usually contain three digits; American Express uses four." = "セキュリティコードは通常3桁です。American Expressは4桁です。";
+"Check the IBAN letters, digits, and check digits." = "IBANの英字、数字、チェック桁を確認してください。";
+"IBAN check digits match. National format and account existence are not checked." = "IBANのチェック桁は一致しています。国別の形式や口座の実在性は確認していません。";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "BICは8文字または11文字の英数字で、国コードは英字2文字です。";
+"Enter a server port from 1 to 65535." = "サーバーのポート番号を1〜65535で入力してください。";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "現在のVINはI・O・Qを除く17文字の英数字です。旧式の番号や地域独自の車台番号は異なる場合があります。";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "VINの形式は一致しています。地域別のチェック桁や車両の実在性は確認していません。";
+"Check the ninth VIN character for a US-registered vehicle." = "米国登録車のVINの9文字目を確認してください。";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Base32の秘密鍵を確認してください。英字A〜Zと数字2〜7を使います。";
+"Enter the secret key here, rather than the whole otpauth URL." = "ここにはotpauth URL全体ではなく、秘密鍵を入力してください。";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "関連する開始日・発行日・生年月日より前の日付です。両方の日付を確認してください。";
+"Common ports" = "よく使うポート番号";
+"Choose the port specified by your server provider." = "サーバーの提供元が指定したポート番号を選んでください。";
+"Add https://" = "https:// を追加";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "形式の確認は端末内で行います。口座・書類・住所・サービスの実在性や有効性は確認できません。確認メッセージが出ても保存できます。";
+
+"Privacy Policy" = "プライバシーポリシー";
+
+"Support" = "サポート";

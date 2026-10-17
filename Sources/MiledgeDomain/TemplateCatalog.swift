@@ -45,6 +45,11 @@ public enum FieldPrivacy {
 }
 
 public enum TemplateCatalog {
+    public static let personalNameFieldIDs = ["givenName", "middleName", "familyName", "namePrefix", "nameSuffix", "nameInOriginalScript"]
+    public static let personalNameTemplates: Set<String> = [
+        "identity", "passport", "driver-license", "membership", "outdoor-license", "reward-program",
+        "social-security-number", "residence-document", "credit-card", "bank-account"
+    ]
     public static func template(id: String) -> ItemTemplate? { all.first { $0.id == id } }
     public static func affiliateProfile(id: String) -> AffiliateProviderProfile? { affiliateProfiles.first { $0.id == id } }
 
@@ -267,6 +272,9 @@ public enum TemplateCatalog {
         var sections = [section(sectionID, fields)]
         if id != "secure-note" { sections.append(section("notes", [field("notes", "multiline")])) }
         var optional = extra.isEmpty ? [] : [section("optional", extra)]
+        if personalNameTemplates.contains(id) {
+            optional.append(section("name-details", personalNameFieldIDs.map { field($0) }))
+        }
         optional.append(section("original-notation", [field("originalDateNotation")]))
         return .init(id: id, name: name, sections: sections, optionalSections: optional)
     }

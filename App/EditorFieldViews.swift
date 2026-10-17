@@ -14,6 +14,7 @@ enum EditorSectionName {
         case "credentials", "optional-credentials": "Credentials"
         case "optional": "Additional information"
         case "original-notation": "Original notation"
+        case "name-details": "Name details"
         default: "Details"
         }
     }
@@ -48,6 +49,7 @@ struct EditableField: View {
     @Binding var invalid: Bool
 
     var onRemove: (() -> Void)?
+    var onEditingChanged: (Bool) -> Void
     let templateID: String?
     let initiallyVisible: Bool
     var copy: ((JSONValue) -> Bool)?
@@ -56,10 +58,12 @@ struct EditableField: View {
     private var rowLayout = FieldRowLayout()
 
     init(field: Binding<VaultField>, invalid: Binding<Bool> = .constant(false), templateID: String? = nil,
-         initiallyVisible: Bool = false, copy: ((JSONValue) -> Bool)? = nil, onRemove: (() -> Void)? = nil) {
+         initiallyVisible: Bool = false, copy: ((JSONValue) -> Bool)? = nil, onRemove: (() -> Void)? = nil,
+         onEditingChanged: @escaping (Bool) -> Void = { _ in }) {
         _field = field
         _invalid = invalid
         self.onRemove = onRemove
+        self.onEditingChanged = onEditingChanged
         self.templateID = templateID
         self.initiallyVisible = initiallyVisible
         self.copy = copy
@@ -215,7 +219,8 @@ struct EditableField: View {
             }
         default:
             if case .string(let text) = field.value {
-                StringFieldInput(field: $field, invalid: $invalid, text: text, templateID: templateID, initiallyVisible: initiallyVisible)
+                StringFieldInput(field: $field, invalid: $invalid, text: text, templateID: templateID,
+                                 initiallyVisible: initiallyVisible, onEditingChanged: onEditingChanged)
             } else {
                 Label("Unsupported field", systemImage: "lock")
             }

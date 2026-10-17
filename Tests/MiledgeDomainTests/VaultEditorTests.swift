@@ -156,7 +156,11 @@ final class VaultEditorTests: XCTestCase {
                 XCTAssertEqual(again, value)
                 XCTAssertEqual(value.sections.filter { $0.id == option.section.id }.count, 1)
             }
-            XCTAssertEqual(value.sections, originalSections + template.optionalSections)
+            var expectedOptional = template.optionalSections
+            if template.id == "identity", let names = expectedOptional.firstIndex(where: { $0.id == "name-details" }) {
+                expectedOptional[names].fields.removeAll { ["givenName", "familyName"].contains($0.id) }
+            }
+            XCTAssertEqual(value.sections, originalSections + expectedOptional)
             XCTAssertTrue(try VaultEditor.availableSections(for: value).isEmpty)
             try VaultEditor.validateDraft(value)
             value.title = "Synthetic"
@@ -176,7 +180,7 @@ final class VaultEditorTests: XCTestCase {
         value.sections[0].fields[0].value = .string("原文")
         let original = value
         let options = try VaultEditor.availableSections(for: value)
-        XCTAssertEqual(options.map(\.section.id), ["card", "optional", "original-notation"])
+        XCTAssertEqual(options.map(\.section.id), ["card", "optional", "name-details", "original-notation"])
         for option in options { value = try VaultEditor.addingSection(id: option.id, to: value) }
         XCTAssertEqual(value.sections[0].fields[0], original.sections[0].fields[0])
         let optional = try XCTUnwrap(value.sections.first { $0.id == "optional" })

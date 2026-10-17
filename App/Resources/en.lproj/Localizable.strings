@@ -500,3 +500,77 @@
 "WEP (legacy)" = "WEP (legacy)";
 "New item title format" = "%1$@ %2$@";
 "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept." = "Existing type fields and their values will be removed. Your title edits, organization, related items, and files are kept.";
+
+/* Settings and iCloud Keychain delivery. */
+"Settings" = "Settings";
+"iCloud Keychain" = "iCloud Keychain";
+"Storage" = "Storage";
+"Refresh" = "Refresh";
+"Last checked on this device" = "Last checked on this device";
+"Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing." = "Enable Passwords & Keychain in iCloud settings on each device. Apple manages delivery timing.";
+"Waiting for iCloud Keychain history." = "Waiting for iCloud Keychain history.";
+"Could not refresh. Try again." = "Could not refresh. Try again.";
+"Copy to iCloud Keychain" = "Copy to iCloud Keychain";
+"Copy this item to iCloud Keychain?" = "Copy this item to iCloud Keychain?";
+"The current values will be copied. The original stays on this device." = "The current values will be copied. The original stays on this device.";
+"Files require device-only storage." = "Files require device-only storage.";
+"The item could not be copied. The original is unchanged." = "The item could not be copied. The original is unchanged.";
+"More" = "More";
+
+/* International input and advisory validation. */
+"Middle Name" = "Middle Name";
+"Name Prefix" = "Name Prefix";
+"Name Suffix" = "Name Suffix";
+"Name In Original Script" = "Name In Original Script";
+"Name details" = "Name details";
+"Add name details" = "Add name details";
+"Phone region" = "Phone region";
+"Postal code" = "Postal code";
+"State / province" = "State / province";
+"City / locality" = "City / locality";
+"Street address" = "Street address";
+"Add address fields" = "Add address fields";
+"Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically." = "Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically.";
+"Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving." = "Format checks run on this device. They do not verify identity, document validity, phone availability, or address existence. Review messages do not prevent saving.";
+"Choose the phone region or include a + country calling code." = "Choose the phone region or include a + country calling code.";
+"Check the phone number, country calling code, and extension." = "Check the phone number, country calling code, and extension.";
+"Phone number format matches. Availability is not checked." = "Phone number format matches. Availability is not checked.";
+"Choose the address country. Postal format is not checked for this region." = "Choose the address country. Postal format is not checked for this region.";
+"Postal format is not checked for this region." = "Postal format is not checked for this region.";
+"This region does not normally use postal codes. The value will be kept." = "This region does not normally use postal codes. The value will be kept.";
+"Check the postal code for the selected country." = "Check the postal code for the selected country.";
+"Postal code format matches. Address existence is not checked." = "Postal code format matches. Address existence is not checked.";
+"Passport number format matches. Authenticity and validity are not checked." = "Passport number format matches. Authenticity and validity are not checked.";
+"Japanese passports normally use two letters followed by seven digits." = "Japanese passports normally use two letters followed by seven digits.";
+"US passport books normally use nine digits or one letter followed by eight digits." = "US passport books normally use nine digits or one letter followed by eight digits.";
+"Passport rules vary by issuer. Country-specific checks currently cover Japan and the US." = "Passport rules vary by issuer. Country-specific checks currently cover Japan and the US.";
+
+/* Structured input assistance */
+"This value is too long for a format check. It will be kept." = "This value is too long for a format check. It will be kept.";
+"Format matches. Existence and validity are not checked." = "Format matches. Existence and validity are not checked.";
+"Check the email address: name@example.com." = "Check the email address: name@example.com.";
+"This email format is not checked. The address will be kept." = "This email format is not checked. The address will be kept.";
+"Check the URL, including its scheme, such as https://." = "Check the URL, including its scheme, such as https://.";
+"The URL scheme is recognized syntactically. Service-specific rules are not checked." = "The URL scheme is recognized syntactically. Service-specific rules are not checked.";
+"Check the card number length, digits, and check digit." = "Check the card number length, digits, and check digit.";
+"This card brand may use different check-digit rules. Confirm the number with the issuer." = "This card brand may use different check-digit rules. Confirm the number with the issuer.";
+"Card check digit matches. Card validity and issuer are not checked." = "Card check digit matches. Card validity and issuer are not checked.";
+"Security codes usually contain three digits; American Express uses four." = "Security codes usually contain three digits; American Express uses four.";
+"Check the IBAN letters, digits, and check digits." = "Check the IBAN letters, digits, and check digits.";
+"IBAN check digits match. National format and account existence are not checked." = "IBAN check digits match. National format and account existence are not checked.";
+"BIC uses eight or eleven letters and digits, with a two-letter country code." = "BIC uses eight or eleven letters and digits, with a two-letter country code.";
+"Enter a server port from 1 to 65535." = "Enter a server port from 1 to 65535.";
+"Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ." = "Modern VINs use 17 letters and digits without I, O, or Q. Older or local chassis numbers may differ.";
+"VIN format matches. Regional check digits and vehicle existence are not checked." = "VIN format matches. Regional check digits and vehicle existence are not checked.";
+"Check the ninth VIN character for a US-registered vehicle." = "Check the ninth VIN character for a US-registered vehicle.";
+"Check the Base32 secret: letters A–Z and digits 2–7." = "Check the Base32 secret: letters A–Z and digits 2–7.";
+"Enter the secret key here, rather than the whole otpauth URL." = "Enter the secret key here, rather than the whole otpauth URL.";
+"This date is earlier than its related start, issue, or birth date. Check both dates." = "This date is earlier than its related start, issue, or birth date. Check both dates.";
+"Common ports" = "Common ports";
+"Choose the port specified by your server provider." = "Choose the port specified by your server provider.";
+"Add https://" = "Add https://";
+"Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving." = "Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving.";
+
+"Privacy Policy" = "Privacy Policy";
+
+"Support" = "Support";

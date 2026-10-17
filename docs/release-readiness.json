@@ -12,11 +12,11 @@
     },
     "hardwareValidation": {
       "status": "blocked",
-      "evidence": "Version 0.1.0 build 2 has been distributed to internal TestFlight for Mac and iOS/iPadOS. Device installation and acceptance, signed authentication/Keychain persistence and official cross-device sharing remain unverified. Distribution is not hardware acceptance."
+      "evidence": "Version 0.1.0 build 6 has completed Apple processing and is Testing in Miledge Internal for Mac and iOS/iPadOS. It includes international and structured input assistance and optional name components. Both Release archives and distribution uploads passed; see docs/testflight-build6-2026-10-17.md, docs/international-input-2026-10-17.md and docs/structured-input-2026-10-17.md. Signed physical-device authentication, upgrade retention, iCloud delivery and conflict recovery remain unverified. Internal distribution is not hardware acceptance."
     },
     "accessibility": {
       "status": "blocked",
-      "evidence": "Synthetic native renders and focused interaction regressions exist. Complete current-source native interaction, keyboard/focus, physical VoiceOver/Voice Control, appearance, contrast, clipping and localization acceptance are still required."
+      "evidence": "2026-10-13: visual accessibility adaptations and native synthetic task tests cover Mac light/dark and grayscale, iPhone/iPad larger text, contrast and Reduce Motion settings. See docs/accessibility-2026-10-13.md for exact artifacts, measured contrast and remaining audit findings. Physical-device assistive technology, complete keyboard/focus, all locales and remaining workflows are unverified; the overall release gate remains blocked."
     },
     "conflictRecovery": {
       "status": "blocked",

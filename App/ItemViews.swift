@@ -399,19 +399,29 @@ struct ItemDetailView: View {
     var openRelated: ((UUID) -> Void)?
     var copy: ((JSONValue) -> Bool)?
     var resolveConflict: (() -> Void)?
+    var synchronize: (() -> Void)?
     var reviewingVersion = false
     @Environment(\.concealValuesByDefault) private var concealByDefault
     var attachments: AttachmentService?
     @State private var confirmingDelete = false
+    @State private var confirmingSynchronization = false
 
     var body: some View {
         Form {
             Section {
                 Text(revision.title).ledgerFont(.title2)
+                    .fixedSize(horizontal: false, vertical: true)
                 Text(LocalizedStringKey(revision.storageScope == .deviceLocal
-                    ? "On this device only" : "Synchronization enabled"))
+                    ? "On this device only" : "iCloud Keychain"))
                     .ledgerFont(.caption)
                     .foregroundStyle(.secondary)
+                if revision.storageScope == .deviceLocal, synchronize != nil,
+                   !conflicted, !revision.isReadOnly, !revision.deleted, revision.attachments.isEmpty {
+                    Button("Copy to iCloud Keychain", systemImage: "icloud.and.arrow.up") {
+                        confirmingSynchronization = true
+                    }
+                    .accessibilityIdentifier("copy-to-icloud")
+                }
                 if conflicted { Label("Conflicting changes", systemImage: "exclamationmark.triangle") }
                 if revision.deleted { Text("Deletion revision") }
                 if revision.isReadOnly {
@@ -420,7 +430,12 @@ struct ItemDetailView: View {
             }
             if revision.favorite || !revision.tags.isEmpty {
                 Section("Organization") {
-                    if revision.favorite { Label("Favorite", systemImage: "star.fill") }
+                    if revision.favorite {
+                        HStack(alignment: .firstTextBaseline) {
+                            Image(systemName: "star.fill").accessibilityHidden(true)
+                            Text("Favorite").fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
                     ForEach(Array(revision.tags.enumerated()), id: \.offset) { _, tag in
                         Text(verbatim: tag)
                     }
@@ -483,6 +498,11 @@ struct ItemDetailView: View {
             Button("Delete", role: .destructive, action: delete)
         }
         .onChange(of: revision.revisionId) { _, _ in confirmingDelete = false }
+        .confirmationDialog("Copy this item to iCloud Keychain?", isPresented: $confirmingSynchronization) {
+            Button("Copy to iCloud Keychain") { synchronize?() }
+        } message: {
+            Text("The current values will be copied. The original stays on this device.")
+        }
         .id(revision.revisionId)
     }
 }
@@ -499,6 +519,7 @@ struct ItemEditor: View {
     @State private var importingFile = false
     @State private var editorIssue: String?
     @State private var invalidFields = Set<EditorFieldID>()
+    @State private var editingFields = Set<EditorFieldID>()
     @State private var pendingFieldRemoval: EditorFieldID?
     @State private var pendingSectionRemoval: String?
     @State private var choosingRelatedItem = false
@@ -551,6 +572,18 @@ struct ItemEditor: View {
         NavigationStack {
             Form {
                 Section("Basic information") {
+                    if creating {
+                        Picker("Storage", selection: $revision.storageScope) {
+                            Text("iCloud Keychain").tag(StorageScope.synchronizable)
+                            Text("On this device only").tag(StorageScope.deviceLocal)
+                        }
+                        .accessibilityIdentifier("storage-scope")
+                        .disabled(!revision.attachments.isEmpty)
+                        if revision.storageScope == .synchronizable {
+                            Text("Files require device-only storage.")
+                                .ledgerFont(.caption).foregroundStyle(.secondary)
+                        }
+                    }
                     if let template = TemplateCatalog.template(id: revision.templateId) {
                         if changeType != nil {
                             ItemTypePicker(selection: typeSelection)
@@ -588,10 +621,29 @@ struct ItemEditor: View {
                     !customSection($0.element) && !$0.element.fields.isEmpty
                 }, id: \.element.id) { sectionIndex, section in
                     Section(EditorSectionName.name(for: section.id)) {
+                        if section.id == "name-details" {
+                            Text("Use only the name parts you need. Keep the full name as written; names are not split or reordered automatically.")
+                                .ledgerFont(.caption).foregroundStyle(.secondary)
+                        }
                         fields(in: section, at: sectionIndex)
+                        if section.id == revision.sections.first?.id, let option = nameDetailsOption {
+                            Button("Add name details", systemImage: "person.text.rectangle") {
+                                do { revision = try VaultEditor.addingSection(id: option.id, to: revision) }
+                                catch { editorIssue = String(localized: "The fields could not be added.") }
+                            }
+                            .accessibilityIdentifier("add-name-details")
+                        }
                         if VaultEditor.canRemoveSection(in: revision, sectionID: section.id) {
                             removeSectionButton(section.id)
                         }
+                    }
+                }
+                if revision.sections.flatMap(\.fields).contains(where: {
+                    ["phone", "address", "date"].contains($0.kind) || StructuredInput.format(for: $0, templateID: revision.templateId) != nil || (revision.templateId == "passport" && $0.id == "passportNumber")
+                }) {
+                    Section {
+                        Text("Format checks run on this device. They do not confirm that an account, document, address, or service exists or is valid. Review messages do not prevent saving.")
+                            .ledgerFont(.caption).foregroundStyle(.secondary)
                     }
                 }
                 Section("Additional fields") {
@@ -600,12 +652,15 @@ struct ItemEditor: View {
                     }, id: \.element.id) { sectionIndex, section in
                         fields(in: section, at: sectionIndex)
                     }
-                    Menu("Add field", systemImage: "plus") {
+                    Menu {
                         ForEach(VaultEditor.supportedKinds, id: \.self) { kind in
                             Button(FieldKindName.name(for: kind)) { addField(kind: kind) }
                         }
+                    } label: {
+                        EditorMenuLabel(title: "Add field", symbol: "plus")
                     }
-                    Menu("Template fields", systemImage: "list.bullet") {
+                    .accessibilityIdentifier("plus")
+                    Menu {
                         switch Result(catching: { try VaultEditor.availableSections(for: revision) }) {
                         case .success(let options):
                             ForEach(options, id: \.id) { option in
@@ -625,7 +680,10 @@ struct ItemEditor: View {
                                 editorIssue = String(localized: "Check the fields before saving.")
                             }
                         }
+                    } label: {
+                        EditorMenuLabel(title: "Template fields", symbol: "list.bullet")
                     }
+                    .accessibilityIdentifier("list.bullet")
                 }
                 if !revision.attachments.isEmpty || (attachments != nil && revision.storageScope == .deviceLocal) {
                     Section("Files") {
@@ -650,6 +708,7 @@ struct ItemEditor: View {
                 }
             }
             .formStyle(.grouped)
+            .textFieldStyle(LedgerTextFieldStyle())
             .navigationDestination(isPresented: $choosingRelatedItem) {
                 RelatedItemPicker(items: relatedItems, excluded: Set(revision.linkedRecordIds + [revision.recordId])) { item in
                     revision.linkedRecordIds.append(item.recordId)
@@ -657,20 +716,31 @@ struct ItemEditor: View {
                 }
             }
             #if os(macOS)
-            .textFieldStyle(.roundedBorder)
             .controlSize(.large)
             #endif
             .accessibilityIdentifier("item-editor-form")
+            #if os(iOS)
+            .scrollDismissesKeyboard(.interactively)
+            #endif
             .disabled(readOnly)
             .navigationTitle(creating ? "New item" : "Edit item")
             .toolbar {
                 if !choosingRelatedItem {
-                    ToolbarItem(placement: .cancellationAction) {
+                    ToolbarItem(id: "item-editor-cancel", placement: .cancellationAction) {
                         Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction)
+                            // Keep toolbar metrics native even when the content uses a larger app font.
+                            .font(.body)
                     }
-                    ToolbarItem(placement: .confirmationAction) {
+                    ToolbarItem(id: "item-editor-save", placement: .confirmationAction) {
                         Button("Save") { save(revision) }
+                            .font(.body)
+                            .accessibilityIdentifier("editor-save")
+                            #if os(macOS)
+                            // Return belongs to the active input/search field. Saving is explicit.
+                            .keyboardShortcut(.return, modifiers: .command)
+                            #else
                             .keyboardShortcut(.defaultAction)
+                            #endif
                             .disabled(readOnly || validationMessage != nil || !invalidFields.isEmpty
                                 || revision.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
@@ -743,7 +813,13 @@ struct ItemEditor: View {
     }
 
     private func fields(in section: VaultSection, at sectionIndex: Int) -> some View {
-        ForEach(Array(section.fields.enumerated()), id: \.element.id) { fieldIndex, field in
+        ForEach(Array(section.fields.enumerated()).filter {
+            let field = $0.element
+            guard field.id.hasPrefix(InputValidator.phoneRegionPrefix) else { return true }
+            let phoneID = String(field.id.dropFirst(InputValidator.phoneRegionPrefix.count))
+            return !section.fields.contains { $0.id == phoneID && $0.kind == "phone" }
+        }, id: \.element.id) { fieldIndex, field in
+            VStack(alignment: .leading, spacing: 8) {
             EditableField(
                 field: fieldBinding(sectionID: section.id, fieldID: field.id, fallback: field),
                 invalid: invalidBinding(section: section.id, field: field.id),
@@ -755,9 +831,48 @@ struct ItemEditor: View {
                     return success
                 } },
                 onRemove: VaultEditor.canRemoveField(in: revision, sectionID: section.id, fieldID: field.id)
-                    ? { pendingFieldRemoval = EditorFieldID(section: section.id, field: field.id) } : nil
+                    ? { pendingFieldRemoval = EditorFieldID(section: section.id, field: field.id) } : nil,
+                onEditingChanged: { editing in
+                    let id = EditorFieldID(section: section.id, field: field.id)
+                    if editing { editingFields.insert(id) } else { editingFields.remove(id) }
+                }
             )
             .id(EditorTypeChangeState.identity(for: field, in: section, generation: fieldGeneration))
+            if field.kind == "phone" {
+                LabeledContent("Phone region") {
+                    ChoiceFieldInput(
+                        text: phoneRegionBinding(section: section.id, field: field.id),
+                        choices: FieldSelectionCatalog.countries(locale: locale),
+                        label: String(localized: "Phone region", locale: locale),
+                        identifier: "phone-region-\(field.id)", searchable: true
+                    )
+                }
+            }
+            // Email syntax is incomplete while typing; show its result when leaving the field.
+            if !(field.kind == "email" && editingFields.contains(EditorFieldID(section: section.id, field: field.id))),
+               let check = InputValidator.shared.check(field, in: revision, sectionID: section.id) {
+                InputCheckFeedback(check: check, identifier: "input-check-\(field.id)")
+            }
+            }
+        }
+    }
+
+    private var nameDetailsOption: VaultSectionOption? {
+        (try? VaultEditor.availableSections(for: revision))?.first { $0.section.id == "name-details" }
+    }
+
+    private func phoneRegionBinding(section: String, field: String) -> Binding<String> {
+        let id = InputValidator.phoneRegionPrefix + field
+        return Binding {
+            revision.sections.first { $0.id == section }?.fields.first { $0.id == id }
+                .flatMap { InputValidator.string($0.value) } ?? ""
+        } set: { value in
+            guard let index = revision.sections.firstIndex(where: { $0.id == section }) else { return }
+            if let existing = revision.sections[index].fields.firstIndex(where: { $0.id == id }) {
+                revision.sections[index].fields[existing].value = .string(value)
+            } else if !value.isEmpty {
+                revision.sections[index].fields.append(VaultField(id: id, value: .string(value), label: "Phone region"))
+            }
         }
     }
 
@@ -846,6 +961,20 @@ struct ItemEditor: View {
             revision.sections.append(VaultSection(id: UUID().uuidString, fields: [field]))
         } catch {
             editorIssue = String(localized: "The fields could not be added.")
+        }
+    }
+}
+
+private struct EditorMenuLabel: View {
+    let title: LocalizedStringKey
+    let symbol: String
+    @Environment(\.dynamicTypeSize) private var textSize
+
+    var body: some View {
+        if textSize.isAccessibilitySize {
+            Text(title).fixedSize(horizontal: false, vertical: true)
+        } else {
+            Label(title, systemImage: symbol)
         }
     }
 }

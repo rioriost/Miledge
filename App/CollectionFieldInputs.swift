@@ -5,6 +5,7 @@ import SwiftUI
 struct CollectionDraftRow<Entry: Identifiable & Equatable, Content: View>: View {
     // Retiring controls must not retain a binding to a removed array index.
     @State var entry: Entry
+    @State private var pendingWrites: [Entry] = []
     let source: Entry
     let update: (Entry) -> Void
     @ViewBuilder let content: (Binding<Entry>) -> Content
@@ -19,9 +20,18 @@ struct CollectionDraftRow<Entry: Identifiable & Equatable, Content: View>: View 
     var body: some View {
         content(Binding(get: { entry }, set: { replacement in
             entry = replacement
+            if pendingWrites.last != replacement { pendingWrites.append(replacement) }
             update(replacement)
         }))
-        .onChange(of: source) { _, replacement in entry = replacement }
+        .onChange(of: source) { _, replacement in
+            // A model echo from an earlier keystroke must not replace newer input.
+            if let index = pendingWrites.lastIndex(of: replacement) {
+                pendingWrites.removeFirst(index + 1)
+            } else {
+                pendingWrites.removeAll()
+                entry = replacement
+            }
+        }
     }
 }
 
@@ -100,9 +110,12 @@ struct AddressFieldInput: View {
     @Binding var invalid: Bool
     @State var draft: AddressFieldDraft
     var initiallyVisible = false
-    @State private var lastWrittenValue: JSONValue?
+    @State private var pendingWrites: [JSONValue] = []
     @State private var duplicateNames = false
     @Environment(\.locale) private var locale
+
+    private let standardComponents = ["country", "postalCode", "region", "city", "street"]
+    private let componentLabels = ["country": "Country", "postalCode": "Postal code", "region": "State / province", "city": "City / locality", "street": "Street address"]
 
     var body: some View {
         CollectionDisclosure(field: field, initiallyVisible: initiallyVisible) {
@@ -112,6 +125,9 @@ struct AddressFieldInput: View {
                 }) { $component in
                     HStack(alignment: .top, spacing: 12) {
                         VStack(alignment: .leading, spacing: 8) {
+                            if let label = componentLabels[component.name] {
+                                Text(LocalizedStringKey(label)).ledgerFont(.subheadline)
+                            } else {
                             #if os(macOS)
                             MacFieldInput(
                                 text: $component.name,
@@ -126,21 +142,28 @@ struct AddressFieldInput: View {
                                 .accessibilityIdentifier("Component name")
                                 .accessibilityLabel(Text("Component name") + Text(verbatim: " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)"))
                             #endif
+                            }
                             if component.name == "country" {
                                 ChoiceFieldInput(
                                     text: $component.value, choices: FieldSelectionCatalog.countries(locale: locale),
                                     label: CatalogLocalization.string("Country", locale: locale)
                                         + " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)",
-                                    identifier: "\(field.id)-\(component.id)", searchable: true
+                                    identifier: "\(field.id)-country", searchable: true
                                 )
                                 .fieldControlFrame()
                             } else {
                                 TextField("Value", text: $component.value, axis: .vertical)
                                     .fieldControlFrame()
                                     .multilineTextAlignment(.leading)
-                                    .accessibilityIdentifier("Value")
+                                    .accessibilityIdentifier(componentLabels[component.name] == nil ? "Value" : "address-\(field.id)-\(component.name)")
                                     .lineLimit(1...4)
-                                    .accessibilityLabel(Text("Value") + Text(verbatim: " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)"))
+                                    .accessibilityLabel(Text(LocalizedStringKey(componentLabels[component.name] ?? "Value")) + Text(verbatim: " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)"))
+                            }
+                            if ["postalCode", "postal", "zip", "zipCode", "postcode"].contains(component.name),
+                               let check = InputValidator.shared.postalCode(
+                                component.value, country: draft.components.first { $0.name == "country" }?.value ?? ""
+                               ) {
+                                InputCheckFeedback(check: check, identifier: "input-check-postal-\(field.id)")
                             }
                         }
                         CollectionRemoveButton(label: "Remove component", target: "\(FieldPresentation.name(for: field, locale: locale)) \(index + 1)", identifier: "Remove component") {
@@ -150,6 +173,16 @@ struct AddressFieldInput: View {
                     }
                 }
             }
+            if standardComponents.contains(where: { name in !draft.components.contains { $0.name == name } }) {
+                Button("Add address fields", systemImage: "plus") {
+                    updateDraft { draft in
+                        for name in standardComponents where !draft.components.contains(where: { $0.name == name }) {
+                            draft.components.append(.init(name: name, value: ""))
+                        }
+                    }
+                }
+                .accessibilityIdentifier("add-address-fields-\(field.id)")
+            }
             Button("Add component", systemImage: "plus") {
                 updateDraft { $0.components.append(.init(name: "", value: "")) }
             }
@@ -157,8 +190,11 @@ struct AddressFieldInput: View {
             .accessibilityLabel(Text("Add component") + Text(verbatim: " " + FieldPresentation.name(for: field, locale: locale)))
         }
         .onChange(of: field.value) { _, replacement in
-            guard replacement != lastWrittenValue else { return }
-            lastWrittenValue = nil
+            if let index = pendingWrites.lastIndex(of: replacement) {
+                pendingWrites.removeFirst(index + 1)
+                return
+            }
+            pendingWrites.removeAll()
             guard (try? draft.json()) != replacement,
                   let replacement = try? AddressFieldDraft(value: replacement) else { return }
             draft = replacement
@@ -179,7 +215,7 @@ struct AddressFieldInput: View {
         draft = replacement
         do {
             let edited = try VaultEditor.replacingValue(in: field, with: replacement.json())
-            lastWrittenValue = edited.value
+            if pendingWrites.last != edited.value { pendingWrites.append(edited.value) }
             field = edited
             duplicateNames = false
             invalid = false

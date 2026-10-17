@@ -45,46 +45,130 @@ struct FieldDetailRow: View {
     var copy: ((JSONValue) -> Bool)?
     @State private var revealed = false
     @State var copied = false
+    @State private var hovering = false
+    @State private var menuPresented = false
+    @FocusState private var focused: Bool
     @Environment(\.locale) private var locale
     @Environment(\.concealValuesByDefault) private var concealByDefault
+    @Environment(\.scenePhase) private var scenePhase
+
+    private var canCopy: Bool { copy != nil && FieldValueView.hasContent(field) }
+
+    private var copyName: String {
+        FieldPresentation.action(structured ? "Copy %@ as JSON" : "Copy %@", field: field, locale: locale)
+    }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             FieldLabel(field: field)
                 .ledgerFont(.caption)
                 .foregroundStyle(.primary)
-            if field.concealed, !revealed {
-                Text("Concealed")
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityLabel("Concealed value")
-            } else {
-                FieldValueView(value: field.value, kind: field.kind)
-                    .multilineTextAlignment(field.kind == "number" ? .trailing : .leading)
-                    .frame(maxWidth: .infinity, alignment: field.kind == "number" ? .trailing : .leading)
-            }
-            HStack {
-                if field.concealed {
-                    FieldRevealButton(revealed: $revealed, field: field)
-                }
-                if let copy, FieldValueView.hasContent(field) {
-                    Button(LocalizedStringKey(structured ? "Copy JSON" : "Copy"), systemImage: "doc.on.doc") {
-                        copied = copy(field.value)
-                    }
-                    .accessibilityIdentifier("copy-value")
-                    .accessibilityLabel(Text(verbatim: FieldPresentation.action(structured ? "Copy %@ as JSON" : "Copy %@", field: field, locale: locale)))
-                    if copied { Label("Copied", systemImage: "checkmark").ledgerFont(.caption) }
-                }
-            }
+            valueControl
         }
-        .buttonStyle(.borderless)
         .textSelection(.disabled)
-        .onChange(of: field) { _, _ in
-            revealed = FieldVisibility.initiallyRevealed(
-                concealed: field.concealed, initiallyVisible: false, concealByDefault: concealByDefault
-            )
-            copied = false
+        .onChange(of: field) { _, _ in reset() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { reset() }
         }
+        .onDisappear { reset() }
         .initialFieldVisibility(revealed: $revealed, concealed: field.concealed, identity: field.id)
+    }
+
+    private var valueControl: some View {
+        Button {
+            #if os(macOS)
+            if canCopy { copyValue() } else { revealed.toggle() }
+            #else
+            copied = false
+            if canCopy { revealed = true; menuPresented = true }
+            else { revealed.toggle() }
+            #endif
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                if copied {
+                    Label("Copied", systemImage: "doc.on.doc")
+                } else if field.concealed, !revealed {
+                    Text(verbatim: "••••••••••••")
+                        .accessibilityLabel("Concealed value")
+                } else {
+                    FieldValueView(value: field.value, kind: field.kind)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 5)
+            #if os(iOS)
+            .frame(minHeight: 44)
+            #endif
+            .contentShape(Rectangle())
+            .background(hovering || menuPresented ? Color.primary.opacity(0.08) : .clear,
+                        in: RoundedRectangle(cornerRadius: 5))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier(canCopy ? "copy-value" : "field-value")
+        .accessibilityLabel(Text(verbatim: FieldPresentation.name(for: field, locale: locale)))
+        .accessibilityValue(accessibleValue)
+        .accessibilityActions {
+            if canCopy { Button(copyName) { copyValue() } }
+            if field.concealed {
+                Button(FieldPresentation.action(revealed ? "Hide %@" : "Reveal %@", field: field, locale: locale)) {
+                    revealed.toggle()
+                }
+            }
+        }
+        #if os(macOS)
+        .focused($focused)
+        .onChange(of: focused) { _, value in
+            revealed = value || hovering || !concealByDefault
+            if !value { copied = false }
+        }
+        .onHover { value in
+            hovering = value
+            revealed = value || !concealByDefault
+            if !value { copied = false }
+        }
+        .onKeyPress(.escape) { reset(); return .handled }
+        .onKeyPress("c", phases: .down) { press in
+            guard press.modifiers.contains(.command), canCopy else { return .ignored }
+            copyValue()
+            return .handled
+        }
+        .contextMenu {
+            if canCopy { Button(copyName) { copyValue() } }
+            if field.concealed {
+                Button(LocalizedStringKey(revealed ? "Hide" : "Reveal")) { revealed.toggle() }
+            }
+        }
+        .help(Text(verbatim: copyName))
+        #else
+        .background {
+            FieldCopyEditMenu(presented: $menuPresented, title: copyName, copy: copyValue) {
+                revealed = !concealByDefault
+            }
+        }
+        .onLongPressGesture { copied = false; revealed = true; menuPresented = canCopy }
+        #endif
+    }
+
+    private var accessibleValue: Text {
+        if copied { return Text("Copied") }
+        if field.concealed, !revealed { return Text("Concealed value") }
+        return Text(verbatim: (try? field.value.plainTextForCopy()) ?? "")
+    }
+
+    private func copyValue() {
+        guard canCopy, let copy else { return }
+        copied = copy(field.value)
+        // Acknowledgement replaces the value, so copying doesn't leave it visible.
+        if copied { revealed = false }
+    }
+
+    private func reset() {
+        revealed = false
+        copied = false
+        hovering = false
+        menuPresented = false
+        focused = false
     }
 
     private var structured: Bool {

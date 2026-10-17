@@ -70,6 +70,7 @@ struct BackupView: View {
                 }
             }
             .formStyle(.grouped)
+            .textFieldStyle(LedgerTextFieldStyle())
             .navigationTitle(LocalizedStringKey(flow.mode == .export ? "Export backup" : "Restore backup"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

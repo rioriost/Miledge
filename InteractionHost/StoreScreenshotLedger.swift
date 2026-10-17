@@ -6,12 +6,14 @@ import SwiftUI
 /// Store artwork uses production views with isolated, fictional records only.
 @MainActor
 struct StoreScreenshotLedger: View {
+    private let automaticallyUnlock: Bool
     @State private var session: VaultSession
-    @State private var clipboard = SecureClipboard.system()
+    @State private var clipboard = SecureClipboard(write: { _, _, _ in }, clear: { _ in })
     private let attachments: AttachmentService
     static let wifiID = UUID(uuidString: "10000000-0000-0000-0000-000000000001")!
 
-    init() {
+    init(automaticallyUnlock: Bool = true, synchronizable: Bool = false) {
+        self.automaticallyUnlock = automaticallyUnlock
         let language = ProcessInfo.processInfo.environment["MILEDGE_UI_LOCALE"] ?? "en"
         let titles: [String: [String]] = [
             "en": ["Home Wi-Fi", "Travel passport", "Cloud API", "Design software", "Home insurance", "Library membership", "Project notes", "Recovery kit"],
@@ -45,8 +47,11 @@ struct StoreScreenshotLedger: View {
                                  title: names[index], favorite: index == 0 || index == 1,
                                  createdAt: date, sections: sections)
         }
-        let records = try! revisions.map(RevisionCodec.encode)
-        _session = State(initialValue: VaultSession(authenticate: {}, load: { records }, append: { _, _, _ in }))
+        var records = try! revisions.map(RevisionCodec.encode)
+        _session = State(initialValue: VaultSession(
+            authenticate: {}, load: { records }, append: { data, _, _ in records.append(data) },
+            defaultStorageScope: synchronizable ? .synchronizable : .deviceLocal
+        ))
         attachments = AttachmentService(store: try! EncryptedBlobStore(
             directory: FileManager.default.temporaryDirectory.appendingPathComponent("store-artwork-\(UUID().uuidString)")
         ))
@@ -55,14 +60,51 @@ struct StoreScreenshotLedger: View {
     var body: some View {
         LedgerView(session: session, attachments: attachments, clipboard: clipboard)
             .task {
-                try? await session.unlock()
-                #if os(macOS)
-                if let window = NSApplication.shared.windows.first(where: { $0.title == "Miledge" }) {
-                    var frame = window.frame
-                    frame.size = NSSize(width: 1280, height: 800)
-                    window.setFrame(frame, display: true)
-                }
-                #endif
+                if automaticallyUnlock { try? await session.unlock() }
             }
     }
 }
+
+#if os(macOS)
+/// A fresh window avoids reusing closed-window restoration state during artwork capture.
+@MainActor
+final class StoreArtworkAppDelegate: NSObject, NSApplicationDelegate {
+    private var artworkWindow: NSWindow?
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        let accessibilityTest = ProcessInfo.processInfo.environment["MILEDGE_ACCESSIBILITY_TEST"] == "1"
+        guard ProcessInfo.processInfo.arguments.contains("store-screenshots") || accessibilityTest else { return }
+        let language = ProcessInfo.processInfo.environment["MILEDGE_UI_LOCALE"] ?? "en"
+        let dark = ProcessInfo.processInfo.environment["MILEDGE_UI_APPEARANCE"] == "dark"
+        let scenario = ProcessInfo.processInfo.arguments.dropFirst().first ?? "store-screenshots"
+        let root = InteractionView(scenario: scenario)
+            .environment(\.locale, Locale(identifier: language))
+            .environment(\.layoutDirection, language == "ar" ? .rightToLeft : .leftToRight)
+            .preferredColorScheme(accessibilityTest ? nil : (dark ? .dark : .light))
+            .displayPreferences()
+            .accessibilityTestConfiguration()
+            .frame(minWidth: 800, minHeight: 520)
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 1280, height: 772),
+                              styleMask: [.titled, .closable, .resizable, .miniaturizable, .fullSizeContentView],
+                              backing: .buffered, defer: false)
+        window.title = "Miledge"
+        window.isReleasedWhenClosed = false
+        let controller = NSHostingController(rootView: root)
+        controller.sizingOptions = []
+        window.contentViewController = controller
+        let highContrast = ProcessInfo.processInfo.environment["MILEDGE_AX_CONTRAST"] == "1"
+        window.appearance = NSAppearance(named: highContrast
+            ? (dark ? .accessibilityHighContrastDarkAqua : .accessibilityHighContrastAqua)
+            : (dark ? .darkAqua : .aqua))
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+        NSApplication.shared.activate()
+        artworkWindow = window
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(700))
+            var frame = window.frame
+            frame.size = NSSize(width: 1280, height: 800)
+            window.setFrame(frame, display: true)
+        }
+    }
+}
+#endif
