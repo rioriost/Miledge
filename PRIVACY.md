@@ -1,8 +1,8 @@
 # Privacy Policy
 
-Last updated: October 13, 2026
+Last updated: October 17, 2026
 
-This policy describes Miledge **0.1.0** (build **2**) for Apple Silicon Mac, iPhone and iPad. Miledge is currently a pre-release app distributed through internal TestFlight, not a publicly released App Store product. Signed-device validation, production synchronization and independent security approval remain incomplete. **Use synthetic data only; do not store real secrets in this version.**
+This policy describes Miledge **0.1.0** (build **7**) for Apple Silicon Mac, iPhone and iPad, including its App Store and TestFlight distributions. Availability on either service does not constitute an independent security certification.
 
 Miledge stores ledger contents on your device and does not send them to a developer-operated server. It requires no Miledge account and includes no advertising, tracking or third-party analytics SDK. Apple's TestFlight diagnostics and information you choose to send for support are separate data flows, as explained below.
 
@@ -22,9 +22,11 @@ The app does not request contacts, location, microphone or camera access. Health
 
 Unlocking uses Apple's device-owner authentication interface. The operating system performs the authentication; Miledge receives its result, not your biometric templates, device passcode or account password.
 
-The current app uses a development Keychain service. New records are device-local, and attachments are encrypted with AES-GCM in the app's local storage. Locking closes access to the ledger and attempts to clean up active preview files. These protections are not a guarantee against a compromised device, screenshots, other software or disclosure after copying or export. Concealing a field on screen is not a separate encryption boundary.
+Records are stored in Apple's Keychain using a shared access group for the signed macOS and iOS apps. The service identifier retains the word "development" for compatibility with earlier installations; changing it would make those records inaccessible to the app. Attachments are encrypted with AES-GCM in the app's local storage. Locking closes access to the ledger and attempts to clean up active preview files. These protections are not a guarantee against a compromised device, screenshots, other software or disclosure after copying or export. Concealing a field on screen is not a separate encryption boundary.
 
-The storage library supports synchronizable Keychain records, but the current app has no official shared Keychain Access Group and rejects synchronizable writes. Cross-device synchronization and iCloud attachment delivery are not available in this configuration. This policy does not promise iCloud delivery, end-to-end protection against Apple, or any particular outcome for government disclosure requests.
+New records use synchronizable Keychain storage. When Passwords & Keychain is enabled in iCloud on devices using the same Apple Account, Apple can synchronize these records, including their fields and revision history, between Miledge installations. Apple manages delivery timing; Miledge checks the local Keychain on unlock, on returning to the foreground, periodically while unlocked, and when you choose Refresh. A refresh is not confirmation that every other device has received the data.
+
+Records created by earlier device-local versions remain local until you explicitly migrate an eligible record. Attachment files are device-local and do not synchronize through iCloud Keychain. The app restricts attachments to device-local records. An encrypted backup and restore can transfer local records and attachments. This policy does not promise a delivery deadline, protection against Apple, or any particular outcome for government disclosure requests.
 
 Apple's operating-system, device-backup and account services may handle information under your settings and [Apple's Privacy Policy](https://www.apple.com/legal/privacy/). They are not Miledge-operated services. Local attachment storage is excluded from automatic backup by the app; do not rely on a device backup as a complete Miledge backup.
 
@@ -60,4 +62,4 @@ For access or deletion requests concerning developer-held TestFlight or support 
 
 For privacy questions or requests, contact the maintainer at [rio_github@rio.st](mailto:rio_github@rio.st). Include only the information needed to identify your request; never send secrets or a backup passphrase.
 
-This policy will be updated when Miledge's data handling changes, including before enabling production cloud sharing or adding services. Changes will be recorded in this file and its revision history. App Store privacy disclosures and this policy must reflect the actual released implementation.
+This policy will be updated when Miledge's data handling changes or services are added. Changes will be recorded in this file and its revision history. App Store privacy disclosures and this policy must reflect the actual released implementation.
