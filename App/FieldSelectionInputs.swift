@@ -11,15 +11,17 @@ struct ChoiceFieldInput: View {
     let label: String
     let identifier: String
     var searchable = false
+    var onEditingChanged: (Bool) -> Void = { _ in }
     @State private var custom = false
     @State private var presented = false
     @Environment(\.locale) private var locale
+    @FocusState private var focused: Bool
 
     private var selection: Binding<FieldChoiceSelection> {
         Binding(get: { custom ? .custom : .value(text) }, set: {
             switch $0 {
             case .custom: custom = true
-            case .value(let value): custom = false; text = value
+            case .value(let value): custom = false; text = value; onEditingChanged(false)
             }
         })
     }
@@ -72,10 +74,11 @@ struct ChoiceFieldInput: View {
             }
             if custom {
                 #if os(macOS)
-                MacFieldInput(text: $text, label: label)
+                MacFieldInput(text: $text, label: label, onEditingChanged: onEditingChanged)
                     .accessibilityIdentifier("field-custom-\(identifier)")
                 #else
                 TextField("", text: $text, axis: .vertical)
+                    .focused($focused)
                     .lineLimit(1...4)
                     .fieldControlFrame()
                     .accessibilityLabel(Text(verbatim: label))
@@ -83,13 +86,14 @@ struct ChoiceFieldInput: View {
                 #endif
             }
         }
+        .onChange(of: focused) { _, editing in onEditingChanged(editing) }
     }
 
     private var selectionList: some View {
         ChoiceSelectionList(
             text: $text, choices: choices, label: label,
             custom: { custom = true; presented = false },
-            select: { text = $0; custom = false; presented = false },
+            select: { text = $0; custom = false; presented = false; onEditingChanged(false) },
             cancel: { presented = false }
         )
     }
@@ -190,6 +194,7 @@ struct CalendarFieldInput: View {
     let kind: String
     let label: String
     let identifier: String
+    var onEditingChanged: (Bool) -> Void = { _ in }
     @State private var presented = false
 
     var body: some View {
@@ -197,9 +202,12 @@ struct CalendarFieldInput: View {
         if let date = try? CalendarFieldValue.date(text, kind: kind) {
             HStack {
                 MacCalendarInput(date: Binding(get: { date }, set: {
-                    if let value = try? CalendarFieldValue.string($0, kind: kind) { text = value }
+                    if let value = try? CalendarFieldValue.string($0, kind: kind) {
+                        text = value
+                        onEditingChanged(false)
+                    }
                 }), kind: kind, label: label, identifier: "field-calendar-\(identifier)")
-                Button("Clear") { text = "" }
+                Button("Clear") { text = ""; onEditingChanged(false) }
                     .accessibilityIdentifier("calendar-clear-\(identifier)")
             }
         } else {
@@ -233,6 +241,7 @@ struct CalendarFieldInput: View {
         CalendarSelectionPanel(text: text, kind: kind, label: label) {
             text = $0
             presented = false
+            onEditingChanged(false)
         } cancel: {
             presented = false
         }

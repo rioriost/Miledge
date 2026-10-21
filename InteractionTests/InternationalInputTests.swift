@@ -21,6 +21,7 @@ final class InternationalInputTests: XCTestCase {
         app.launchArguments = ["international-" + scenario, "-AppleLanguages", "(\(locale))", "-AppleLocale", locale]
         app.launchEnvironment["MILEDGE_UI_LOCALE"] = locale
         app.launchEnvironment["MILEDGE_UI_APPEARANCE"] = large ? "dark" : "light"
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
         if large {
             app.launchArguments.append("selection-largest")
             app.launchEnvironment["MILEDGE_AX_TEXT"] = "ax3"
@@ -108,6 +109,8 @@ final class InternationalInputTests: XCTestCase {
         let phone = app.textFields["field-input-phone"]
         activate(phone)
         replaceSingleLineInput(phone, with: "123")
+        XCTAssertFalse(app.descendants(matching: .any).matching(identifier: "input-check-phone").firstMatch.exists)
+        activate(app.textFields["Title"])
         feedback("input-check-phone", contains: "Check the phone number")
         capture("Phone review message preserves save")
         let fields = try save()
@@ -138,6 +141,8 @@ final class InternationalInputTests: XCTestCase {
         activate(postal)
         for character in "001-0001" { postal.typeText(String(character)) }
         XCTAssertEqual(postal.value as? String, "001-0001")
+        XCTAssertFalse(app.descendants(matching: .any).matching(identifier: "input-check-postal-address").firstMatch.exists)
+        activate(app.textFields["address-address-region"])
         feedback("input-check-postal-address", contains: "format matches")
         selectCountry("US", control: "address-country")
         feedback("input-check-postal-address", contains: "Check the postal code")

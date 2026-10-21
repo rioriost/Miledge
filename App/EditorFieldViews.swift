@@ -1,10 +1,47 @@
 import MiledgeApplication
 import MiledgeDomain
 import SwiftUI
+import Observation
 
 struct EditorFieldID: Hashable {
     let section: String
     let field: String
+}
+
+/// Unvalidated values belong to the editor, never to the persisted revision.
+/// Keeping them separate also lets structural edits retain incomplete custom input.
+@Observable
+final class EditorDraftValues {
+    private var values: [EditorFieldID: JSONValue] = [:]
+
+    func value(for id: EditorFieldID, fallback: JSONValue) -> JSONValue {
+        values[id] ?? fallback
+    }
+
+    func set(_ value: JSONValue, for id: EditorFieldID) {
+        guard values[id] != value else { return }
+        values[id] = value
+    }
+
+    func applying(to revision: VaultRevision) -> VaultRevision {
+        var result = revision
+        for section in result.sections.indices {
+            for field in result.sections[section].fields.indices {
+                let id = EditorFieldID(section: result.sections[section].id,
+                                       field: result.sections[section].fields[field].id)
+                if let value = values[id] { result.sections[section].fields[field].value = value }
+            }
+        }
+        return result
+    }
+
+    func retainFields(in revision: VaultRevision, customOnly: Bool = false) {
+        let retained = Set(revision.sections.flatMap { section in
+            section.fields.filter { !customOnly || EditorTypeChangeState.preserves($0, in: section) }
+                .map { EditorFieldID(section: section.id, field: $0.id) }
+        })
+        values = values.filter { retained.contains($0.key) }
+    }
 }
 
 enum EditorSectionName {
@@ -142,6 +179,11 @@ struct EditableField: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             inputAndOptions
+            if isCustom, field.kind == "string" {
+                Toggle("Conceal value", isOn: $field.concealed)
+                    .accessibilityIdentifier("conceal-field-\(field.id)")
+                    .accessibilityLabel(Text(verbatim: FieldPresentation.action("Conceal %@", field: field, locale: locale)))
+            }
         }
     }
 
@@ -220,7 +262,8 @@ struct EditableField: View {
         default:
             if case .string(let text) = field.value {
                 StringFieldInput(field: $field, invalid: $invalid, text: text, templateID: templateID,
-                                 initiallyVisible: initiallyVisible, onEditingChanged: onEditingChanged)
+                                 initiallyVisible: initiallyVisible && !(isCustom && field.concealed),
+                                 onEditingChanged: onEditingChanged)
             } else {
                 Label("Unsupported field", systemImage: "lock")
             }

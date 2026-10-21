@@ -67,6 +67,15 @@ struct InteractionView: View {
             Text("Saved")
                 .accessibilityIdentifier("saved-revision")
                 .accessibilityValue(result)
+        } else if scenario == "custom-privacy" {
+            ItemEditor(revision: VaultRevision(templateId: "document", title: "Synthetic privacy", sections: [
+                VaultSection(id: "50000000-0000-0000-0000-000000000001", fields: [
+                    VaultField(id: "50000000-0000-0000-0000-000000000002", kind: "string",
+                               value: .string("Synthetic private text"), concealed: false, label: "Private note")
+                ])
+            ]), creating: true) { revision in
+                result = String(decoding: try! RevisionCodec.encode(revision), as: UTF8.self)
+            }
         } else if scenario.hasPrefix("format-") {
             ItemEditor(revision: StructuredInputFixture.make(scenario)) { revision in
                 result = String(decoding: try! RevisionCodec.encode(revision), as: UTF8.self)

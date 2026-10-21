@@ -3,6 +3,20 @@ import XCTest
 @testable import MiledgeDomain
 
 final class VaultEditorTests: XCTestCase {
+    func testCustomTextPrivacySurvivesSaveReloadAndValueEditing() throws {
+        var field = try VaultEditor.customField(kind: "string", label: "Private note")
+        field = try VaultEditor.replacingValue(in: field, with: .string("  秘密\n0001  "))
+        field.concealed = true
+        let revision = VaultRevision(templateId: "document", title: "Synthetic privacy",
+                                     sections: [VaultSection(id: UUID().uuidString, fields: [field])])
+        let reloaded = try RevisionCodec.decode(RevisionCodec.encode(revision))
+        let restored = try XCTUnwrap(reloaded.sections.first?.fields.first)
+        XCTAssertEqual(restored, field)
+        let edited = try VaultEditor.replacingValue(in: restored, with: .string("Updated secret"))
+        XCTAssertTrue(edited.concealed)
+        XCTAssertEqual(edited.kind, "string")
+    }
+
     private func draft(template: ItemTemplate? = nil, title: String = "") -> VaultRevision {
         VaultRevision(
             templateId: template?.id ?? "custom-item", title: title, createdAt: Date(timeIntervalSince1970: 0),

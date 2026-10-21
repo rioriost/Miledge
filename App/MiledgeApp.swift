@@ -18,7 +18,11 @@ struct MiledgeApp: App {
         .defaultSize(width: 1100 * displayTextSize.scale, height: 760 * displayTextSize.scale)
         .windowResizability(.contentMinSize)
         .commands {
-            LedgerCommands()
+            LedgerCommands(lock: session?.state == .unlocked ? {
+                clipboard.clearOwnedContents()
+                attachments?.clearTemporaryFiles()
+                session?.lock()
+            } : nil)
             BackupCommands()
         }
         Settings { DisplaySettingsView(session: session) }

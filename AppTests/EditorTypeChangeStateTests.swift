@@ -92,4 +92,50 @@ final class EditorTypeChangeStateTests: XCTestCase {
         XCTAssertTrue(EditorInitialAccess(revision: deleted).readOnly)
     }
 
+    func testUnvalidatedDraftNeverMutatesBaselineAndSaveRejectsIncompleteValue() throws {
+        let field = VaultField(id: "amount", kind: "number", value: .string("1.000"), concealed: false)
+        let original = VaultRevision(templateId: "custom-item", title: "Synthetic", sections: [
+            VaultSection(id: "custom", fields: [field])
+        ])
+        let id = EditorFieldID(section: "custom", field: field.id)
+        let draft = EditorDraftValues()
+        for text in ["-", "１２３\r\ninvalid-number\n", "invalid"] {
+            draft.set(.string(text), for: id)
+            XCTAssertEqual(draft.value(for: id, fallback: field.value), .string(text))
+            XCTAssertEqual(original.sections[0].fields[0].value, .string("1.000"))
+            XCTAssertThrowsError(try VaultPolicy.validateForWrite(draft.applying(to: original)))
+        }
+        let exact = "-9007199254740993.00000100"
+        draft.set(.string(exact), for: id)
+        let saved = draft.applying(to: original)
+        XCTAssertNoThrow(try VaultPolicy.validateForWrite(saved))
+        XCTAssertEqual(saved.sections[0].fields[0].value, .string(exact))
+    }
+
+    func testRawCustomDraftSurvivesTypeChangeAndRemovedValuesStayRemoved() throws {
+        let card = try XCTUnwrap(TemplateCatalog.template(id: "credit-card"))
+        let bank = try XCTUnwrap(TemplateCatalog.template(id: "bank-account"))
+        var original = VaultRevision(templateId: card.id, title: "Synthetic", sections: card.sections)
+        let field = VaultField(kind: "number", value: .string(""), label: "Custom decimal")
+        let custom = VaultSection(id: UUID().uuidString, fields: [field])
+        original.sections.append(custom)
+        let customID = EditorFieldID(section: custom.id, field: field.id)
+        let catalog = try XCTUnwrap(original.sections.first)
+        let catalogField = try XCTUnwrap(catalog.fields.first)
+        let catalogID = EditorFieldID(section: catalog.id, field: catalogField.id)
+        let draft = EditorDraftValues()
+        draft.set(.string("-"), for: customID)
+        draft.set(.string("incomplete"), for: catalogID)
+        let changed = try VaultEditor.replacingTypeFields(
+            in: original, with: VaultRevision(templateId: bank.id, sections: bank.sections)
+        )
+        draft.retainFields(in: changed, customOnly: true)
+        XCTAssertEqual(draft.applying(to: changed).sections.last?.fields.first?.value, .string("-"))
+        XCTAssertEqual(draft.value(for: catalogID, fallback: .null), .null)
+        let removed = try VaultEditor.removingSection(in: changed, sectionID: custom.id)
+        draft.retainFields(in: removed)
+        XCTAssertEqual(draft.value(for: customID, fallback: .null), .null)
+        XCTAssertFalse(draft.applying(to: removed).sections.contains { $0.id == custom.id })
+    }
+
 }

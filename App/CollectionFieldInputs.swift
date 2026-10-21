@@ -112,6 +112,8 @@ struct AddressFieldInput: View {
     var initiallyVisible = false
     @State private var pendingWrites: [JSONValue] = []
     @State private var duplicateNames = false
+    @State private var postalChecks: [UUID: InputCheck] = [:]
+    @FocusState private var focusedComponent: UUID?
     @Environment(\.locale) private var locale
 
     private let standardComponents = ["country", "postalCode", "region", "city", "street"]
@@ -148,21 +150,20 @@ struct AddressFieldInput: View {
                                     text: $component.value, choices: FieldSelectionCatalog.countries(locale: locale),
                                     label: CatalogLocalization.string("Country", locale: locale)
                                         + " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)",
-                                    identifier: "\(field.id)-country", searchable: true
+                                    identifier: "\(field.id)-country", searchable: true,
+                                    onEditingChanged: { editing in if !editing { refreshPostalChecks() } }
                                 )
                                 .fieldControlFrame()
                             } else {
                                 TextField("Value", text: $component.value, axis: .vertical)
+                                    .focused($focusedComponent, equals: component.id)
                                     .fieldControlFrame()
                                     .multilineTextAlignment(.leading)
                                     .accessibilityIdentifier(componentLabels[component.name] == nil ? "Value" : "address-\(field.id)-\(component.name)")
                                     .lineLimit(1...4)
                                     .accessibilityLabel(Text(LocalizedStringKey(componentLabels[component.name] ?? "Value")) + Text(verbatim: " \(FieldPresentation.name(for: field, locale: locale)) \(index + 1)"))
                             }
-                            if ["postalCode", "postal", "zip", "zipCode", "postcode"].contains(component.name),
-                               let check = InputValidator.shared.postalCode(
-                                component.value, country: draft.components.first { $0.name == "country" }?.value ?? ""
-                               ) {
+                            if focusedComponent != component.id, let check = postalChecks[component.id] {
                                 InputCheckFeedback(check: check, identifier: "input-check-postal-\(field.id)")
                             }
                         }
@@ -189,6 +190,10 @@ struct AddressFieldInput: View {
             .accessibilityIdentifier("Add component")
             .accessibilityLabel(Text("Add component") + Text(verbatim: " " + FieldPresentation.name(for: field, locale: locale)))
         }
+        .onAppear { refreshPostalChecks() }
+        .onChange(of: focusedComponent) { old, _ in
+            if old != nil { refreshPostalChecks() }
+        }
         .onChange(of: field.value) { _, replacement in
             if let index = pendingWrites.lastIndex(of: replacement) {
                 pendingWrites.removeFirst(index + 1)
@@ -200,6 +205,7 @@ struct AddressFieldInput: View {
             draft = replacement
             invalid = false
             duplicateNames = false
+            refreshPostalChecks()
         }
         if invalid {
             Text(LocalizedStringKey(duplicateNames
@@ -214,9 +220,9 @@ struct AddressFieldInput: View {
         edit(&replacement)
         draft = replacement
         do {
-            let edited = try VaultEditor.replacingValue(in: field, with: replacement.json())
-            if pendingWrites.last != edited.value { pendingWrites.append(edited.value) }
-            field = edited
+            let value = try replacement.json()
+            if pendingWrites.last != value { pendingWrites.append(value) }
+            field.value = value
             duplicateNames = false
             invalid = false
         } catch StructuredFieldError.duplicateComponents {
@@ -226,6 +232,16 @@ struct AddressFieldInput: View {
             duplicateNames = false
             invalid = true
         }
+    }
+
+    private func refreshPostalChecks() {
+        let country = draft.components.first { $0.name == "country" }?.value ?? ""
+        var checks: [UUID: InputCheck] = [:]
+        for component in draft.components where ["postalCode", "postal", "zip", "zipCode", "postcode"].contains(component.name) {
+            guard component.id != focusedComponent else { continue }
+            checks[component.id] = InputValidator.shared.postalCode(component.value, country: country)
+        }
+        postalChecks = checks
     }
 }
 
@@ -298,12 +314,9 @@ struct StringListFieldInput: View {
     private var draftBinding: Binding<StringListFieldDraft> {
         Binding(get: { draft }, set: { replacement in
             draft = replacement
-            do {
-                let edited = try VaultEditor.replacingValue(in: field, with: replacement.json)
-                lastWrittenValue = edited.value
-                field = edited
-                invalid = false
-            } catch { invalid = true }
+            lastWrittenValue = replacement.json
+            field.value = replacement.json
+            invalid = false
         })
     }
 }
@@ -365,9 +378,9 @@ struct RecoveryCodesFieldInput: View {
         edit(&replacement)
         draft = replacement
         do {
-            let edited = try VaultEditor.replacingValue(in: field, with: replacement.json())
-            lastWrittenValue = edited.value
-            field = edited
+            let value = try replacement.json()
+            lastWrittenValue = value
+            field.value = value
             invalid = false
         } catch { invalid = true }
     }

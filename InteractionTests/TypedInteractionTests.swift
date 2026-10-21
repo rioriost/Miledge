@@ -32,8 +32,17 @@ final class TypedInteractionTests: XCTestCase {
         try await super.tearDown()
     }
 
+    private func assertSaveRejected() {
+        activate(app.buttons["Save"])
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Check the fields before saving."].firstMatch.exists)
+        XCTAssertFalse(app.staticTexts["saved-revision"].exists)
+        activate(app.alerts.buttons["OK"])
+    }
+
     private func launch(_ scenario: String) {
         app.launchArguments[0] = scenario
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
         app.launch()
         if scenario.hasPrefix("conflict") || ["clipboard", "organization-ledger", "related-ledger"].contains(scenario) {
             openAllItems()
@@ -342,7 +351,8 @@ final class TypedInteractionTests: XCTestCase {
         launch("validation")
         try auditAccessibility(of: app, state: "editor")
         replace(app.textFields["Amount"], with: "invalid\n")
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
+        assertSaveRejected()
         XCTAssertTrue(app.staticTexts["Use a decimal number with a dot."].exists)
         try auditAccessibility(of: app, state: "invalid editor")
         replace(app.textFields["Amount"], with: "9007199254740993.25\n")
@@ -942,10 +952,11 @@ final class TypedInteractionTests: XCTestCase {
         activate(visibilityButton("Reveal"))
         replace(input, with: "not-a-number")
         XCTAssertTrue(app.staticTexts["Use a decimal number with a dot."].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
+        assertSaveRejected()
         XCTAssertEqual(input.value as? String, "not-a-number")
         activate(visibilityButton("Hide"))
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
         activate(visibilityButton("Reveal"))
         XCTAssertEqual(input.value as? String, "not-a-number")
         let exact = "9007199254740993.000001"
@@ -1037,7 +1048,8 @@ final class TypedInteractionTests: XCTestCase {
         replace(names.element(boundBy: 1), with: "alpha")
         XCTAssertEqual(names.element(boundBy: 1).value as? String, "alpha")
         XCTAssertTrue(app.staticTexts["Component names must be different."].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
+        assertSaveRejected()
         XCTAssertEqual(names.count, 2)
         replace(names.element(boundBy: 1), with: "custom locality")
         XCTAssertTrue(app.buttons["Save"].isEnabled)
@@ -1162,11 +1174,13 @@ final class TypedInteractionTests: XCTestCase {
         XCTAssertFalse(app.textViews["Key"].exists)
     }
 
-    func testInvalidEditorInputCannotCopyTheLastValidValue() {
+    func testEditorCopyUsesCurrentRawDraftInsteadOfLastValidValue() {
         launch("editor-copy")
         replace(app.textFields["Amount"], with: "invalid")
-        XCTAssertFalse(app.buttons["editor-copy-amount"].isEnabled)
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["editor-copy-amount"].isEnabled)
+        activate(app.buttons["editor-copy-amount"])
+        XCTAssertEqual(app.staticTexts["editor-copied-value"].value as? String, "invalid")
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
         replace(app.textFields["Amount"], with: "9007199254740993.000001")
         XCTAssertTrue(app.buttons["editor-copy-amount"].isEnabled)
         activate(app.buttons["editor-copy-amount"])

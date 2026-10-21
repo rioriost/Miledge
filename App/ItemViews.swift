@@ -528,6 +528,12 @@ struct ItemEditor: View {
     @State private var fieldGeneration = UUID()
     @State private var initialAccess: EditorInitialAccess
     @State private var defaultTitle = EditorDefaultTitle()
+    @State private var draftValues = EditorDraftValues()
+    @State private var validationMessage: String?
+    @State private var inputChecks: [EditorFieldID: InputCheck] = [:]
+    @State private var sectionOptions: Result<[VaultSectionOption], Error> = .success([])
+    @State private var removableFields = Set<EditorFieldID>()
+    @State private var removableSections = Set<String>()
     private let initialFields: Set<EditorFieldID>
     @Environment(\.displayTextSize) private var displayTextSize
     @Environment(\.locale) private var locale
@@ -557,15 +563,6 @@ struct ItemEditor: View {
 
     private func customSection(_ section: VaultSection) -> Bool {
         section.id == "custom" || UUID(uuidString: section.id) != nil
-    }
-
-    private var validationMessage: String? {
-        do {
-            try VaultEditor.validateDraft(revision)
-            return nil
-        } catch {
-            return String(localized: "Check the fields before saving.")
-        }
     }
 
     var body: some View {
@@ -628,12 +625,15 @@ struct ItemEditor: View {
                         fields(in: section, at: sectionIndex)
                         if section.id == revision.sections.first?.id, let option = nameDetailsOption {
                             Button("Add name details", systemImage: "person.text.rectangle") {
-                                do { revision = try VaultEditor.addingSection(id: option.id, to: revision) }
+                                do {
+                                    revision = try VaultEditor.addingSection(id: option.id, to: revision)
+                                    refreshStructure()
+                                }
                                 catch { editorIssue = String(localized: "The fields could not be added.") }
                             }
                             .accessibilityIdentifier("add-name-details")
                         }
-                        if VaultEditor.canRemoveSection(in: revision, sectionID: section.id) {
+                        if removableSections.contains(section.id) {
                             removeSectionButton(section.id)
                         }
                     }
@@ -661,12 +661,13 @@ struct ItemEditor: View {
                     }
                     .accessibilityIdentifier("plus")
                     Menu {
-                        switch Result(catching: { try VaultEditor.availableSections(for: revision) }) {
+                        switch sectionOptions {
                         case .success(let options):
                             ForEach(options, id: \.id) { option in
                                 Button(EditorSectionName.name(for: option.section.id)) {
                                     do {
                                         revision = try VaultEditor.addingSection(id: option.id, to: revision)
+                                        refreshStructure()
                                     } catch {
                                         editorIssue = String(localized: "The fields could not be added.")
                                     }
@@ -732,7 +733,7 @@ struct ItemEditor: View {
                             .font(.body)
                     }
                     ToolbarItem(id: "item-editor-save", placement: .confirmationAction) {
-                        Button("Save") { save(revision) }
+                        Button("Save") { validateAndSave() }
                             .font(.body)
                             .accessibilityIdentifier("editor-save")
                             #if os(macOS)
@@ -741,13 +742,13 @@ struct ItemEditor: View {
                             #else
                             .keyboardShortcut(.defaultAction)
                             #endif
-                            .disabled(readOnly || validationMessage != nil || !invalidFields.isEmpty
-                                || revision.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                            .disabled(readOnly)
                     }
                 }
             }
         }
         .interactiveDismissDisabled()
+        .onAppear { refreshStructure(); refreshInputChecks() }
         .onAppear {
             if !readOnly {
                 defaultTitle.initialize(revision: &revision, creating: creating, locale: locale, timeZone: timeZone)
@@ -830,11 +831,15 @@ struct ItemEditor: View {
                     if !success { editorIssue = String(localized: "The value could not be copied. Try again.") }
                     return success
                 } },
-                onRemove: VaultEditor.canRemoveField(in: revision, sectionID: section.id, fieldID: field.id)
+                onRemove: removableFields.contains(EditorFieldID(section: section.id, field: field.id))
                     ? { pendingFieldRemoval = EditorFieldID(section: section.id, field: field.id) } : nil,
                 onEditingChanged: { editing in
                     let id = EditorFieldID(section: section.id, field: field.id)
                     if editing { editingFields.insert(id) } else { editingFields.remove(id) }
+                    if !editing {
+                        if field.id == "profileId" { updateProfileContext(id) }
+                        refreshInputChecks()
+                    }
                 }
             )
             .id(EditorTypeChangeState.identity(for: field, in: section, generation: fieldGeneration))
@@ -844,13 +849,13 @@ struct ItemEditor: View {
                         text: phoneRegionBinding(section: section.id, field: field.id),
                         choices: FieldSelectionCatalog.countries(locale: locale),
                         label: String(localized: "Phone region", locale: locale),
-                        identifier: "phone-region-\(field.id)", searchable: true
+                        identifier: "phone-region-\(field.id)", searchable: true,
+                        onEditingChanged: { editing in if !editing { refreshInputChecks() } }
                     )
                 }
             }
-            // Email syntax is incomplete while typing; show its result when leaving the field.
-            if !(field.kind == "email" && editingFields.contains(EditorFieldID(section: section.id, field: field.id))),
-               let check = InputValidator.shared.check(field, in: revision, sectionID: section.id) {
+            let id = EditorFieldID(section: section.id, field: field.id)
+            if !editingFields.contains(id), let check = inputChecks[id] {
                 InputCheckFeedback(check: check, identifier: "input-check-\(field.id)")
             }
             }
@@ -858,7 +863,7 @@ struct ItemEditor: View {
     }
 
     private var nameDetailsOption: VaultSectionOption? {
-        (try? VaultEditor.availableSections(for: revision))?.first { $0.section.id == "name-details" }
+        (try? sectionOptions.get())?.first { $0.section.id == "name-details" }
     }
 
     private func phoneRegionBinding(section: String, field: String) -> Binding<String> {
@@ -878,11 +883,17 @@ struct ItemEditor: View {
 
     private func fieldBinding(sectionID: String, fieldID: String, fallback: VaultField) -> Binding<VaultField> {
         Binding {
-            revision.sections.first { $0.id == sectionID }?.fields.first { $0.id == fieldID } ?? fallback
+            var field = revision.sections.first { $0.id == sectionID }?.fields.first { $0.id == fieldID } ?? fallback
+            field.value = draftValues.value(for: EditorFieldID(section: sectionID, field: fieldID), fallback: field.value)
+            return field
         } set: { value in
             guard let section = revision.sections.firstIndex(where: { $0.id == sectionID }),
                   let field = revision.sections[section].fields.firstIndex(where: { $0.id == fieldID }) else { return }
-            revision.sections[section].fields[field] = value
+            draftValues.set(value.value, for: EditorFieldID(section: sectionID, field: fieldID))
+            var metadata = value
+            metadata.value = revision.sections[section].fields[field].value
+            if metadata != revision.sections[section].fields[field] { revision.sections[section].fields[field] = metadata }
+            validationMessage = nil
         }
     }
 
@@ -896,6 +907,9 @@ struct ItemEditor: View {
         do {
             revision = try VaultEditor.removingField(in: revision, sectionID: target.section, fieldID: target.field)
             invalidFields.remove(target)
+            draftValues.retainFields(in: revision)
+            refreshStructure()
+            refreshInputChecks()
         } catch { editorIssue = String(localized: "Check the fields before saving.") }
         pendingFieldRemoval = nil
     }
@@ -905,6 +919,9 @@ struct ItemEditor: View {
         do {
             revision = try VaultEditor.removingSection(in: revision, sectionID: id)
             invalidFields = invalidFields.filter { $0.section != id }
+            draftValues.retainFields(in: revision)
+            refreshStructure()
+            refreshInputChecks()
         } catch { editorIssue = String(localized: "Check the fields before saving.") }
         pendingSectionRemoval = nil
     }
@@ -915,6 +932,9 @@ struct ItemEditor: View {
             revision = try changeType(revision, template, profile)
             defaultTitle.updateType(revision: &revision, locale: locale)
             invalidFields = EditorTypeChangeState.retainedInvalidFields(invalidFields, in: revision)
+            draftValues.retainFields(in: revision, customOnly: true)
+            refreshStructure()
+            refreshInputChecks()
             fieldGeneration = UUID()
         } catch { editorIssue = String(localized: "The fields could not be added.") }
         pendingType = nil
@@ -941,7 +961,10 @@ struct ItemEditor: View {
     }
 
     private var titleBinding: Binding<String> {
-        Binding(get: { revision.title }, set: { defaultTitle.edit($0, revision: &revision) })
+        Binding(get: { revision.title }, set: {
+            defaultTitle.edit($0, revision: &revision)
+            validationMessage = nil
+        })
     }
 
     private func invalidBinding(section: String, field: String) -> Binding<Bool> {
@@ -959,8 +982,76 @@ struct ItemEditor: View {
         do {
             let field = try VaultEditor.customField(kind: kind, label: "")
             revision.sections.append(VaultSection(id: UUID().uuidString, fields: [field]))
+            refreshStructure()
         } catch {
             editorIssue = String(localized: "The fields could not be added.")
+        }
+    }
+
+    // Profile selection determines which template sections can be added. Commit only
+    // recognized catalog IDs to the structural baseline after leaving the control;
+    // incomplete custom input remains in draftValues until Save validates it.
+    private func updateProfileContext(_ id: EditorFieldID) {
+        guard ["affiliate-account", "api-credential"].contains(revision.templateId),
+              let section = revision.sections.firstIndex(where: { $0.id == id.section }),
+              let field = revision.sections[section].fields.firstIndex(where: { $0.id == id.field }),
+              case .string(let value) = draftValues.value(for: id, fallback: revision.sections[section].fields[field].value)
+        else { return }
+        let recognized = value.isEmpty || (revision.templateId == "affiliate-account"
+            ? TemplateCatalog.affiliateProfile(id: value) != nil
+            : TemplateCatalog.apiCredentialProfiles.contains { $0.id == value })
+        guard recognized else {
+            sectionOptions = .failure(StructuredFieldError.unsupportedValue)
+            return
+        }
+        revision.sections[section].fields[field].value = .string(value)
+        refreshStructure()
+    }
+
+    // Catalog availability and removal permissions change with structure, not keystrokes.
+    private func refreshStructure() {
+        sectionOptions = Result { try VaultEditor.availableSections(for: revision) }
+        removableFields = Set(revision.sections.flatMap { section in
+            section.fields.filter { VaultEditor.canRemoveField(in: revision, sectionID: section.id, fieldID: $0.id) }
+                .map { EditorFieldID(section: section.id, field: $0.id) }
+        })
+        removableSections = Set(revision.sections.filter {
+            VaultEditor.canRemoveSection(in: revision, sectionID: $0.id)
+        }.map(\.id))
+    }
+
+    private func refreshInputChecks() {
+        let candidate = draftValues.applying(to: revision)
+        var checks: [EditorFieldID: InputCheck] = [:]
+        for section in candidate.sections {
+            for field in section.fields {
+                let id = EditorFieldID(section: section.id, field: field.id)
+                guard !editingFields.contains(id) else { continue }
+                checks[id] = InputValidator.shared.check(field, in: candidate, sectionID: section.id)
+            }
+        }
+        inputChecks = checks
+    }
+
+    private func validateAndSave() {
+        guard !readOnly else { return }
+        let candidate = draftValues.applying(to: revision)
+        do {
+            // Invalid collection buffers (e.g. duplicate address keys) cannot be encoded.
+            guard invalidFields.isEmpty else { throw StructuredFieldError.unsupportedValue }
+            try VaultPolicy.validateForWrite(candidate)
+            validationMessage = nil
+            save(candidate)
+        } catch {
+            let message = String(localized: "Check the fields before saving.")
+            validationMessage = message
+            editorIssue = message
+            refreshInputChecks()
+            for section in candidate.sections {
+                for field in section.fields where (try? VaultEditor.validateField(field)) == nil {
+                    invalidFields.insert(EditorFieldID(section: section.id, field: field.id))
+                }
+            }
         }
     }
 }

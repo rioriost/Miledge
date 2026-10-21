@@ -24,6 +24,7 @@ final class GUIReviewRegressionTests: XCTestCase {
     private func launch(_ scenario: String = "navigation", locale: String = "en") {
         app.launchArguments = [scenario, "-AppleLanguages", "(\(locale))", "-AppleLocale", locale]
         app.launchEnvironment["MILEDGE_UI_LOCALE"] = locale
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
         app.launch()
     }
 
@@ -108,6 +109,62 @@ final class GUIReviewRegressionTests: XCTestCase {
             capture("Japanese editor \(identifier)")
             app.terminate()
         }
+    }
+
+    func testCustomTextConcealmentPreservesValueAndSavesPrivacy() throws {
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
+        launch("custom-privacy")
+        let id = "50000000-0000-0000-0000-000000000002"
+        let plain = app.textFields["field-input-\(id)"]
+        makeReachable(plain, in: app)
+        XCTAssertTrue(plain.waitForExistence(timeout: 5))
+        XCTAssertEqual(plain.value as? String, "Synthetic private text")
+        #if os(macOS)
+        let toggle = app.checkBoxes["conceal-field-\(id)"]
+        #else
+        let toggle = app.switches["conceal-field-\(id)"].switches.firstMatch
+        #endif
+        activate(toggle)
+        let secure = app.secureTextFields["field-input-\(id)"]
+        XCTAssertTrue(secure.waitForExistence(timeout: 5))
+        XCTAssertNotEqual(secure.value as? String, "Synthetic private text")
+        capture("Custom text concealed")
+        activate(toggle)
+        XCTAssertTrue(plain.waitForExistence(timeout: 5))
+        XCTAssertEqual(plain.value as? String, "Synthetic private text")
+        activate(toggle)
+        activate(app.buttons["Save"])
+        let saved = app.staticTexts["saved-revision"]
+        XCTAssertTrue(saved.waitForExistence(timeout: 5))
+        let data = try XCTUnwrap((saved.value as? String)?.data(using: .utf8))
+        let revision = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        let sections = try XCTUnwrap(revision["sections"] as? [[String: Any]])
+        let fields = sections.compactMap { $0["fields"] as? [[String: Any]] }.flatMap { $0 }
+        let field = try XCTUnwrap(fields.first { $0["id"] as? String == id })
+        XCTAssertEqual(field["concealed"] as? Bool, true)
+        XCTAssertEqual(field["value"] as? String, "Synthetic private text")
+        XCTAssertEqual(field["kind"] as? String, "string")
+    }
+
+    func testIdleLockExtendsForInputAndDismissesEditor() async throws {
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
+        launch("navigation")
+        activate(app.buttons["ledger-add"])
+        activate(templateSearch)
+        templateSearch.typeText("Document")
+        activateTemplate("document", in: app)
+        let title = app.textFields["Title"]
+        XCTAssertTrue(title.waitForExistence(timeout: 5))
+        activate(title)
+        // Input after 35 seconds must extend the deadline while an editor is open.
+        try await Task.sleep(for: .seconds(35))
+        title.typeText(" synthetic idle test")
+        try await Task.sleep(for: .seconds(35))
+        XCTAssertTrue(title.exists, "Active input must extend the original unlock deadline.")
+        XCTAssertFalse(app.buttons["Unlock"].exists)
+        XCTAssertTrue(app.buttons["Unlock"].waitForExistence(timeout: 35))
+        XCTAssertFalse(title.exists, "Locking must dismiss the editor containing private data.")
+        capture("Idle lock dismissed the editor")
     }
 
     func testArabicCreationUsesLocalizedSinglePresentation() throws {
@@ -199,7 +256,7 @@ final class GUIReviewRegressionTests: XCTestCase {
         let field = app.textFields["field-input-50000000-0000-0000-0000-000000000002"]
         activate(field)
         field.typeText("-")
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
         #if os(iOS)
         let form = app.descendants(matching: .any).matching(identifier: "item-editor-form").firstMatch
         for _ in 0..<8 {
@@ -211,7 +268,11 @@ final class GUIReviewRegressionTests: XCTestCase {
         confirm("confirm-change-type")
         makeReachable(field, in: app)
         XCTAssertEqual(field.value as? String, "-")
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
+        activate(app.buttons["Save"])
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["saved-revision"].exists)
+        activate(app.alerts.buttons["OK"])
         capture("Custom invalid buffer retained after type change")
         activate(field)
         replaceSingleLineInput(field, with: "-5.000")

@@ -12,6 +12,7 @@ final class StructuredInputInteractionTests: XCTestCase {
         app.launchArguments = ["format-" + scenario, "-AppleLanguages", "(\(locale))", "-AppleLocale", locale]
         app.launchEnvironment["MILEDGE_UI_LOCALE"] = locale
         app.launchEnvironment["MILEDGE_UI_APPEARANCE"] = large ? "dark" : "light"
+        app.launchEnvironment["MILEDGE_AX_TEXT"] = "large"
         if large { app.launchArguments.append("selection-largest"); app.launchEnvironment["MILEDGE_AX_TEXT"] = "ax3" }
         app.launch()
     }
@@ -64,6 +65,8 @@ final class StructuredInputInteractionTests: XCTestCase {
         XCTAssertTrue(app.keys["1"].exists)
         #endif
         replaceSingleLineInput(port, with: "65536")
+        XCTAssertFalse(app.descendants(matching: .any).matching(identifier: "input-check-port").firstMatch.exists)
+        activate(app.textFields["field-input-url"])
         feedback("port", contains: "1 to 65535")
         capture("Port number keyboard and review")
         let values = try save()
@@ -80,8 +83,10 @@ final class StructuredInputInteractionTests: XCTestCase {
         XCTAssertFalse(message.exists)
         replaceSingleLineInput(email, with: "name+tag@example.com")
         XCTAssertFalse(message.exists)
+        capture("Email typing without format feedback")
         activate(app.textFields["field-input-name"])
         feedback("email", contains: "Format matches")
+        capture("Email format feedback after blur")
         let values = try save()
         XCTAssertEqual(values.first { $0["id"] as? String == "email" }?["value"] as? String, "name+tag@example.com")
     }

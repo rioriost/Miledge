@@ -20,6 +20,9 @@ struct LedgerView: View {
     @State private var issue: String?
     @State private var backupFlow: BackupFlow?
     @State private var showingDisplaySettings = false
+    #if os(macOS)
+    @State private var automaticLock = MacAutomaticLock()
+    #endif
 
     init(
         session: VaultSession, attachments: AttachmentService? = nil, selected: UUID? = nil,
@@ -169,7 +172,26 @@ struct LedgerView: View {
         }
         .onChange(of: browser.query) { _, _ in browser.reconcileSelection(heads: session.heads) }
         .onChange(of: session.heads) { _, _ in browser.reconcileSelection(heads: session.heads) }
+        #if os(iOS)
+        .background {
+            IOSAutomaticLock(unlocked: session.state == .unlocked) { lock() }
+                .frame(width: 0, height: 0)
+                .accessibilityHidden(true)
+        }
+        #endif
         #if os(macOS)
+        .onAppear {
+            automaticLock.start(unlocked: session.state == .unlocked) { reason in
+                lock(clearClipboard: reason != .inactive)
+            }
+        }
+        .onChange(of: session.state) { _, state in
+            automaticLock.setUnlocked(state == .unlocked)
+        }
+        .onDisappear {
+            automaticLock.stop()
+            lock()
+        }
         .focusedSceneValue(\.backupActions, backupActions)
         .focusedSceneValue(\.ledgerActions, session.state == .unlocked
             ? LedgerActions(add: { choosingTemplate = true }, lock: { lock() }) : nil)
@@ -419,6 +441,7 @@ extension FocusedValues {
 }
 
 struct LedgerCommands: Commands {
+    var lock: (() -> Void)? = nil
     @FocusedValue(\.ledgerActions) private var actions
 
     var body: some Commands {
@@ -427,10 +450,10 @@ struct LedgerCommands: Commands {
                 .keyboardShortcut("n")
                 .disabled(actions == nil)
         }
-        CommandMenu("Ledger") {
-            Button("Lock") { actions?.lock() }
-                .keyboardShortcut("l", modifiers: [.command, .shift])
-                .disabled(actions == nil)
+        CommandGroup(after: .appSettings) {
+            Button("Lock") { (lock ?? actions?.lock)?() }
+                .keyboardShortcut("l", modifiers: .command)
+                .disabled(lock == nil && actions == nil)
         }
     }
 }

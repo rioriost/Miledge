@@ -228,7 +228,11 @@ final class SelectionInteractionTests: XCTestCase {
         #endif
         chooseType("Reward Program", confirm: true)
         XCTAssertEqual(title.value as? String, title.placeholderValue)
-        XCTAssertFalse(app.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.buttons["Save"].isEnabled)
+        activate(app.buttons["Save"])
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["saved-revision"].exists)
+        activate(app.alerts.buttons["OK"])
         capture("Intentionally cleared title after type change")
     }
 }

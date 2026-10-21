@@ -160,6 +160,7 @@ struct MacMultilineFieldInput: NSViewRepresentable {
     let label: String
     var alignment: NSTextAlignment = .left
     var inputSource = MacFieldInputSource.unrestricted
+    var onEditingChanged: (Bool) -> Void = { _ in }
     @Environment(\.displayTextSize) private var size
     @Environment(\.isEnabled) private var enabled
     @ScaledMetric(relativeTo: .body) private var points: CGFloat = 16
@@ -209,6 +210,9 @@ struct MacMultilineFieldInput: NSViewRepresentable {
             }
             input.text = editor.string
         }
+
+        func textDidBeginEditing(_ notification: Notification) { input.onEditingChanged(true) }
+        func textDidEndEditing(_ notification: Notification) { input.onEditingChanged(false) }
     }
 }
 #endif
@@ -245,6 +249,8 @@ struct StringFieldInput: View {
     @FocusState private var focused: Bool
     private let onEditingChanged: (Bool) -> Void
     @State private var revealed: Bool
+    @State private var urlSuggestion: String?
+    @State private var editing = false
     @Environment(\.locale) private var locale
     private var rowLayout = FieldRowLayout()
 
@@ -270,14 +276,10 @@ struct StringFieldInput: View {
     private var textBinding: Binding<String> {
         Binding(get: { text }, set: { value in
             text = value
-            do {
-                let replacement = try VaultEditor.replacingValue(in: field, with: .string(value))
-                if pendingWrites.last != replacement.value { pendingWrites.append(replacement.value) }
-                field = replacement
-                invalid = false
-            } catch {
-                invalid = true
-            }
+            let replacement = JSONValue.string(value)
+            if pendingWrites.last != replacement { pendingWrites.append(replacement) }
+            field.value = replacement
+            invalid = false
         })
     }
 
@@ -294,15 +296,21 @@ struct StringFieldInput: View {
             if revealed, !multiline, format == .port {
                 Menu("Common ports") {
                     ForEach(StructuredInput.portChoices(fieldID: field.id), id: \.value) { choice in
-                        Button(choice.label) { textBinding.wrappedValue = choice.value }
+                        Button(choice.label) {
+                            textBinding.wrappedValue = choice.value
+                            editingChanged(false)
+                        }
                             .accessibilityIdentifier("port-option-" + choice.value)
                     }
                 }
                 .accessibilityIdentifier("port-suggestions-" + field.id)
                 .help("Choose the port specified by your server provider.")
             }
-            if revealed, format == .url, let suggestion = StructuredInput.httpsSuggestion(text) {
-                Button("Add https://") { textBinding.wrappedValue = suggestion }
+            if revealed, !editing, let suggestion = urlSuggestion {
+                Button("Add https://") {
+                    textBinding.wrappedValue = suggestion
+                    editingChanged(false)
+                }
                     .accessibilityIdentifier("url-add-scheme-" + field.id)
             }
             if let hint = FieldPresentation.formatHint(for: field.kind), field.kind == "number" || invalid {
@@ -320,8 +328,9 @@ struct StringFieldInput: View {
         .keyboardType(keyboardType)
         .textContentType(contentType)
         #endif
-        .onChange(of: focused) { _, focused in onEditingChanged(focused) }
-        .onDisappear { onEditingChanged(false) }
+        .onChange(of: focused) { _, focused in editingChanged(focused) }
+        .onAppear { refreshURLSuggestion() }
+        .onDisappear { editingChanged(false) }
         .onChange(of: field.value) { _, value in
             if let index = pendingWrites.lastIndex(of: value) {
                 pendingWrites.removeFirst(index + 1)
@@ -343,6 +352,16 @@ struct StringFieldInput: View {
         )
     }
 
+    private func refreshURLSuggestion() {
+        urlSuggestion = format == .url ? StructuredInput.httpsSuggestion(text) : nil
+    }
+
+    private func editingChanged(_ active: Bool) {
+        editing = active
+        if !active { refreshURLSuggestion() }
+        onEditingChanged(active)
+    }
+
     @ViewBuilder
     private var value: some View {
         if !revealed {
@@ -357,7 +376,8 @@ struct StringFieldInput: View {
             if FieldPresentation.usesRomanInput(for: field.kind) {
                 MacMultilineFieldInput(
                     text: textBinding, label: FieldPresentation.name(for: field, locale: locale),
-                    alignment: field.kind == "number" ? .right : .left, inputSource: .roman
+                    alignment: field.kind == "number" ? .right : .left, inputSource: .roman,
+                    onEditingChanged: editingChanged
                 )
                 .frame(minHeight: 100, idealHeight: 120, maxHeight: 180)
                 .ledgerInputSurface()
@@ -371,13 +391,14 @@ struct StringFieldInput: View {
         } else if ["date", "year-month"].contains(field.kind) {
             CalendarFieldInput(
                 text: textBinding, kind: field.kind, label: FieldPresentation.name(for: field, locale: locale),
-                identifier: field.id
+                identifier: field.id, onEditingChanged: editingChanged
             )
         } else if !FieldSelectionCatalog.choices(for: field, templateID: templateID, locale: locale).isEmpty {
             ChoiceFieldInput(
                 text: textBinding, choices: FieldSelectionCatalog.choices(for: field, templateID: templateID, locale: locale),
                 label: FieldPresentation.name(for: field, locale: locale), identifier: field.id,
-                searchable: FieldSelectionCatalog.countryIDs.contains(field.id) || field.id == "currency"
+                searchable: FieldSelectionCatalog.countryIDs.contains(field.id) || field.id == "currency",
+                onEditingChanged: editingChanged
             )
         } else {
             singleLine(secure: false)
@@ -386,6 +407,7 @@ struct StringFieldInput: View {
 
     private var multilineInput: some View {
         TextEditor(text: textBinding)
+            .focused($focused)
             .scrollContentBackground(.hidden)
             .padding(6)
             .ledgerInputSurface()
@@ -400,7 +422,7 @@ struct StringFieldInput: View {
         MacFieldInput(
             text: textBinding, label: FieldPresentation.name(for: field, locale: locale),
             placeholder: promptString, alignment: field.kind == "number" ? .right : .left, secure: secure,
-            onEditingChanged: onEditingChanged,
+            onEditingChanged: editingChanged,
             inputSource: FieldPresentation.usesRomanInput(for: field.kind) ? .roman : .unrestricted
         )
         .id(secure)
@@ -477,10 +499,8 @@ struct BooleanFieldInput: View {
     private var valueBinding: Binding<Bool> {
         Binding(get: { value }, set: { value in
             self.value = value
-            do {
-                field = try VaultEditor.replacingValue(in: field, with: .bool(value))
-                invalid = false
-            } catch { invalid = true }
+            field.value = .bool(value)
+            invalid = false
         })
     }
 
